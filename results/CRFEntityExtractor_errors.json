@@ -1,0 +1,446 @@
+[
+  {
+    "text": "want to order least carnivore  pizza",
+    "entities": [
+      {
+        "start": 20,
+        "end": 29,
+        "value": "carnivore",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "mushrooms, artichokes and olives",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "value": "mushrooms",
+        "entity": "pizza_type"
+      },
+      {
+        "start": 11,
+        "end": 21,
+        "value": "artichokes",
+        "entity": "pizza_type"
+      },
+      {
+        "start": 26,
+        "end": 32,
+        "value": "olives",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "pizza_type",
+        "start": 26,
+        "end": 32,
+        "confidence_entity": 0.9881054066918172,
+        "value": "olives",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "What is 2 + 2?",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "pizza_amount",
+        "start": 8,
+        "end": 9,
+        "confidence_entity": 0.7926795592865259,
+        "value": "2",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "pizza_amount",
+        "start": 12,
+        "end": 13,
+        "confidence_entity": 0.9061031267831227,
+        "value": "2",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "peperoni, large",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "pizza_type",
+        "start": 0,
+        "end": 8,
+        "confidence_entity": 0.48968253309180537,
+        "value": "peperoni",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "pizza_size",
+        "start": 10,
+        "end": 15,
+        "confidence_entity": 0.9785576024276401,
+        "value": "large",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "Corn",
+    "entities": [
+      {
+        "start": 0,
+        "end": 4,
+        "value": "Corn",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "do you have shoes",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "pizza_type",
+        "start": 12,
+        "end": 17,
+        "confidence_entity": 0.5222068579204098,
+        "value": "shoes",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "I hawaii pizza small",
+    "entities": [
+      {
+        "start": 2,
+        "end": 8,
+        "value": "hawaii",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "pizza_type",
+        "start": 2,
+        "end": 8,
+        "confidence_entity": 0.874803394844141,
+        "value": "hawaii",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "pizza_size",
+        "start": 15,
+        "end": 20,
+        "confidence_entity": 0.8242922690620135,
+        "value": "small",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "jumbo",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "value": "jumbo",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "can i get a vegetarian instead?",
+    "entities": [
+      {
+        "start": 12,
+        "end": 22,
+        "value": "vegetarian",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Yes",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "pizza_type",
+        "start": 0,
+        "end": 3,
+        "confidence_entity": 0.7893823886644827,
+        "value": "Yes",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "I like olive",
+    "entities": [
+      {
+        "start": 7,
+        "end": 12,
+        "value": "olive",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Onions",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "Onions",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "ham, mushrooms, bacon and brie",
+    "entities": [
+      {
+        "start": 0,
+        "end": 3,
+        "value": "ham",
+        "entity": "pizza_type"
+      },
+      {
+        "start": 5,
+        "end": 14,
+        "value": "mushrooms",
+        "entity": "pizza_type"
+      },
+      {
+        "start": 16,
+        "end": 21,
+        "value": "bacon",
+        "entity": "pizza_type"
+      },
+      {
+        "start": 26,
+        "end": 30,
+        "value": "brie",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "onions and tuna",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "onions",
+        "entity": "pizza_type"
+      },
+      {
+        "start": 11,
+        "end": 15,
+        "value": "tuna",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "pizza_type",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.6684740449411828,
+        "value": "onions",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "do you have Americana",
+    "entities": [
+      {
+        "start": 12,
+        "end": 21,
+        "value": "Americana",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "do you offer pizza Americana",
+    "entities": [
+      {
+        "start": 19,
+        "end": 28,
+        "value": "Americana",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "My favorite pizza is Small corn",
+    "entities": [
+      {
+        "start": 21,
+        "end": 26,
+        "value": "Small",
+        "entity": "pizza_size"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "small pizza with tomatoes topping",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "value": "small",
+        "entity": "pizza_size"
+      },
+      {
+        "start": 17,
+        "end": 25,
+        "value": "tomatoes",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "pizza_size",
+        "start": 0,
+        "end": 5,
+        "confidence_entity": 0.971201301217887,
+        "value": "small",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "Pepperoni is my favorite topping",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "pizza_type",
+        "start": 0,
+        "end": 9,
+        "confidence_entity": 0.7099320140124035,
+        "value": "Pepperoni",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "Olive",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "value": "Olive",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "dozen",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "value": "dozen",
+        "entity": "pizza_amount"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "medium with onion",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "medium",
+        "entity": "pizza_size"
+      },
+      {
+        "start": 12,
+        "end": 17,
+        "value": "onion",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "pizza_size",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.9672786195148362,
+        "value": "medium",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "hawaii pizza small",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "hawaii",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "pizza_type",
+        "start": 0,
+        "end": 6,
+        "confidence_entity": 0.9823175839855419,
+        "value": "hawaii",
+        "extractor": "CRFEntityExtractor"
+      },
+      {
+        "entity": "pizza_size",
+        "start": 13,
+        "end": 18,
+        "confidence_entity": 0.7811879621851963,
+        "value": "small",
+        "extractor": "CRFEntityExtractor"
+      }
+    ]
+  },
+  {
+    "text": "Definitely onion",
+    "entities": [
+      {
+        "start": 11,
+        "end": 16,
+        "value": "onion",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "favorite topping is Corns",
+    "entities": [
+      {
+        "start": 20,
+        "end": 25,
+        "value": "Corns",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  }
+]

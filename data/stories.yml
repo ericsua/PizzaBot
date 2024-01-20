@@ -1,0 +1,40 @@
+
+- story: interactive_story_1
+  steps:
+  - intent: item_start_generic
+    entities:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_amount: one
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - intent: item_start_generic
+    entities:
+    - pizza_type: funghi
+  - slot_was_set:
+    - pizza_type: funghi
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: funghi
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - intent: item_size
+    entities:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_size: large
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - requested_slot: pizza_crust
+
+- story: interactive_story_1
+  steps:
+  - intent: request_pizza_types
+  - action: action_get_pizza_types
+  - action: utter_inform_pizza_types

@@ -1,0 +1,23 @@
+version: "3.1"
+nlu:
+- intent: item_start_generic
+  examples: |
+    - [funghi](pizza_type)
+    - i want a pizza
+    - i want [one](pizza_amount) pizza
+    - [Funghi](pizza_type)
+    - i want [one](pizza_amount) pize
+- intent: item_size
+  examples: |
+    - [10 inches](item_size)
+    - [10"](pizza_size)
+    - [large](pizza_size)
+- intent: item_amount
+  examples: |
+    - [two](pizza_amount)
+- intent: item_type
+  examples: |
+    - [hawaii](pizza_type)
+- intent: request_pizza_types
+  examples: |
+    - what meat pizzas do you have?
