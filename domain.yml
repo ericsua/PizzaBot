@@ -30,13 +30,14 @@ intents:
 - response_name_phone
 - response_negative
 - response_positive
+- stop_order
 - welcome_greet
 entities:
 - pizza_amount
-- pizza_crust
 - pizza_size
 - pizza_type
-- pizza_types
+- pizza_crust
+- pizza_category
 - item_size
 - pizza_sliced
 - anti_pizza_type
@@ -90,21 +91,22 @@ slots:
     mappings:
     - type: from_entity
       entity: pizza_amount
+      intent: item_amount
   pizza_size:
     type: any
     mappings:
     - type: from_entity
       entity: pizza_size
   pizza_type:
-    type: any
+    type: list
     mappings:
     - type: from_entity
       entity: pizza_type
-  pizza_types:
-    type: any
+  pizza_category:
+    type: text
     mappings:
     - type: from_entity
-      entity: pizza_types
+      entity: pizza_category
   requested_slot:
     type: categorical
     values:
@@ -130,12 +132,16 @@ slots:
     mappings:
     - type: custom
 responses:
+  utter_stop_order:
+  - text: Okay. Your order has been cancelled. Is there anything else I can do for you?
   utter_out_of_scope:
   - text: Sorry, I can't handle that request.
   utter_welcome_greet:
-  - text: Hello There! Welcome to Pizzbot. How can I help you?
+  - text: Hello there! Welcome to HMD pizzeria. How can I help you?
+  - text: Hi there! Welcome to HMD pizzeria. How can I help you?
+  - text: Hi! Welcome to HMD pizzeria. How can I help you?tmm
   utter_init_request:
-  - text: Okay. In today's menu, we have Funghi, Hawaii, Margherita, Pepperoni, Vegetarian, all available in sizes Small, Medium or Large . What would you like to have?
+  - text: Okay. In today's menu, we have Funghi, Hawaii, Margherita, Pepperoni, Veggie, all available in sizes Small, Medium or Large. What would you like to have?
   utter_init_pizza_question:
   - text: For pizza without meat we have.... For pizza without cheese we have. Sizes available are Small, Medium and Large. What would you love to have?
   utter_ask_pizza_size:
@@ -167,7 +173,7 @@ responses:
   utter_delivery_address:
   - text: Please provide us with your home/ office address
   utter_order_add:
-  - text: which pizza like to add in your order?
+  - text: which pizza would you like to add in your order?
   utter_default:
   - text: Sorry, I didn’t understand that. Can you please retype it?
   utter_item_type_start_negative:
@@ -179,7 +185,7 @@ responses:
   utter_item_size:
   - text: what size do you want your {pizza_type} in
   utter_item_amount:
-  - text: how many would like?
+  - text: how many would you like?
   utter_pizza_questions:
   - text: what would you like on your pizza?
   utter_order_processing_positive:
@@ -195,16 +201,22 @@ responses:
   utter_inform_restaurant_location:
   - text: Our restaurant is located at {restaurant_location}. We're waiting for you.
   utter_inform_pizza_types:
-  - text: The pizzas that we have are {pizza_types}
+  - text: The pizzas that we have are Margherita, Pepperoni, Veggie, Funghi, Hawaii.
+  utter_inform_pizza_types_meat:
+  - text: The meat pizza that we have is the Pepperoni.
+  utter_inform_pizza_types_vegetarian:
+  - text: The vegetarian pizzas that we have are the Margherita, Veggie, Funghi, Hawaii.
   utter_anything_else:
   - text: Is there anything else I can do for you?
 actions:
+- utter_anything_else
 - utter_item_change
 - action_get_pizza_types
 - utter_inform_pizza_types
+- utter_inform_pizza_types_meat
+- utter_inform_pizza_types_vegetarian
 - utter_ask_pizza_type
 - validate_pizza_order_form
-- utter_anything_else
 - utter_inform_restaurant_location
 - utter_explain_pizza_quantities
 - utter_total_order_final
@@ -238,6 +250,7 @@ actions:
 - utter_order_add
 - utter_default
 - utter_summarize_order
+- action_confirm_pizzas
 forms:
   pizza_order_form:
     required_slots:

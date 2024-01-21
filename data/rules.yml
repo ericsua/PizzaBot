@@ -14,7 +14,7 @@ rules:
   steps:
       - action: pizza_order_form      # run the form
       - active_loop: null
-      - action: utter_item_change
+      - action: action_confirm_pizzas
 
 
 - rule: out-of-scope
@@ -39,4 +39,3 @@ rules:
   steps:
     - intent: request_pizza_types
     - action: action_get_pizza_types
-    - action: utter_inform_pizza_types
