@@ -374,3 +374,64 @@ stories:
     - pizza_amount: '10'
   - slot_was_set: 
     - pizza_amount: '10'
+
+- story: extra large
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - intent: item_amount
+    entities:
+    - pizza_amount: '10'
+  - slot_was_set:
+    - pizza_amount: '10'
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: '10'
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - intent: item_type
+    entities:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_type:
+      - Hawaii
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - intent: item_size
+    entities:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_size: large
+  - intent: item_size
+    entities:
+    - pizza_size: extra large
+
+- story: name greet
+  steps:
+  - intent: welcome_greet
+    entities:
+    - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  - action: utter_welcome_greet
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - intent: item_amount
+    entities:
+    - pizza_amount: '10'
+  - slot_was_set:
+    - pizza_amount: '10'
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: '10'
+  - slot_was_set:
+    - requested_slot: pizza_type

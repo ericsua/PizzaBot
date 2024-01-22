@@ -46,6 +46,7 @@ entities:
 - client_name
 - phone_number
 - order_number
+- PERSON
 slots:
   pizza_sliced:
     type: bool
@@ -76,7 +77,7 @@ slots:
     type: any
     mappings:
     - type: from_entity
-      entity: client_name
+      entity: PERSON
   order_number:
     type: any
     mappings:
@@ -124,7 +125,7 @@ slots:
     - type: from_entity
       entity: toppings
   total_order:
-    type: any
+    type: list
     mappings:
     - type: custom
   restaurant_location:
@@ -137,11 +138,24 @@ responses:
   utter_out_of_scope:
   - text: Sorry, I can't handle that request.
   utter_welcome_greet:
-  - text: Hello there! Welcome to HMD pizzeria. How can I help you?
-  - text: Hi there! Welcome to HMD pizzeria. How can I help you?
-  - text: Hi! Welcome to HMD pizzeria. How can I help you?tmm
+  - condition:
+    - name: client_name
+      type: slot
+      value: null
+    text: Hi there! Welcome to HMD pizzeria. How can I help you?
+  - condition:
+    - name: client_name
+      type: slot
+      value: null
+    text: Hello there! Welcome to HMD pizzeria. How can I help you?
+  - condition:
+    - name: client_name
+      type: slot
+      value: null
+    text: Hi! Welcome to HMD pizzeria. How can I help you?
+  - text: Hello {client_name}! Welcome to HMD pizzeria. How can I help you?
   utter_init_request:
-  - text: Okay. In today's menu, we have Funghi, Hawaii, Margherita, Pepperoni, Veggie, all available in sizes Small, Medium or Large. What would you like to have?
+  - text: Okay. In today's menu, we have Funghi, Hawaii, Margherita, Pepperoni, Veggie, all available in sizes Baby, Small, Medium, Large, or Extra Large. What would you like to have?
   utter_init_pizza_question:
   - text: For pizza without meat we have.... For pizza without cheese we have. Sizes available are Small, Medium and Large. What would you love to have?
   utter_ask_pizza_size:
@@ -209,6 +223,7 @@ responses:
   utter_anything_else:
   - text: Is there anything else I can do for you?
 actions:
+- utter_welcome_greet
 - utter_anything_else
 - utter_item_change
 - action_get_pizza_types
@@ -223,7 +238,6 @@ actions:
 - utter_ask_pizza_size
 - action_pizza_order_add
 - action_get_restaurant_location
-- utter_welcome_greet
 - utter_init_request
 - utter_init_pizza_question
 - utter_ask_pizza_amount

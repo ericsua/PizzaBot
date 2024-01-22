@@ -27,11 +27,11 @@ class ActionConfirmPizzas(Action):
 		pizza_amount = tracker.get_slot("pizza_amount")
 		pizza_sliced = tracker.get_slot("pizza_sliced")
 		order_details = ""
-		for amount, type, size, sliced in zip(pizza_amount, pizza_type, pizza_size, pizza_sliced):
-			order_details += f"{amount} {size} {type} " + ("sliced" if sliced == "yes" else "not sliced") + ", "
-		order_details =  str(pizza_amount + " "+pizza_type + " is of "+pizza_size + " and sliced: "+pizza_sliced)
-		dispatcher.utter_message(text="So you want to order "+order_details+" is that correct?")
-		return[]
+		for amount, type, size in zip(pizza_amount, pizza_type, pizza_size):
+			order_details += f"{amount} {size} {type} " + ", "
+		order_details += ". All pizzas" + ( "sliced" if pizza_sliced == "yes" else "not sliced")
+		dispatcher.utter_message(text="So you want to order "+order_details+". Is everything correct?")
+		return []
 
 class ActionChangeOrder(Action):
 	def name(self):
@@ -66,7 +66,7 @@ class ActionResetPizzaForm(Action):
 
 	def run(self, dispatcher, tracker, domain):
 
-		return[SlotSet("pizza_type", None),SlotSet("pizza_size", None),SlotSet("pizza_amount", None)]
+		return[SlotSet("pizza_type", None),SlotSet("pizza_size", None),SlotSet("pizza_amount", None), SlotSet("pizza_sliced", None)]
 
 class ActionOrderNumber(Action):
 	def name(self):
@@ -122,7 +122,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
 	def pizza_db() -> List[Text]:
 		"""Database of supported cuisines"""
 
-		return ["hawaii", "fungi", "french"]
+		return ["Funghi", "Hawaii", "Margherita", "Pepperoni", "Veggie"]
 
 	def validate_pizza_type(
 		self,
@@ -217,7 +217,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
 			elif tracker.get_intent_of_latest_message() == "response_negative":
 				return {"pizza_sliced": False}
 			else:
-				#dispatcher.utter_message(text="Please tell me if you want the pizza sliced or not, with a yes or a no")
+				#dispatcher.utter_message(text="Please tell me if you want the pizza sliced or not, with a yes or a no") # not correct since it can be a different intent like "stop" which do not need an answer
 				return {"pizza_sliced": None}
 		elif isinstance(slot_value, list):
 			if len(slot_value) > 0:

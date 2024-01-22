@@ -47,6 +47,15 @@ nlu:
     - which are your [vegetable](pizza_category) pizzas?
 - intent: welcome_greet
   examples: |
+    - Hi, I'm [Raymond](PERSON)
+    - Hello, my name is [Raymond](PERSON)
+    - Hi, my name is [Marco](PERSON)
+    - Hello, I'm [Marco](PERSON)
+    - Hello, I'm [Chiara](PERSON)
+    - Hi, I'm [Chiara](PERSON)
+    - Hello, my name is [Francesca](PERSON)
+    - Hi, my name is [Francesca](PERSON)
+    - Hi, I'm [Eric](PERSON)
     - just going to say hi
     - hey
     - hello hi
@@ -206,7 +215,6 @@ nlu:
     - i want to order a [pepperoni]{"entity": "pizza_type", "value": "Pepperoni"} pizza
     - [funghi]{"entity": "pizza_type", "value": "Funghi"}
     - [10](pizza_amount) pizzas
-
 - intent: item_change
   examples: |
     - I changed my mind. Can I get  a [funghi](pizza_type) instead?
@@ -280,6 +288,7 @@ nlu:
   examples: |
     - [hawaii](pizza_type)
     - [margherita](pizza_type)
+    - [hawaii]{"entity": "pizza_type", "value": "Hawaii"}
 - intent: item_size
   examples: |
     - [8"]{"entity": "pizza_size", "value": "baby"}
@@ -292,11 +301,11 @@ nlu:
     - [12"]{"entity": "pizza_size", "value": "medium"} please
     - [14"]{"entity": "pizza_size", "value": "large"} please
     - [18"]{"entity": "pizza_size", "value": "extra large"} please
-    - [8]{"entity": "pizza_size", "value": "baby"}
-    - [10]{"entity": "pizza_size", "value": "small"}
-    - [12]{"entity": "pizza_size", "value": "medium"}
-    - [14]{"entity": "pizza_size", "value": "large"}
-    - [18]{"entity": "pizza_size", "value": "extra large"}
+    - [8 inches]{"entity": "pizza_size", "value": "baby"}
+    - [10 inches]{"entity": "pizza_size", "value": "small"}
+    - [12 inches]{"entity": "pizza_size", "value": "medium"}
+    - [14 inches]{"entity": "pizza_size", "value": "large"}
+    - [18 inches]{"entity": "pizza_size", "value": "extra large"}
     - [small](pizza_size)
     - [large](pizza_size)
     - I want to order [large](pizza_size) pizza
@@ -308,6 +317,7 @@ nlu:
     - Probably avg
     - [medium](pizza_size)
     - [large](pizza_size) please
+    - [extra large](pizza_size)
 - intent: pizza_crust
   examples: |
     - [stuffed](pizza_crust) crust
@@ -399,7 +409,7 @@ nlu:
     - [16](pizza_amount) please
     - [17](pizza_amount) please
     - [18](pizza_amount) please
-    
+    - [10](pizza_amount)
 - intent: out_of_scope
   examples: |
     - What is 2 + 2?
@@ -411,92 +421,98 @@ nlu:
     - book a flight from milan to ny
     - how far is the square
     - give me the directions to time square
-# - synonym: Funghi
-#   examples: |
-#     - funghi
-#     - Funghi
-# - synonym: Hawaii
-#   examples: |
-#     - hawaii
-#     - Hawaii
-#     - hawaiian
-#     - Hawaiian
-#     - hawai
-#     - Hawai
-# - synonym: Pepperoni
-#   examples: |
-#     - pepperoni
-#     - Pepp
-#     - Pepperoni
-#     - Peperoni
-#     - peperoni
-# - synonym: Americana
-#   examples: |
-#     - Americana
-# - synonym: Calzone
-#   examples: |
-#     - Calzone
-# - synonym: Caprese
-#   examples: |
-#     - Caprese
-# - synonym: Crudo
-#   examples: |
-#     - Crudo
-# - synonym: Chicken BBC
-#   examples: |
-#     - Chicken BBC
-# - synonym: Rustica
-#   examples: |
-#     - Rustica
-# - synonym: baby
-#   examples: |
-#     - 8 inch
-#     - 8"
-#     - baby
-#     - Baby
-#     - size XS
-# - synonym: small
-#   examples: |
-#     - 10"
-#     - 10 inch
-#     - small
-#     - Small
-#     - size S
-# - synonym: medium
-#   examples: |
-#     - 12 inch
-#     - 12"
-#     - Medium
-#     - medium
-#     - normal
-#     - twelve inch
-#     - size M
-# - synonym: large
-#   examples: |
-#     - 14 inch
-#     - 14"
-#     - large
-#     - fourteen inch
-#     - size L
-# - synonym: extra large
-#   examples: |
-#     - jumbo
-#     - 18 inch
-#     - 18"
-#     - extra large
-#     - Extra large
-#     - XXL
-#     - size XXL
-# - synonym: Margherita
-#   examples: |
-#     - Margherita
-#     - margherita
-# - synonym: Veggie
-#   examples: |
-#     - Vegetarian
-#     - Vegetariana
-#     - vegetarian
-#     - vegetable
-#     - Vegetable
-#     - Veggie
-#     - veggie
+- synonym: Funghi
+  examples: |
+    - funghi
+    - Funghi
+- synonym: Hawaii
+  examples: |
+    - hawaii
+    - Hawaii
+    - hawaiian
+    - Hawaiian
+    - hawai
+    - Hawai
+- synonym: Pepperoni
+  examples: |
+    - pepperoni
+    - Pepp
+    - Pepperoni
+    - Peperoni
+    - peperoni
+- synonym: baby
+  examples: |
+    - 8"
+    - 8 inches
+    - 8 inch
+    - baby
+    - Baby
+    - size XS
+- synonym: small
+  examples: |
+    - 10"
+    - 10 inches
+    - 10 inch
+    - small
+    - Small
+    - size S
+- synonym: medium
+  examples: |
+    - 12"
+    - 12 inches
+    - 12 inch
+    - Medium
+    - medium
+    - normal
+    - twelve inch
+    - size M
+- synonym: large
+  examples: |
+    - 14"
+    - 14 inches
+    - 14 inch
+    - large
+    - fourteen inch
+    - size L
+- synonym: extra large
+  examples: |
+    - 18"
+    - 18 inches
+    - jumbo
+    - 18 inch
+    - extra large
+    - Extra large
+    - XXL
+    - size XXL
+- synonym: Americana
+  examples: |
+    - Americana
+    - american
+- synonym: Calzone
+  examples: |
+    - Calzone
+- synonym: Caprese
+  examples: |
+    - Caprese
+- synonym: Crudo
+  examples: |
+    - Crudo
+- synonym: Chicken BBC
+  examples: |
+    - Chicken BBC
+- synonym: Rustica
+  examples: |
+    - Rustica
+- synonym: Margherita
+  examples: |
+    - Margherita
+    - margherita
+- synonym: Veggie
+  examples: |
+    - Vegetarian
+    - Vegetariana
+    - vegetarian
+    - vegetable
+    - Vegetable
+    - Veggie
+    - veggie
