@@ -39,3 +39,11 @@ rules:
   steps:
     - intent: request_pizza_types
     - action: action_get_pizza_types
+
+- rule: anti pizza
+  steps:
+    - intent: order_anti_pizza
+    - slot_was_set:
+      - anti_pizza_type: "true"
+    - action: utter_anti_pizza
+    - action: action_get_pizza_types

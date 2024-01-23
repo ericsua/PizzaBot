@@ -3,8 +3,6 @@ recipe: default.v1
 language: en
 
 pipeline:
-- name: SpacyNLP
-  model: "en_core_web_md"
 - name: WhitespaceTokenizer
 - name: CountVectorsFeaturizer
 - name: CountVectorsFeaturizer
@@ -13,11 +11,14 @@ pipeline:
   max_ngram: 4
 - name: LogisticRegressionClassifier
 - name: CRFEntityExtractor
-- name: SpacyEntityExtractor
-  dimensions: ["PERSON"]
 - name: EntitySynonymMapper
 - name: ResponseSelector
   epochs: 2
+
+# - name: SpacyNLP
+#   model: "en_core_web_md"
+# - name: SpacyEntityExtractor
+#   dimensions: ["PERSON"]
 
 # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
 # If you'd like to customize it, uncomment and adjust the pipeline.

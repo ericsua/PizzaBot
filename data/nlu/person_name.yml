@@ -1,0 +1,36 @@
+version: "3.1"
+nlu:
+- lookup: PERSON
+  examples: |
+    - Eric
+    - Francesca
+    - Giuseppe
+    - Gianni
+    - Giovanni
+    - Giorgio
+    - Giorgia
+    - Giustina
+    - Marco
+    - Maria
+    - Mario
+    - Marta
+    - Martina
+    - Luisa
+    - Laura
+    - Luca
+    - Lucia
+    - Luigi
+    - Andrea
+    - Anna
+    - Antonio
+    - Alessandro
+    - Alessandra
+    - Roberto
+    - Roberta
+    - Riccardo
+    - Raffaele
+    - Raffaella
+    - Raffaello
+    - Raffaela
+    - Raffael
+

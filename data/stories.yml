@@ -435,3 +435,206 @@ stories:
     - pizza_amount: '10'
   - slot_was_set:
     - requested_slot: pizza_type
+
+- story: chicken wings anti pizza
+  steps:
+  - intent: welcome_greet
+  - intent: order_anti_pizza
+    entities:
+    - anti_pizza_type: chicken wings
+  - action: utter_anti_pizza
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+
+- story: multiple anti pizza
+  steps:
+  - intent: order_anti_pizza
+    entities:
+    - anti_pizza_type: Chicken Wings
+  - slot_was_set:
+    - anti_pizza_type: Chicken Wings
+  - action: utter_anti_pizza
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+  - intent: order_anti_pizza
+    entities:
+    - anti_pizza_type: Americana
+  - action: utter_anti_pizza
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+  - intent: order_anti_pizza
+    entities:
+    - anti_pizza_type: Calzone
+  - slot_was_set:
+    - anti_pizza_type: Calzone
+  - action: utter_anti_pizza
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+
+# - story: interactive_story_1
+#   steps:
+#   - intent: order_anti_pizza
+#     entities:
+#     - anti_pizza_type: Chicken Wings
+#   - slot_was_set:
+#     - anti_pizza_type: Chicken Wings
+#   - action: utter_anti_pizza
+#   - action: action_get_pizza_types
+#   - slot_was_set:
+#     - pizza_category: null
+#   - intent: order_anti_pizza
+#     entities:
+#     - pizza_type: Americana
+#   - slot_was_set:
+#     - pizza_type: Americana
+#   - intent: order_anti_pizza
+#     entities:
+#     - anti_pizza_type: Americana
+#   - action: utter_anti_pizza
+#   - action: action_get_pizza_types
+#   - slot_was_set:
+#     - pizza_category: null
+#   - intent: order_anti_pizza
+#     entities:
+#     - anti_pizza_type: Calzone
+#   - slot_was_set:
+#     - anti_pizza_type: Calzone
+#   - intent: order_anti_pizza
+#   - intent: order_anti_pizza
+#     entities:
+#     - anti_pizza_type: Calzone
+#   - action: utter_anti_pizza
+#   - action: action_get_pizza_types
+#   - slot_was_set:
+#     - pizza_category: null
+
+- story: Garlic Bread anti pizza but PERSON
+  steps:
+  - intent: order_anti_pizza
+    entities:
+    - anti_pizza_type: Americana
+  - slot_was_set:
+    - anti_pizza_type: Americana
+  - action: utter_anti_pizza
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+  - intent: order_anti_pizza
+    entities:
+    - anti_pizza_type: Garlic Bread
+  - slot_was_set:
+    - anti_pizza_type: Garlic Bread
+  - action: utter_anti_pizza
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+
+- story: Garlic Bread anti pizza but PERSON
+  steps:
+  - intent: order_anti_pizza
+    entities:
+    - anti_pizza_type: Garlic Bread
+  - action: utter_anti_pizza
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+
+- story: Garlic Bread
+  steps:
+  - intent: order_anti_pizza
+    entities:
+    - anti_pizza_type: Garlic Bread
+  - slot_was_set:
+    - anti_pizza_type: Garlic Bread
+  - action: utter_anti_pizza
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+
+- story: name greet anti pizza full order
+  steps:
+  - intent: welcome_greet
+  - intent: welcome_greet
+    entities:
+    - PERSON: Leonardo
+  - slot_was_set:
+    - client_name: Leonardo
+  - action: utter_welcome_greet
+  - intent: order_anti_pizza
+    entities:
+    - anti_pizza_type: Chicken Wings
+  - slot_was_set:
+    - anti_pizza_type: Chicken Wings
+  - action: utter_anti_pizza
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+  - intent: order_anti_pizza
+    entities:
+    - anti_pizza_type: Prosciutto
+  - slot_was_set:
+    - anti_pizza_type: Prosciutto
+  - action: utter_anti_pizza
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+  - intent: item_change
+    entities:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_type:
+      - Margherita
+  - intent: item_start_generic
+    entities:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - intent: item_amount
+    entities:
+    - pizza_amount: '1'
+  - slot_was_set:
+    - pizza_amount: '1'
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: '1'
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - intent: item_size
+    entities:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_size: large
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - intent: pizza_crust
+    entities:
+    - pizza_crust: cracker
+  - slot_was_set:
+    - pizza_crust: cracker
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_crust: cracker
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - intent: response_positive
+  - slot_was_set:
+    - pizza_sliced: true
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive

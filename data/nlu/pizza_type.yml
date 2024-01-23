@@ -8,12 +8,12 @@ nlu:
     - Pepperoni
     - Vegetarian
     - artichoke
-    - ham
-    - olives
-    - onions
-    - onion
-    - potatoes
-    - bacon
-    - mortadella
-    - salami
-    - arancini
+  # - ham
+  # - olives
+  # - onions
+  # - onion
+  # - potatoes
+  # - bacon
+  # - mortadella
+  # - salami
+  # - arancini

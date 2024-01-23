@@ -16,6 +16,7 @@ intents:
 - item_topping
 - item_type
 - item_type_start
+- order_anti_pizza
 - order_confirm_final
 - order_confirm_negative
 - order_confirm_positive
@@ -33,20 +34,20 @@ intents:
 - stop_order
 - welcome_greet
 entities:
-- pizza_amount
-- pizza_size
+- PERSON
+- anti_pizza_type
 - pizza_type
+- pizza_amount
 - pizza_crust
+- pizza_size
 - pizza_category
 - item_size
 - pizza_sliced
-- anti_pizza_type
 - active_form_pizza_order_form
 - toppings
 - client_name
 - phone_number
 - order_number
-- PERSON
 slots:
   pizza_sliced:
     type: bool
@@ -168,6 +169,8 @@ responses:
   - text: What type of crust do you want?
   utter_ask_pizza_sliced:
   - text: Do you want your pizza to be sliced?
+  utter_order_added:
+  - text: Perfect. Your order has been added.
   utter_order_confirm_negative:
   - text: What would you like to change?
   utter_order_confirm_positive:
@@ -222,11 +225,16 @@ responses:
   - text: The vegetarian pizzas that we have are the Margherita, Veggie, Funghi, Hawaii.
   utter_anything_else:
   - text: Is there anything else I can do for you?
+  utter_anti_pizza:
+  - text: Sorry, we don't have {anti_pizza_type} in our menu.
 actions:
 - utter_welcome_greet
+- action_confirm_pizzas
+- utter_anti_pizza
+- action_get_pizza_types
+- utter_order_added
 - utter_anything_else
 - utter_item_change
-- action_get_pizza_types
 - utter_inform_pizza_types
 - utter_inform_pizza_types_meat
 - utter_inform_pizza_types_vegetarian
@@ -264,7 +272,6 @@ actions:
 - utter_order_add
 - utter_default
 - utter_summarize_order
-- action_confirm_pizzas
 forms:
   pizza_order_form:
     required_slots:

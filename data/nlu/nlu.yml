@@ -1,5 +1,72 @@
 version: "3.1"
 nlu:
+- intent: order_anti_pizza
+  examples: |
+    - I want to order [Americana](anti_pizza_type) pizza
+    - I want to order [Calzone](anti_pizza_type)
+    - I want to order [Caprese](anti_pizza_type) pizza
+    - I want to order [Crudo](anti_pizza_type)
+    - I want to order [Diavola](anti_pizza_type)
+    - I want to order [Focaccia](anti_pizza_type) pizza
+    - I want to order [Pioggia](anti_pizza_type)
+    - I want to order [Quattro Stagioni](anti_pizza_type)
+    - I want to order [Quattro Formaggi](anti_pizza_type)
+    - I want to order [Salsiccia](anti_pizza_type) pizza
+    - I want to order [Siciliana](anti_pizza_type)
+    - I want to order [Capricciosa](anti_pizza_type)
+    - I want to order [Prosciutto](anti_pizza_type)
+    - I want to order [Bufalina](anti_pizza_type) pizza
+    - I want to order [Marinara](anti_pizza_type)
+    - I want to order [Salsiccia e Patate](anti_pizza_type) pizza
+    - I want to order [Chicken BBC](anti_pizza_type)
+    - I want to order [Chicken BBQ](anti_pizza_type)
+    - I want to order [Chicken Wings](anti_pizza_type)
+    - I want to order [Garlic Bread](anti_pizza_type)
+    - I want to order [Garlic Bread with Cheese](anti_pizza_type)
+    - I want to order [Onion Rings](anti_pizza_type)
+    - I want to order [Potato Wedges](anti_pizza_type)
+    - I want to order [Americana](anti_pizza_type) please
+    - I want to order [Calzone](anti_pizza_type) please
+    - I want to order [Caprese](anti_pizza_type) please
+    - I want to order [Crudo](anti_pizza_type) please
+    - I'd like to order a [Diavola](anti_pizza_type) pizza please
+    - I'd like to order a [Focaccia](anti_pizza_type) pizza please
+    - I'd like to order a [Pioggia](anti_pizza_type) pizza please
+    - Can I order a [Quattro Stagioni](anti_pizza_type) pizza please
+    - Can I order a [Quattro Formaggi](anti_pizza_type) pizza please
+    - Can I order a [Salsiccia](anti_pizza_type) pizza please
+    - Can I order a [Siciliana](anti_pizza_type) pizza please
+    - Can I order a [Capricciosa](anti_pizza_type) pizza please
+    - [Prosciutto](anti_pizza_type) pizza
+    - [Bufalina](anti_pizza_type) pizza
+    - [Diavola](anti_pizza_type) please
+    - [Focaccia](anti_pizza_type) please
+    - [Pioggia](anti_pizza_type) please
+    - [Quattro Stagioni](anti_pizza_type) please
+    - [Quattro Formaggi](anti_pizza_type) please
+    - [Salsiccia](anti_pizza_type)
+    - [Siciliana](anti_pizza_type)
+    - [Capricciosa](anti_pizza_type)
+    - [Prosciutto](anti_pizza_type)
+    - [chicken wings](anti_pizza_type)
+    - i want to order [chicken wings]{"entity": "anti_pizza_type", "value": "Chicken Wings"}
+    - i want to order an [Americana](anti_pizza_type)
+    - I want to order a [Calzone](anti_pizza_type)
+    - i want to order an [Americana](anti_pizza_type) pizza
+    - [Garlic Bread](anti_pizza_type)
+    - [Garlic bread](anti_pizza_type)
+    - [garlic bread](anti_pizza_type)
+    - [Chicken wings](anti_pizza_type)
+    - [Chicken Wings](anti_pizza_type)
+    - [Chicken BBC](anti_pizza_type)
+    - [Chicken BBQ](anti_pizza_type)
+    - [Potato Wedges](anti_pizza_type)
+    - [Potato wedges](anti_pizza_type)
+    - [Onion Rings](anti_pizza_type)
+    - [Onion rings](anti_pizza_type)
+    - Garlic Bread
+    - I want to order [chicken wings]{"entity": "anti_pizza_type", "value": "Chicken Wings"}
+    - I want to order a [Prosciutto](anti_pizza_type) please
 - intent: stop_order
   examples: |
     - stop
@@ -70,6 +137,7 @@ nlu:
     - greetings
     - long time no see
     - hello
+    - hi I'm [Leonardo](PERSON)
 - intent: init_pizza_question
   examples: |
     - do you have pizza with no [meat](pizza_type)?
@@ -215,6 +283,7 @@ nlu:
     - i want to order a [pepperoni]{"entity": "pizza_type", "value": "Pepperoni"} pizza
     - [funghi]{"entity": "pizza_type", "value": "Funghi"}
     - [10](pizza_amount) pizzas
+    - I'd like to have a [margherita]{"entity": "pizza_type", "value": "Margherita"}
 - intent: item_change
   examples: |
     - I changed my mind. Can I get  a [funghi](pizza_type) instead?
@@ -289,6 +358,51 @@ nlu:
     - [hawaii](pizza_type)
     - [margherita](pizza_type)
     - [hawaii]{"entity": "pizza_type", "value": "Hawaii"}
+    - [margherita]{"entity": "pizza_type", "value": "Margherita"}
+    - [pepperoni](pizza_type)
+    - [vegetarian](pizza_type)
+    - [veggie](pizza_type)
+    - I want [hawaii](pizza_type)
+    - I want [margherita](pizza_type)
+    - I want [pepperoni](pizza_type)
+    - I want [vegetarian](pizza_type)
+    - I want [veggie](pizza_type)
+    - [hawaii](pizza_type) please
+    - [margherita](pizza_type) please
+    - [pepperoni](pizza_type) please
+    - [vegetarian](pizza_type) please
+    - [veggie](pizza_type) please
+    - [hawaii](pizza_type) pizza
+    - [margherita](pizza_type) pizza
+    - [pepperoni](pizza_type) pizza
+    - [vegetarian](pizza_type) pizza
+    - [veggie](pizza_type) pizza
+    - I'd like to order [hawaii](pizza_type)
+    - I'd like to order [margherita](pizza_type)
+    - I'd like to order [pepperoni](pizza_type)
+    - I'd like to order [vegetarian](pizza_type)
+    - I'd like to order [veggie](pizza_type)
+    - I'd like to order [hawaii](pizza_type) pizza
+    - Can I order [margherita](pizza_type) pizza
+    - Can I order [pepperoni](pizza_type) pizza
+    - Can I order [vegetarian](pizza_type) pizza
+    - Can I order [veggie](pizza_type) pizza
+    - Can I order [hawaii](pizza_type) pizza
+    - I want [baby](pizza_size) [hawaii](pizza_type) pizza
+    - I want [small](pizza_size) [margherita](pizza_type) pizza
+    - I want [medium](pizza_size) [pepperoni](pizza_type) pizza
+    - I want [large](pizza_size) [vegetarian](pizza_type) pizza
+    - I want [extra large](pizza_size) [veggie](pizza_type) pizza
+    - [baby](pizza_size) [hawaii](pizza_type) pizza
+    - [baby](pizza_size) [margherita](pizza_type) pizza
+    - [baby](pizza_size) [pepperoni](pizza_type) pizza
+    - [baby](pizza_size) [vegetarian](pizza_type) pizza
+    - [small](pizza_size) [pepperoni](pizza_type) pizza
+    - [small](pizza_size) [margherita](pizza_type) pizza
+    - [medium](pizza_size) [pepperoni](pizza_type) pizza
+    - [large](pizza_size) [vegetarian](pizza_type) pizza
+    - [extra large](pizza_size) [veggie](pizza_type) pizza
+
 - intent: item_size
   examples: |
     - [8"]{"entity": "pizza_size", "value": "baby"}
@@ -312,12 +426,15 @@ nlu:
     - I want a [large](pizza_size) pizza
     - I think its [large](pizza_size)
     - [medium](pizza_size) pizza
-    - huge pizza
-    - Little pizza
-    - Probably avg
+    - [huge]{"entity": "pizza_size", "value": "small"} pizza
+    - [Little]{"entity": "pizza_size", "value": "small"} pizza
+    - Probably [avg]{"entity": "pizza_size", "value": "medium"}
+    - Probably [average]{"entity": "pizza_size", "value": "medium"} pizza
+    - [Average]{"entity": "pizza_size", "value": "medium"} 
     - [medium](pizza_size)
     - [large](pizza_size) please
     - [extra large](pizza_size)
+    - [large](pizza_size) and sliced
 - intent: pizza_crust
   examples: |
     - [stuffed](pizza_crust) crust
@@ -336,6 +453,7 @@ nlu:
     - [cracker](pizza_crust)
     - [flatbread](pizza_crust)
     - [thin](pizza_crust)
+    - [cracker](pizza_crust) crust
 - intent: item_topping
   examples: |
     - I want to order pizza with [olives](pizza_type)
@@ -409,7 +527,7 @@ nlu:
     - [16](pizza_amount) please
     - [17](pizza_amount) please
     - [18](pizza_amount) please
-    - [10](pizza_amount)
+    - [1](pizza_amount)
 - intent: out_of_scope
   examples: |
     - What is 2 + 2?
@@ -421,6 +539,9 @@ nlu:
     - book a flight from milan to ny
     - how far is the square
     - give me the directions to time square
+- synonym: Chicken Wings
+  examples: |
+    - chicken wings
 - synonym: Funghi
   examples: |
     - funghi

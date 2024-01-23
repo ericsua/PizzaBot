@@ -26,12 +26,14 @@ class ActionConfirmPizzas(Action):
 		pizza_type = tracker.get_slot("pizza_type")
 		pizza_amount = tracker.get_slot("pizza_amount")
 		pizza_sliced = tracker.get_slot("pizza_sliced")
-		order_details = ""
+		order_details = []
 		for amount, type, size in zip(pizza_amount, pizza_type, pizza_size):
-			order_details += f"{amount} {size} {type} " + ", "
-		order_details += ". All pizzas" + ( "sliced" if pizza_sliced == "yes" else "not sliced")
+			order_details += f"{amount} {size} {type} "
+		order_details = ", ".join(order_details)
+		order_details += ". All pizzas" + ( " sliced" if pizza_sliced == True else " not sliced")
 		dispatcher.utter_message(text="So you want to order "+order_details+". Is everything correct?")
-		return []
+		#old_order = tracker.get_slot("total_order")
+		return [SlotSet("pending_order", order_details)]
 
 class ActionChangeOrder(Action):
 	def name(self):
@@ -51,13 +53,18 @@ class ActionPizzaOrderAdd(Action):
 		return 'action_pizza_order_add'
 
 	def run(self, dispatcher, tracker, domain):
-		pizza_size = tracker.get_slot("pizza_size")
-		pizza_type = tracker.get_slot("pizza_type")
-		pizza_amount = tracker.get_slot("pizza_amount")
-		if pizza_size is None:
-			pizza_size = "standard"
-		order_details =  str(pizza_amount + " "+pizza_type + " is of "+pizza_size )
+		# pizza_size = tracker.get_slot("pizza_size")
+		# pizza_type = tracker.get_slot("pizza_type")
+		# pizza_amount = tracker.get_slot("pizza_amount")
+		# if pizza_size is None:
+		# 	pizza_size = "standard"
+		pending_order = tracker.get_slot("pending_order")
+		if pending_order is None:
+			dispatcher.utter_message(text="Sorry, there is an error. You have no pending order")
+			return []
+		order_details =  pending_order
 		old_order = tracker.get_slot("total_order")
+		dispatcher.utter_message(response="utter_order_added")
 		return[SlotSet("total_order", [order_details]) if old_order is None else SlotSet("total_order", [old_order[0]+' and '+order_details])]
 
 class ActionResetPizzaForm(Action):
