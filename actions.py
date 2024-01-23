@@ -166,7 +166,9 @@ class ValidatePizzaOrderForm(FormValidationAction):
 		"""Validate cuisine value."""
 
 		if isinstance(slot_value, str):
-			if slot_value in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]:
+			if slot_value in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+                     "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"
+                     "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"]:
 				# validation succeeded, set the value of the "cuisine" slot to value
 				return {"pizza_amount": slot_value}
 			else:
@@ -235,3 +237,137 @@ class ValidatePizzaOrderForm(FormValidationAction):
 				# user will be asked for the slot again
 				#dispatcher.utter_message(text="Please tell me yes or no")
 				return {"pizza_sliced": None}
+
+class ActionAskPizzaAmount(Action):
+	def name(self):
+		return 'action_ask_pizza_amount'
+	
+	def run(self, dispatcher, tracker, domain):
+		last_intent = tracker.get_intent_of_latest_message()
+  
+		requested_slot = tracker.get_slot("requested_slot")
+		if requested_slot == "pizza_amount" and last_intent not in ["pizza_crust", "stop_order"]:
+			dispatcher.utter_message(response="utter_ask_pizza_amount_again")
+			return []
+   
+		if last_intent == "item_start_generic":
+			dispatcher.utter_message(response="utter_ask_pizza_amount_ack")
+		elif last_intent == "item_size" and tracker.get_slot("pizza_size") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_amount_ack_size")
+			#dispatcher.utter_message(text="How many pizzas of this size do you want?")
+		elif last_intent == "item_type" and tracker.get_slot("pizza_type") is not None:
+			#pizza_type = tracker.get_slot("pizza_type")
+			#dispatcher.utter_message(text=f"Great choice! How many {pizza_type} pizzas do you want?")
+			dispatcher.utter_message(response="utter_ask_pizza_amount_ack_type")
+		elif last_intent == "pizza_sliced" and tracker.get_slot("pizza_sliced") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_amount_ack")
+		elif last_intent == "pizza_crust" and tracker.get_slot("pizza_crust") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_amount_ack_crust")
+		else:
+			dispatcher.utter_message(response="utter_ask_pizza_amount")
+		return[]
+
+class ActionAskPizzaType(Action):
+	def name(self):
+		return 'action_ask_pizza_type'
+
+	def run(self, dispatcher, tracker, domain):
+		last_intent = tracker.get_intent_of_latest_message()
+
+
+		requested_slot = tracker.get_slot("requested_slot")
+		if requested_slot == "pizza_type" and last_intent not in ["pizza_crust", "stop_order"]:
+			dispatcher.utter_message(response="utter_ask_pizza_type_again")
+			return []
+
+		if last_intent == "item_start_generic":
+			dispatcher.utter_message(response="utter_ask_pizza_type_ack")
+		elif last_intent == "item_amount" and tracker.get_slot("pizza_amount") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_type_ack_amount")
+		elif last_intent == "item_size" and tracker.get_slot("pizza_size") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_type_ack_size")
+		elif last_intent == "pizza_sliced" and tracker.get_slot("pizza_sliced") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_type_ack")
+		elif last_intent == "pizza_crust" and tracker.get_slot("pizza_crust") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_type_ack_crust")
+		else:
+			dispatcher.utter_message(response="utter_ask_pizza_type")
+		return[]
+
+class ActionAskPizzaSize(Action):
+	def name(self):
+		return 'action_ask_pizza_size'
+
+	def run(self, dispatcher, tracker, domain):
+		last_intent = tracker.get_intent_of_latest_message()
+  
+		requested_slot = tracker.get_slot("requested_slot")
+		if requested_slot == "pizza_size" and last_intent not in ["pizza_crust", "stop_order"]:
+			dispatcher.utter_message(response="utter_ask_pizza_size_again")
+			return []
+  
+		if last_intent == "item_start_generic":
+			dispatcher.utter_message(response="utter_ask_pizza_size_ack")
+		elif last_intent == "item_amount" and tracker.get_slot("pizza_amount") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_size_ack_amount")
+		elif last_intent == "item_type" and tracker.get_slot("pizza_type") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_size_ack_type")
+		elif last_intent == "pizza_sliced" and tracker.get_slot("pizza_sliced") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_size_ack")
+		elif last_intent == "pizza_crust" and tracker.get_slot("pizza_crust") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_size_ack_crust")
+		else:
+			dispatcher.utter_message(response="utter_ask_pizza_size")
+		return[]
+
+class ActionAskPizzaSliced(Action):
+	def name(self):
+		return 'action_ask_pizza_sliced'
+
+	def run(self, dispatcher, tracker, domain):
+		last_intent = tracker.get_intent_of_latest_message()
+  
+		requested_slot = tracker.get_slot("requested_slot")
+		if requested_slot == "pizza_sliced" and last_intent not in ["pizza_crust", "stop_order"]:
+			dispatcher.utter_message(response="utter_ask_pizza_sliced_again")
+			return []
+   
+		if last_intent == "item_start_generic":
+			dispatcher.utter_message(response="utter_ask_pizza_sliced_ack")
+		elif last_intent == "item_amount" and tracker.get_slot("pizza_amount") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_sliced_ack_amount")
+		elif last_intent == "item_type" and tracker.get_slot("pizza_type") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_sliced_ack_type")
+		elif last_intent == "item_size" and tracker.get_slot("pizza_size") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_sliced_ack_size")
+		elif last_intent == "pizza_crust" and tracker.get_slot("pizza_crust") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_sliced_ack_crust")
+		else:
+			dispatcher.utter_message(response="utter_ask_pizza_sliced")
+		return[]
+
+class ActionAskPizzaCrust(Action):
+	def name(self):
+		return 'action_ask_pizza_crust'
+
+	def run(self, dispatcher, tracker, domain):
+		last_intent = tracker.get_intent_of_latest_message()
+  
+		requested_slot = tracker.get_slot("requested_slot")
+		if requested_slot == "pizza_crust" and last_intent not in ["pizza_crust", "stop_order"]:
+			dispatcher.utter_message(response="utter_ask_pizza_crust_again")
+			return []
+   
+		if last_intent == "item_start_generic":
+			dispatcher.utter_message(response="utter_ask_pizza_crust_ack")
+		elif last_intent == "item_amount" and tracker.get_slot("pizza_amount") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_crust_ack_amount")
+		elif last_intent == "item_type" and tracker.get_slot("pizza_type") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_crust_ack_type")
+		elif last_intent == "item_size" and tracker.get_slot("pizza_size") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_crust_ack_size")
+		elif last_intent == "pizza_sliced" and tracker.get_slot("pizza_sliced") is not None:
+			dispatcher.utter_message(response="utter_ask_pizza_crust_ack")
+		else:
+			dispatcher.utter_message(response="utter_ask_pizza_crust")
+		return[]

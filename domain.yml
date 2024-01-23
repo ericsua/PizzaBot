@@ -155,20 +155,78 @@ responses:
       value: null
     text: Hi! Welcome to HMD pizzeria. How can I help you?
   - text: Hello {client_name}! Welcome to HMD pizzeria. How can I help you?
+  - text: Hi {client_name}! Welcome to HMD pizzeria. How can I help you?
+  - text: Hi {client_name}! It's HMD pizzeria here. How can I help you?
   utter_init_request:
   - text: Okay. In today's menu, we have Funghi, Hawaii, Margherita, Pepperoni, Veggie, all available in sizes Baby, Small, Medium, Large, or Extra Large. What would you like to have?
   utter_init_pizza_question:
   - text: For pizza without meat we have.... For pizza without cheese we have. Sizes available are Small, Medium and Large. What would you love to have?
+
   utter_ask_pizza_size:
   - text: What size of pizza do you want?
+  utter_ask_pizza_size_ack:
+  - text: Okay, washat size of pizza do you want?
+  utter_ask_pizza_size_ack_amount:
+  - text: And what size do you want your {pizza_amount} pizzas to be?
+  utter_ask_pizza_size_ack_crust:
+  - text: Great choice! And what size do you want your {pizza_crust} pizza to be?
+  utter_ask_pizza_size_ack_type:
+  - text: Nice choice! And what size do you want your {pizza_type} pizza to be?
+  utter_ask_pizza_size_again:
+  - text: Sorry, I didn't understand which size you want, can you tell me again?
+
   utter_ask_pizza_type:
   - text: What type of pizza do you want?
+  utter_ask_pizza_type_ack:
+  - text: Okay, what type of pizza do you want?
+  utter_ask_pizza_type_ack_amount:
+  - text: And what type of pizza do you want your {pizza_amount} pizzas to be?
+  utter_ask_pizza_type_ack_crust:
+  - text: Perfect combination! And what type of pizza do you want your {pizza_crust} pizza to be?
+  utter_ask_pizza_type_ack_size:
+  - text: Good! And what type of pizza do you want your {pizza_size} pizza to be?
+  utter_ask_pizza_type_again:
+  - text: Sorry, I didn't understand which pizza type you want, can you tell me again?
+
   utter_ask_pizza_amount:
   - text: How many pizzas do you want?
+  utter_ask_pizza_amount_ack:
+  - text: Okay, how many pizzas do you want?
+  utter_ask_pizza_amount_ack_crust:
+  - text: Nice! How many pizzas do you want your {pizza_crust} pizza to be?
+  utter_ask_pizza_amount_ack_size:
+  - text: Wonderful! How many pizzas do you want your {pizza_size} pizza to be?
+  utter_ask_pizza_amount_ack_type:
+  - text: My favourite! How many pizzas do you want your {pizza_type} pizza to be?
+  utter_ask_pizza_amount_again:
+  - text: Sorry, I didn't understand how many pizzas you want, can you tell me again?
+
   utter_ask_pizza_crust:
   - text: What type of crust do you want?
+  utter_ask_pizza_crust_ack:
+  - text: Okay, what type of crust do you want?
+  utter_ask_pizza_crust_ack_amount:
+  - text: And what type of crust do you want your {pizza_amount} pizzas to be?
+  utter_ask_pizza_crust_ack_size:
+  - text: Yummy! And what type of crust do you want your {pizza_size} pizza to be?
+  utter_ask_pizza_crust_ack_type:
+  - text: Good! And what type of crust do you want your {pizza_type} pizza to be?
+  utter_ask_pizza_crust_again:
+  - text: Sorry, I didn't understand the type of crust you want. Can you tell me again?
+
   utter_ask_pizza_sliced:
   - text: Do you want your pizza to be sliced?
+  utter_ask_pizza_sliced_ack:
+  - text: Okay, do you want your pizza to be sliced?
+  utter_ask_pizza_sliced_ack_amount:
+  - text: And do you want your {pizza_amount} pizzas to be sliced?
+  utter_ask_pizza_sliced_ack_crust:
+  - text: Delicious! Do you want your {pizza_crust} pizza to be sliced?
+  utter_ask_pizza_sliced_ack_size:
+  - text: Beautiful! Do you want your {pizza_size} pizza to be sliced?
+  utter_ask_pizza_sliced_again:
+  - text: Sorry, I didn't understand if you want the pizzas to be sliced. Can you tell me again?
+
   utter_order_added:
   - text: Perfect. Your order has been added.
   utter_order_confirm_negative:
@@ -228,6 +286,11 @@ responses:
   utter_anti_pizza:
   - text: Sorry, we don't have {anti_pizza_type} in our menu.
 actions:
+- action_ask_pizza_amount
+- action_ask_pizza_type
+- action_ask_pizza_crust
+- action_ask_pizza_size
+- action_ask_pizza_sliced
 - utter_welcome_greet
 - action_confirm_pizzas
 - utter_anti_pizza
