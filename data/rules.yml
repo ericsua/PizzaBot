@@ -52,3 +52,58 @@ rules:
       - anti_pizza_type: "true"
     - action: utter_anti_pizza
     - action: action_get_pizza_types
+
+- rule: explain pizza amount
+  condition:
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  steps:
+  - intent: explain
+  - action: utter_explain_pizza_quantities
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+
+- rule: explain pizza types
+  condition:
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  steps:
+  - intent: explain
+  - action: utter_explain_pizza_types
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+
+- rule: explain pizza size
+  condition:
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_size
+  steps:
+  - intent: explain
+  - action: utter_explain_pizza_size
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+
+- rule: explain pizza crust
+  condition:
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  steps:
+  - intent: explain
+  - action: utter_explain_pizza_crust
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+
+- rule: explain pizza sliced
+  condition:
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  steps:
+  - intent: explain
+  - action: utter_explain_pizza_sliced
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
