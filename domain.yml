@@ -34,10 +34,10 @@ intents:
 - stop_order
 - welcome_greet
 entities:
-- pizza_amount
-- pizza_type
 - pizza_crust
 - pizza_size
+- pizza_amount
+- pizza_type
 - future_pizza_type
 - future_pizza_size
 - future_pizza_amount
@@ -372,11 +372,11 @@ responses:
   utter_inform_pizza_crust:
   - text: The crusts that we have are Thin, Stuffed, Cracker, and Flatbread.
 actions:
+- action_confirm_pizzas
+- utter_explain_pizza_types
 - utter_explain_pizza_quantities
 - utter_welcome_greet
-- utter_explain_pizza_types
 - utter_explain_pizza_sliced
-- action_confirm_pizzas
 - utter_explain_pizza_crust
 - utter_explain_pizza_size
 - action_ask_pizza_amount

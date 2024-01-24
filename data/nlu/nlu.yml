@@ -412,6 +412,8 @@ nlu:
     - [four](pizza_amount) [small](pizza_size) [stuffed](pizza_crust) crust [margherita](pizza_type)
     - [one](pizza_amount) [medium](pizza_size) [thin](pizza_crust) crust [pepperoni](pizza_type) pizza, [sliced]{"entity": "pizza_sliced", "value": "true"}
     - [Margherita](pizza_type)
+    - [veggie]{"entity": "pizza_type", "value": "Veggie"}
+    - [margherita]{"entity": "pizza_type", "value": "Margherita"}
 - intent: item_size
   examples: |
     - [8"]{"entity": "pizza_size", "value": "baby"}
@@ -449,6 +451,8 @@ nlu:
     - [one](pizza_amount) [large](pizza_size) [pepperoni](pizza_type) pizza
     - [one](pizza_amount) [large](pizza_size) [vegetarian](pizza_type) pizza
     - [2](pizza_amount) [extra large](pizza_size) [cracker](pizza_crust) crust [veggie](pizza_type), [sliced]{"entity": "pizza_sliced", "value": "true"}
+    - [baby](pizza_size)
+    - [large](pizza_size)
 - intent: pizza_crust
   examples: |
     - [stuffed](pizza_crust) crust
@@ -471,6 +475,7 @@ nlu:
     - [one](pizza_amount) [cracker](pizza_crust) crust [margherita](pizza_type)
     - [four](pizza_amount) [medium](pizza_size) [stuffed](pizza_crust) crust [pepperoni](pizza_type)
     - [two](pizza_amount) [large](pizza_size) [flatbread](pizza_crust) crust [vegetarian](pizza_type)
+    - [flatbread](pizza_crust)
 - intent: item_topping
   examples: |
     - I want to order pizza with [olives](pizza_type)
@@ -490,6 +495,7 @@ nlu:
     - [mushrooms](pizza_type), [artichokes](pizza_type) and [olives](pizza_type)
     - [ham](pizza_type), [mushrooms](pizza_type), [bacon](pizza_type) and [brie](pizza_type)
     - [onions](pizza_type) and [tuna](pizza_type)
+    - [pepperoni]{"entity": "pizza_type", "value": "Pepperoni"}
 - intent: explain
   examples: |
     - can you explain more?
@@ -552,6 +558,8 @@ nlu:
     - [17](pizza_amount) please
     - [18](pizza_amount) please
     - [6](pizza_amount)
+    - [20](pizza_amount)
+    - [two](pizza_amount)
 - intent: out_of_scope
   examples: |
     - What is 2 + 2?
@@ -592,6 +600,15 @@ nlu:
 - synonym: 'true'
   examples: |
     - sliced
+- synonym: Veggie
+  examples: |
+    - veggie
+    - Vegetarian
+    - Vegetariana
+    - vegetarian
+    - vegetable
+    - Vegetable
+    - Veggie
 - synonym: baby
   examples: |
     - 8"
@@ -661,15 +678,6 @@ nlu:
 - synonym: Rustica
   examples: |
     - Rustica
-- synonym: Veggie
-  examples: |
-    - Vegetarian
-    - Vegetariana
-    - vegetarian
-    - vegetable
-    - Vegetable
-    - Veggie
-    - veggie
 - synonym: thin
   examples: |
     - thin

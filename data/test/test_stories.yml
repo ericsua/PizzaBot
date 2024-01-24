@@ -1,0 +1,45 @@
+version: "3.1"
+stories:
+- story: explain 2 steps
+  steps:
+  - user: |
+      pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      what
+    intent: explain
+  - action: utter_explain_pizza_quantities
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [3](pizza_amount)
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: '3'
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: '3'
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      what
+    intent: explain
+  - action: utter_explain_pizza_types
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Margherita](pizza_type)
+    intent: item_type
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - requested_slot: pizza_size

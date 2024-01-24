@@ -28,7 +28,7 @@ class ActionConfirmPizzas(Action):
 		pizza_sliced = tracker.get_slot("pizza_sliced")
 		order_details = ""
 		#for amount, type, size in zip(pizza_amount, pizza_type, pizza_size):
-		order_details += f"{pizza_amount} {pizza_size} {pizza_type} "
+		order_details += f"{pizza_amount} {pizza_size} {pizza_type}"
 		#order_details = ", ".join(order_details)
 		order_details += ". All pizzas" + ( " sliced" if pizza_sliced == True else " not sliced")
 		dispatcher.utter_message(text="So you want to order "+order_details+". Is everything correct?")
