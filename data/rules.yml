@@ -7,6 +7,11 @@ rules:
   - action: pizza_order_form
   - active_loop: pizza_order_form
 
+- rule: greet
+  steps:
+  - intent: welcome_greet
+  - action: utter_welcome_greet
+
 
 - rule: submit form
   condition:

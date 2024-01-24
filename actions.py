@@ -26,10 +26,10 @@ class ActionConfirmPizzas(Action):
 		pizza_type = tracker.get_slot("pizza_type")
 		pizza_amount = tracker.get_slot("pizza_amount")
 		pizza_sliced = tracker.get_slot("pizza_sliced")
-		order_details = []
-		for amount, type, size in zip(pizza_amount, pizza_type, pizza_size):
-			order_details += f"{amount} {size} {type} "
-		order_details = ", ".join(order_details)
+		order_details = ""
+		#for amount, type, size in zip(pizza_amount, pizza_type, pizza_size):
+		order_details += f"{pizza_amount} {pizza_size} {pizza_type} "
+		#order_details = ", ".join(order_details)
 		order_details += ". All pizzas" + ( " sliced" if pizza_sliced == True else " not sliced")
 		dispatcher.utter_message(text="So you want to order "+order_details+". Is everything correct?")
 		#old_order = tracker.get_slot("total_order")
@@ -129,7 +129,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
 	def pizza_db() -> List[Text]:
 		"""Database of supported cuisines"""
 
-		return ["Funghi", "Hawaii", "Margherita", "Pepperoni", "Veggie"]
+		return ["funghi", "hawaii", "margherita", "pepperoni", "veggie"]
 
 	def validate_pizza_type(
 		self,
@@ -198,7 +198,8 @@ class ValidatePizzaOrderForm(FormValidationAction):
 				# validation succeeded, set the value of the "cuisine" slot to value
 				return {"pizza_size": slot_value}
 			else:
-				dispatcher.utter_message(text="Please tell me a valid size. We have baby, small, medium, standard, large, extra large")
+				dispatcher.utter_message(text="Please tell me a valid size")#. We have baby, small, medium, standard, large, extra large")
+				dispatcher.utter_message(response="utter_inform_pizza_size")
 				return {"pizza_size": None}
 		elif isinstance(slot_value, list):
 			if len(slot_value) > 0:
@@ -207,7 +208,8 @@ class ValidatePizzaOrderForm(FormValidationAction):
 			else:
 				# validation failed, set this slot to None so that the
 				# user will be asked for the slot again
-				dispatcher.utter_message(text="Please tell me a valid size. We have baby, small, medium, standard, large, extra large")
+				dispatcher.utter_message(text="Please tell me a valid size")#. We have baby, small, medium, standard, large, extra large")
+				dispatcher.utter_message(response="utter_inform_pizza_size")
 				return {"pizza_size": None}
 
 	def validate_pizza_sliced(
@@ -238,6 +240,34 @@ class ValidatePizzaOrderForm(FormValidationAction):
 				#dispatcher.utter_message(text="Please tell me yes or no")
 				return {"pizza_sliced": None}
 
+	def validate_pizza_crust(
+		self,
+		slot_value: Any,
+		dispatcher: CollectingDispatcher,
+		tracker: Tracker,
+		domain: DomainDict,
+	) -> Dict[Text, Any]:
+		"""Validate cuisine value."""
+
+		if isinstance(slot_value, str):
+			if slot_value.lower() in ["thin", "flatbread", "stuffed", "cracker"]:
+				# validation succeeded, set the value of the "cuisine" slot to value
+				return {"pizza_crust": slot_value}
+			else:
+				dispatcher.utter_message(text="Please tell me a valid crust")#. We have thin, thick, standard")
+				dispatcher.utter_message(response="utter_inform_pizza_crust")
+				return {"pizza_crust": None}
+		elif isinstance(slot_value, list):
+			if len(slot_value) > 0:
+				concatenated_slot = ", ".join(slot_value)
+				return {"pizza_crust": concatenated_slot}
+			else:
+				# validation failed, set this slot to None so that the
+				# user will be asked for the slot again
+				dispatcher.utter_message(text="Please tell me a valid crust")#. We have thin, thick, standard")
+				dispatcher.utter_message(response="utter_inform_pizza_crust")
+				return {"pizza_crust": None}
+
 class ActionAskPizzaAmount(Action):
 	def name(self):
 		return 'action_ask_pizza_amount'
@@ -246,7 +276,7 @@ class ActionAskPizzaAmount(Action):
 		last_intent = tracker.get_intent_of_latest_message()
   
 		requested_slot = tracker.get_slot("requested_slot")
-		if requested_slot == "pizza_amount" and last_intent not in ["pizza_crust", "stop_order"]:
+		if requested_slot == "pizza_amount" and last_intent not in ["pizza_crust", "stop_order", "explain"]:
 			dispatcher.utter_message(response="utter_ask_pizza_amount_again")
 			return []
    
@@ -276,7 +306,7 @@ class ActionAskPizzaType(Action):
 
 
 		requested_slot = tracker.get_slot("requested_slot")
-		if requested_slot == "pizza_type" and last_intent not in ["pizza_crust", "stop_order"]:
+		if requested_slot == "pizza_type" and last_intent not in ["pizza_crust", "stop_order", "explain"]:
 			dispatcher.utter_message(response="utter_ask_pizza_type_again")
 			return []
 
@@ -302,7 +332,7 @@ class ActionAskPizzaSize(Action):
 		last_intent = tracker.get_intent_of_latest_message()
   
 		requested_slot = tracker.get_slot("requested_slot")
-		if requested_slot == "pizza_size" and last_intent not in ["pizza_crust", "stop_order"]:
+		if requested_slot == "pizza_size" and last_intent not in ["pizza_crust", "stop_order", "explain"]:
 			dispatcher.utter_message(response="utter_ask_pizza_size_again")
 			return []
   
@@ -328,7 +358,7 @@ class ActionAskPizzaSliced(Action):
 		last_intent = tracker.get_intent_of_latest_message()
   
 		requested_slot = tracker.get_slot("requested_slot")
-		if requested_slot == "pizza_sliced" and last_intent not in ["pizza_crust", "stop_order"]:
+		if requested_slot == "pizza_sliced" and last_intent not in ["pizza_crust", "stop_order", "explain"]:
 			dispatcher.utter_message(response="utter_ask_pizza_sliced_again")
 			return []
    
@@ -354,7 +384,7 @@ class ActionAskPizzaCrust(Action):
 		last_intent = tracker.get_intent_of_latest_message()
   
 		requested_slot = tracker.get_slot("requested_slot")
-		if requested_slot == "pizza_crust" and last_intent not in ["pizza_crust", "stop_order"]:
+		if requested_slot == "pizza_crust" and last_intent not in ["pizza_crust", "stop_order", "explain"]:
 			dispatcher.utter_message(response="utter_ask_pizza_crust_again")
 			return []
    

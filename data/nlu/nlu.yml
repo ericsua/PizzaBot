@@ -271,7 +271,7 @@ nlu:
     - [hawaii](pizza_type) pizza [small](pizza_size) please
     - [small](pizza_size) [hawaii](pizza_type) pizza
     - [two](pizza_amount) [medium](pizza_size) pizza [margherita](pizza_type) please
-    - [jumbo](pizza_type)
+    - [jumbo](pizza_size)
     - [one](pizza_amount) pizza [funghi](pizza_type)
     - i'd like [three](pizza_amount) [medium](pizza_size) pizza [margherita](pizza_type)
     - I'd like to order [3](pizza_amount)  [small](pizza_size) [hawaii](pizza_type) please
@@ -320,6 +320,7 @@ nlu:
     - correct
     - Yes
     - Yeah
+    - yes please
 - intent: response_name_phone
   examples: |
     - my name is [Raymond](client_name) and number is [098765432](phone_number).
@@ -402,7 +403,15 @@ nlu:
     - [medium](pizza_size) [pepperoni](pizza_type) pizza
     - [large](pizza_size) [vegetarian](pizza_type) pizza
     - [extra large](pizza_size) [veggie](pizza_type) pizza
-
+    - [2](pizza_amount) [hawaii](pizza_type) pizza
+    - [2](pizza_amount) [margherita](pizza_type) pizza
+    - [one](pizza_amount) [pepperoni](pizza_type)
+    - [one](pizza_amount) [vegetarian](pizza_type) pizza
+    - [two](pizza_amount) [large](pizza_size) [veggie](pizza_type)
+    - [three](pizza_amount) [extra large](pizza_size) [thin](pizza_crust) crust [hawaii](pizza_type) pizza
+    - [four](pizza_amount) [small](pizza_size) [stuffed](pizza_crust) crust [margherita](pizza_type)
+    - [one](pizza_amount) [medium](pizza_size) [thin](pizza_crust) crust [pepperoni](pizza_type) pizza, [sliced]{"entity": "pizza_sliced", "value": "true"}
+    - [Margherita](pizza_type)
 - intent: item_size
   examples: |
     - [8"]{"entity": "pizza_size", "value": "baby"}
@@ -430,11 +439,16 @@ nlu:
     - [Little]{"entity": "pizza_size", "value": "small"} pizza
     - Probably [avg]{"entity": "pizza_size", "value": "medium"}
     - Probably [average]{"entity": "pizza_size", "value": "medium"} pizza
-    - [Average]{"entity": "pizza_size", "value": "medium"} 
+    - [Average]{"entity": "pizza_size", "value": "medium"}
     - [medium](pizza_size)
     - [large](pizza_size) please
     - [extra large](pizza_size)
-    - [large](pizza_size) and sliced
+    - [large](pizza_size) and [sliced]{"entity": "pizza_sliced", "value": "true"}
+    - [ten](pizza_amount) [large](pizza_size) [hawaii](pizza_type) pizza
+    - [nine](pizza_amount) [baby](pizza_size) [margherita](pizza_type)
+    - [one](pizza_amount) [large](pizza_size) [pepperoni](pizza_type) pizza
+    - [one](pizza_amount) [large](pizza_size) [vegetarian](pizza_type) pizza
+    - [2](pizza_amount) [extra large](pizza_size) [cracker](pizza_crust) crust [veggie](pizza_type), [sliced]{"entity": "pizza_sliced", "value": "true"}
 - intent: pizza_crust
   examples: |
     - [stuffed](pizza_crust) crust
@@ -453,7 +467,10 @@ nlu:
     - [cracker](pizza_crust)
     - [flatbread](pizza_crust)
     - [thin](pizza_crust)
-    - [cracker](pizza_crust) crust
+    - [one](pizza_amount) [thin](pizza_crust) crust [hawaii](pizza_type)
+    - [one](pizza_amount) [cracker](pizza_crust) crust [margherita](pizza_type)
+    - [four](pizza_amount) [medium](pizza_size) [stuffed](pizza_crust) crust [pepperoni](pizza_type)
+    - [two](pizza_amount) [large](pizza_size) [flatbread](pizza_crust) crust [vegetarian](pizza_type)
 - intent: item_topping
   examples: |
     - I want to order pizza with [olives](pizza_type)
@@ -484,6 +501,13 @@ nlu:
     - explain
     - tell me more about it
     - what do you mean
+    - What
+    - what
+    - Huh?
+    - Eh?
+    - Sorry?
+    - huh
+    - sorry?
 - intent: request_restaurant_location
   examples: |
     - Where is the restaurant?
@@ -527,7 +551,7 @@ nlu:
     - [16](pizza_amount) please
     - [17](pizza_amount) please
     - [18](pizza_amount) please
-    - [1](pizza_amount)
+    - [6](pizza_amount)
 - intent: out_of_scope
   examples: |
     - What is 2 + 2?
@@ -561,6 +585,13 @@ nlu:
     - Pepperoni
     - Peperoni
     - peperoni
+- synonym: Margherita
+  examples: |
+    - margherita
+    - Margherita
+- synonym: 'true'
+  examples: |
+    - sliced
 - synonym: baby
   examples: |
     - 8"
@@ -573,6 +604,7 @@ nlu:
   examples: |
     - 10"
     - 10 inches
+    - Little
     - 10 inch
     - small
     - Small
@@ -581,6 +613,9 @@ nlu:
   examples: |
     - 12"
     - 12 inches
+    - avg
+    - average
+    - Average
     - 12 inch
     - Medium
     - medium
@@ -595,10 +630,12 @@ nlu:
     - large
     - fourteen inch
     - size L
+    - big
 - synonym: extra large
   examples: |
     - 18"
     - 18 inches
+    - huge
     - jumbo
     - 18 inch
     - extra large
@@ -624,10 +661,6 @@ nlu:
 - synonym: Rustica
   examples: |
     - Rustica
-- synonym: Margherita
-  examples: |
-    - Margherita
-    - margherita
 - synonym: Veggie
   examples: |
     - Vegetarian
@@ -637,3 +670,33 @@ nlu:
     - Vegetable
     - Veggie
     - veggie
+- synonym: thin
+  examples: |
+    - thin
+    - Thin
+    - tin
+    - Thinn
+    - thhin
+- synonym: cracker
+  examples: |
+    - cracker
+    - Cracker
+    - crecker
+    - Craker
+    - crakcer
+- synonym: flatbread
+  examples: |
+    - flatbread
+    - Flatbread
+    - flat bread
+    - Flat bread
+    - flat-bread
+    - Flat-bread
+- synonym: stuffed
+  examples: |
+    - stuffed
+    - Stuffed
+    - stuff
+    - Stuff
+    - stufed
+    - Stufd
