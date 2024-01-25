@@ -91,6 +91,18 @@ nlu:
     - Is it possible to cancel my order?
     - Is it possible to cancel my pizza?
     - Is it possible to cancel my pizza order?
+    - I've changed my mind, i want to cancel my order
+    - stop now
+    - stop please
+    - I want to stop
+    - I have changed my mind, i want to stop
+    - I have changed my mind, i want to stop please
+    - I have changed my mind. I want to cancel my order
+    - I have changed my mind. Cancel my order.
+    - I don't want to order anymore
+    - I don't want to buy anymore
+    - I don't want to buy a pizza anymore
+    - I've changed my mind, i don't want to buy a pizza
 - intent: request_pizza_types
   examples: |
     - what [meat](pizza_category) pizzas do you have?
@@ -112,6 +124,27 @@ nlu:
     - which are your [vegetarian](pizza_category) pizzas?
     - which are your [vegan](pizza_category) pizzas?
     - which are your [vegetable](pizza_category) pizzas?
+- intent: request_pizza_crusts
+  examples: |
+    - what crusts do you have?
+    - what crusts do you offer?
+    - what crusts do you have for hawaii pizza?
+    - what crusts do you have for margherita?
+    - what crusts do you have for pepperoni?
+    - which crusts do you have?
+    - which crusts do you offer?
+    - what are the crusts options?
+- intent: request_pizza_sizes
+  examples: |
+    - what sizes do you have?
+    - what sizes do you offer?
+    - what sizes do you have for hawaii pizza?
+    - what sizes do you have for margherita?
+    - what sizes do you have for pepperoni?
+    - which sizes do you have?
+    - which sizes do you offer?
+    - what are the sizes options?
+    - what size you have
 - intent: welcome_greet
   examples: |
     - Hi, I'm [Raymond](PERSON)
@@ -284,6 +317,7 @@ nlu:
     - [funghi]{"entity": "pizza_type", "value": "Funghi"}
     - [10](pizza_amount) pizzas
     - I'd like to have a [margherita]{"entity": "pizza_type", "value": "Margherita"}
+    - i want pizza
 - intent: item_change
   examples: |
     - I changed my mind. Can I get  a [funghi](pizza_type) instead?
@@ -559,7 +593,7 @@ nlu:
     - [18](pizza_amount) please
     - [6](pizza_amount)
     - [20](pizza_amount)
-    - [two](pizza_amount)
+    - [3](pizza_amount)
 - intent: out_of_scope
   examples: |
     - What is 2 + 2?

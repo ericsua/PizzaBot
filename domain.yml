@@ -27,6 +27,8 @@ intents:
 - pizza_crust
 - pizza_questions
 - pizza_sliced
+- request_pizza_crusts
+- request_pizza_sizes
 - request_pizza_types
 - response_name_phone
 - response_negative
@@ -371,11 +373,23 @@ responses:
   - text: The sizes that we have are Baby, Small, Medium, Large, Extra Large.
   utter_inform_pizza_crust:
   - text: The crusts that we have are Thin, Stuffed, Cracker, and Flatbread.
+  utter_ask_confirm:
+  - text: Are you sure?
+  - text: Are you sure about that?
+  utter_confirm_order_canceled:
+  - text: No problem. Your order has been canceled.
+  - text: Okay. Your order has been canceled.
+  - text: Alright. Your order has been canceled.
 actions:
+- utter_ask_confirm
+- action_reset_pizza_form
+- utter_confirm_order_canceled
+- utter_anything_else
+- utter_welcome_greet
+- utter_inform_pizza_size
 - action_confirm_pizzas
 - utter_explain_pizza_types
 - utter_explain_pizza_quantities
-- utter_welcome_greet
 - utter_explain_pizza_sliced
 - utter_explain_pizza_crust
 - utter_explain_pizza_size
@@ -387,7 +401,6 @@ actions:
 - utter_anti_pizza
 - action_get_pizza_types
 - utter_order_added
-- utter_anything_else
 - utter_item_change
 - utter_inform_pizza_types
 - utter_inform_pizza_types_meat
@@ -412,7 +425,6 @@ actions:
 - utter_order_complete
 - utter_delivery_address
 - action_change_order
-- action_reset_pizza_form
 - action_order_number
 - utter_item_type_start_negative
 - utter_item_type_start_postive

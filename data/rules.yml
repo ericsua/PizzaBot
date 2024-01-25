@@ -45,6 +45,16 @@ rules:
     - intent: request_pizza_types
     - action: action_get_pizza_types
 
+- rule: crust questions
+  steps:
+    - intent: request_pizza_crusts
+    - action: utter_inform_pizza_crust
+
+- rule: size questions
+  steps:
+    - intent: request_pizza_sizes
+    - action: utter_inform_pizza_size
+
 - rule: anti pizza
   steps:
     - intent: order_anti_pizza
