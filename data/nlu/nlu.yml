@@ -355,6 +355,7 @@ nlu:
     - Yes
     - Yeah
     - yes please
+    - es
 - intent: response_name_phone
   examples: |
     - my name is [Raymond](client_name) and number is [098765432](phone_number).
@@ -486,7 +487,7 @@ nlu:
     - [one](pizza_amount) [large](pizza_size) [vegetarian](pizza_type) pizza
     - [2](pizza_amount) [extra large](pizza_size) [cracker](pizza_crust) crust [veggie](pizza_type), [sliced]{"entity": "pizza_sliced", "value": "true"}
     - [baby](pizza_size)
-    - [large](pizza_size)
+    - [small](pizza_size)
 - intent: pizza_crust
   examples: |
     - [stuffed](pizza_crust) crust
@@ -509,7 +510,7 @@ nlu:
     - [one](pizza_amount) [cracker](pizza_crust) crust [margherita](pizza_type)
     - [four](pizza_amount) [medium](pizza_size) [stuffed](pizza_crust) crust [pepperoni](pizza_type)
     - [two](pizza_amount) [large](pizza_size) [flatbread](pizza_crust) crust [vegetarian](pizza_type)
-    - [flatbread](pizza_crust)
+    - [cracker](pizza_crust)
 - intent: item_topping
   examples: |
     - I want to order pizza with [olives](pizza_type)
@@ -569,6 +570,17 @@ nlu:
     - just [one](pizza_amount)
     - just [1](pizza_amount)
     - [one](pizza_amount)
+    - [four](pizza_amount)
+    - [five](pizza_amount)
+    - [six](pizza_amount)
+    - [seven](pizza_amount)
+    - [eight](pizza_amount)
+    - [nine](pizza_amount)
+    - [ten](pizza_amount)
+    - [eleven](pizza_amount)
+    - [twelve](pizza_amount)
+    - [thirteen](pizza_amount)
+    - [fourteen](pizza_amount)
     - [8](pizza_amount)
     - [9](pizza_amount)
     - [10](pizza_amount)
@@ -593,7 +605,7 @@ nlu:
     - [18](pizza_amount) please
     - [6](pizza_amount)
     - [20](pizza_amount)
-    - [3](pizza_amount)
+    - [1](pizza_amount)
 - intent: out_of_scope
   examples: |
     - What is 2 + 2?

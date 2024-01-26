@@ -117,3 +117,18 @@ rules:
   - action: utter_explain_pizza_sliced
   - action: pizza_order_form
   - active_loop: pizza_order_form
+
+# - rule: stop pizza form
+#   condition:
+#   - active_loop: pizza_order_form
+#   steps:
+#   - intent: stop_order
+#   - action: utter_ask_confirm
+#   - or:
+#     - intent: response_positive
+#     - intent: stop_order
+#   - action: action_deactivate_loop
+#   - active_loop: null
+#   - action: action_reset_pizza_form
+#   - action: utter_confirm_order_canceled
+#   - action: utter_anything_else

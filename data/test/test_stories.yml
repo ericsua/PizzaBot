@@ -43,3 +43,527 @@ stories:
     - pizza_type: Margherita
   - slot_was_set:
     - requested_slot: pizza_size
+
+
+- story: stop order second step
+  steps:
+  - user: |
+      pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [three](pizza_amount)
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: three
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      stop
+    intent: stop_order
+  - action: utter_ask_confirm
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_reset_pizza_form
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - action: utter_confirm_order_canceled
+  - action: utter_anything_else
+
+- story: stop order first step
+  steps:
+  - user: |
+      pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      stop
+    intent: stop_order
+  - action: utter_ask_confirm
+  - user: |
+      stop
+    intent: stop_order
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_reset_pizza_form
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - action: utter_confirm_order_canceled
+  - action: utter_anything_else
+
+- story: stop order at crust plus starting again
+  steps:
+  - user: |
+      hi
+    intent: welcome_greet
+  - action: utter_welcome_greet
+  - user: |
+      pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [three](pizza_amount)
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: three
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Margherita](pizza_type)
+    intent: item_type
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      what sizes do you have
+    intent: request_pizza_sizes
+  - action: utter_inform_pizza_size
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      [small](pizza_size)
+    intent: item_size
+  - slot_was_set:
+    - pizza_size: small
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_size: small
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      I want to cancel my order
+    intent: stop_order
+  - action: utter_ask_confirm
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_reset_pizza_form
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - action: utter_confirm_order_canceled
+  - action: utter_anything_else
+  - user: |
+      pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [nine](pizza_amount)
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: nine
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: nine
+  - slot_was_set:
+    - requested_slot: pizza_type
+
+- story: stop order at size
+  steps:
+  - user: |
+      I want to buy a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [1](pizza_amount)
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: '1'
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: '1'
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Margherita](pizza_type)
+    intent: item_type
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      cancel
+  - intent: stop_order
+  - action: utter_ask_confirm
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_reset_pizza_form
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - action: utter_confirm_order_canceled
+  - action: utter_anything_else
+
+
+- story: stop order at crust
+  steps:
+  - user: |
+      I want to buy a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [1](pizza_amount)
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: '1'
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: '1'
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Margherita](pizza_type)
+    intent: item_type
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      [small](pizza_size)
+    intent: item_size
+  - slot_was_set:
+    - pizza_size: small
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_size: small
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      cancel
+    intent: stop_order
+  - action: utter_ask_confirm
+  - user: |
+      stop
+    intent: stop_order
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_reset_pizza_form
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - action: utter_confirm_order_canceled
+  - action: utter_anything_else
+
+- story: stop order at sliced
+  steps:
+  - user: |
+      I want to order a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [1](pizza_amount)
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: '1'
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: '1'
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Margherita](pizza_type)
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      [small](pizza_size)
+    intent: item_size
+  - slot_was_set:
+    - pizza_size: small
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_size: small
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      [cracker](pizza_crust)
+    intent: pizza_crust
+  - slot_was_set:
+    - pizza_crust: cracker
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_crust: cracker
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - user: |
+      stop
+    intent: stop_order
+  - action: utter_ask_confirm
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_reset_pizza_form
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - action: utter_confirm_order_canceled
+  - action: utter_anything_else
+
+- story: stop order at sliced 2
+  steps:
+  - user: |
+      I want to order a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [3](pizza_amount)
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: '3'
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: '3'
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Margherita](pizza_type)
+    intent: item_type
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      [large](pizza_size)
+    intent: item_size
+  - slot_was_set:
+    - pizza_size: large
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      [flatbread](pizza_crust)
+    intent: pizza_crust
+  - slot_was_set:
+    - pizza_crust: flatbread
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_crust: flatbread
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - user: |
+      stop
+    intent: stop_order
+  - action: utter_ask_confirm
+  - user: |
+      stop
+    intent: stop_order
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_reset_pizza_form
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - action: utter_confirm_order_canceled
+  - action: utter_anything_else
+
+
+- story: happy form
+  steps:
+  - user: |
+      I want to order a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [1](pizza_amount)
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: '1'
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: '1'
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Margherita](pizza_type)
+    intent: item_type
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      [medium](pizza_size)
+    intent: item_size
+  - slot_was_set:
+    - pizza_size: medium
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_size: medium
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      [flatbread](pizza_crust)
+    intent: pizza_crust
+  - slot_was_set:
+    - pizza_crust: flatbread
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_crust: flatbread
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - user: |
+      [yes](pizza_sliced)
+    intent: response_positive
+  - slot_was_set:
+    - pizza_sliced: true
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order: 1 medium Margherita. All pizzas sliced
+
+- story: stop at amount
+  steps:
+  - user: |
+      pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      stop
+    intent: stop_order
+  - action: utter_ask_confirm
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_reset_pizza_form
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pending_order: null
+  - action: utter_confirm_order_canceled
+  - action: utter_anything_else

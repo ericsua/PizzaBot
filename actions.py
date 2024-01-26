@@ -321,7 +321,7 @@ class ActionAskPizzaType(Action):
 			dispatcher.utter_message(response="utter_ask_pizza_type_ack_crust")
 		else:
 			dispatcher.utter_message(response="utter_ask_pizza_type")
-		return[]
+		return []
 
 class ActionAskPizzaSize(Action):
 	def name(self):

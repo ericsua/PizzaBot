@@ -36,10 +36,10 @@ intents:
 - stop_order
 - welcome_greet
 entities:
+- pizza_type
+- pizza_amount
 - pizza_crust
 - pizza_size
-- pizza_amount
-- pizza_type
 - future_pizza_type
 - future_pizza_size
 - future_pizza_amount
@@ -62,15 +62,18 @@ slots:
     - type: custom
   pizza_sliced:
     type: bool
+    influence_conversation: true
     mappings:
     - type: from_intent
       intent: response_positive
+      not_intent: stop_order
       value: true
       conditions:
       - active_loop: pizza_order_form
         requested_slot: pizza_sliced
     - type: from_intent
       intent: response_negative
+      not_intent: stop_order
       value: false
       conditions:
       - active_loop: pizza_order_form
@@ -81,7 +84,8 @@ slots:
     - type: from_entity
       entity: anti_pizza_type
   pizza_crust:
-    type: any
+    type: text
+    influence_conversation: true
     mappings:
     - type: from_entity
       entity: pizza_crust
@@ -100,38 +104,45 @@ slots:
     - type: from_entity
       entity: phone_number
   pizza_amount:
-    type: any
+    type: text
+    influence_conversation: true
     mappings:
     - type: from_entity
       entity: pizza_amount
       intent: item_amount
   pizza_size:
-    type: any
+    type: text
+    influence_conversation: true
     mappings:
     - type: from_entity
       entity: pizza_size
   pizza_type:
-    type: any
+    type: text
+    influence_conversation: true
     mappings:
     - type: from_entity
       entity: pizza_type
   future_pizza_type:
-    type: any
+    type: text
+    influence_conversation: true
     mappings:
     - type: from_entity
       entity: future_pizza_type
   future_pizza_size:
-    type: any
+    type: text
+    influence_conversation: true
     mappings:
     - type: from_entity
       entity: future_pizza_size
   future_pizza_amount:
-    type: any
+    type: text
+    influence_conversation: true
     mappings:
     - type: from_entity
       entity: future_pizza_amount
   future_pizza_crust:
-    type: any
+    type: text
+    influence_conversation: true
     mappings:
     - type: from_entity
       entity: future_pizza_crust
@@ -381,51 +392,35 @@ responses:
   - text: Okay. Your order has been canceled.
   - text: Alright. Your order has been canceled.
 actions:
-- utter_ask_confirm
 - action_reset_pizza_form
 - utter_confirm_order_canceled
+- utter_ask_confirm
 - utter_anything_else
-- utter_welcome_greet
-- utter_inform_pizza_size
+- validate_pizza_order_form
 - action_confirm_pizzas
-- utter_explain_pizza_types
-- utter_explain_pizza_quantities
-- utter_explain_pizza_sliced
-- utter_explain_pizza_crust
-- utter_explain_pizza_size
 - action_ask_pizza_amount
 - action_ask_pizza_type
 - action_ask_pizza_crust
 - action_ask_pizza_size
 - action_ask_pizza_sliced
-- utter_anti_pizza
 - action_get_pizza_types
-- utter_order_added
-- utter_item_change
-- utter_inform_pizza_types
-- utter_inform_pizza_types_meat
-- utter_inform_pizza_types_vegetarian
-- utter_ask_pizza_type
-- validate_pizza_order_form
-- utter_inform_restaurant_location
-- utter_total_order_final
-- utter_ask_pizza_size
 - action_pizza_order_add
 - action_get_restaurant_location
-- utter_init_request
-- utter_init_pizza_question
-- utter_ask_pizza_amount
-- utter_ask_pizza_crust
-- utter_ask_pizza_sliced
+- action_change_order
+- action_order_number
+- utter_stop_order
+- utter_order_added
 - utter_order_confirm_negative
 - utter_order_confirm_positive
+- utter_item_change
 - utter_extra_order
 - utter_final_order
+- utter_total_order_final
 - utter_name_phone
 - utter_order_complete
 - utter_delivery_address
-- action_change_order
-- action_order_number
+- utter_order_add
+- utter_default
 - utter_item_type_start_negative
 - utter_item_type_start_postive
 - utter_item_type
@@ -434,9 +429,19 @@ actions:
 - utter_pizza_questions
 - utter_order_processing_positive
 - utter_order_processing_negative
-- utter_order_add
-- utter_default
+- utter_explain_pizza_quantities
+- utter_explain_pizza_types
+- utter_explain_pizza_crust
+- utter_explain_pizza_size
+- utter_explain_pizza_sliced
 - utter_summarize_order
+- utter_inform_restaurant_location
+- utter_inform_pizza_types
+- utter_inform_pizza_types_meat
+- utter_inform_pizza_types_vegetarian
+- utter_anti_pizza
+- utter_inform_pizza_size
+- utter_inform_pizza_crust
 forms:
   pizza_order_form:
     required_slots:
