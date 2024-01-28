@@ -108,11 +108,12 @@ class ActionGetPizzaTypes(Action):
 		if pizza_category is None:
 			#pizza_types = "Funghi, Hawaii, Margherita, Pepperoni, Vegetarian"
 			dispatcher.utter_message(response="utter_inform_pizza_types")
-		elif pizza_category.lower() == "meat":
+		elif pizza_category.lower() in ["meat", "meat lover", "meatlovers", "meat-lover", "meat-lovers", "meatlovers", "meat lovers", "no vegetables"]:
 			dispatcher.utter_message(response="utter_inform_pizza_types_meat")
-		elif pizza_category.lower() in ["vegetarian", "vegan", "vegetable", "veggie"]:
+		elif pizza_category.lower() in ["vegetarian", "vegan", "vegetable", "vegetables", "veggie", "no meat"]:
 			dispatcher.utter_message(response="utter_inform_pizza_types_vegetarian")
 		else:
+			dispatcher.utter_message(response="utter_inform_pizza_types_no_category")
 			dispatcher.utter_message(response="utter_inform_pizza_types")
 
 		return [SlotSet("pizza_category", None)]
@@ -274,9 +275,10 @@ class ActionAskPizzaAmount(Action):
 	
 	def run(self, dispatcher, tracker, domain):
 		last_intent = tracker.get_intent_of_latest_message()
-  
+		# reversed_events = list(reversed(tracker.events))
+		# print(reversed_events[1])
 		requested_slot = tracker.get_slot("requested_slot")
-		if requested_slot == "pizza_amount" and last_intent not in ["pizza_crust", "stop_order", "explain"]:
+		if requested_slot == "pizza_amount" and last_intent not in ["pizza_crust", "stop_order", "explain", "response_negative", "bot_challenge"]:
 			dispatcher.utter_message(response="utter_ask_pizza_amount_again")
 			return []
    
@@ -305,7 +307,7 @@ class ActionAskPizzaType(Action):
 		last_intent = tracker.get_intent_of_latest_message()
 
 		requested_slot = tracker.get_slot("requested_slot")
-		if requested_slot == "pizza_type" and last_intent not in ["pizza_crust", "stop_order", "explain", "request_pizza_types"]:
+		if requested_slot == "pizza_type" and last_intent not in ["pizza_crust", "stop_order", "explain", "request_pizza_types", "response_negative", "bot_challenge"]:
 			dispatcher.utter_message(response="utter_ask_pizza_type_again")
 			return []
 
@@ -329,9 +331,10 @@ class ActionAskPizzaSize(Action):
 
 	def run(self, dispatcher, tracker, domain):
 		last_intent = tracker.get_intent_of_latest_message()
+		
   
 		requested_slot = tracker.get_slot("requested_slot")
-		if requested_slot == "pizza_size" and last_intent not in ["pizza_crust", "stop_order", "explain", "request_pizza_sizes"]:
+		if requested_slot == "pizza_size" and last_intent not in ["pizza_crust", "stop_order", "explain", "request_pizza_sizes", "response_negative", "bot_challenge"]:
 			dispatcher.utter_message(response="utter_ask_pizza_size_again")
 			return []
   
@@ -353,11 +356,11 @@ class ActionAskPizzaSliced(Action):
 	def name(self):
 		return 'action_ask_pizza_sliced'
 
-	def run(self, dispatcher, tracker, domain):
+	def run(self, dispatcher, tracker: Tracker, domain):
 		last_intent = tracker.get_intent_of_latest_message()
   
 		requested_slot = tracker.get_slot("requested_slot")
-		if requested_slot == "pizza_sliced" and last_intent not in ["pizza_crust", "stop_order", "explain"]:
+		if requested_slot == "pizza_sliced" and last_intent not in ["pizza_crust", "stop_order", "explain", "bot_challenge"]:
 			dispatcher.utter_message(response="utter_ask_pizza_sliced_again")
 			return []
    
@@ -383,7 +386,7 @@ class ActionAskPizzaCrust(Action):
 		last_intent = tracker.get_intent_of_latest_message()
   
 		requested_slot = tracker.get_slot("requested_slot")
-		if requested_slot == "pizza_crust" and last_intent not in ["pizza_crust", "stop_order", "explain", "request_pizza_crusts"]:
+		if requested_slot == "pizza_crust" and last_intent not in ["pizza_crust", "stop_order", "explain", "request_pizza_crusts", "response_negative", "bot_challenge"]:
 			dispatcher.utter_message(response="utter_ask_pizza_crust_again")
 			return []
    

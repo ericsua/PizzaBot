@@ -118,6 +118,11 @@ rules:
   - action: pizza_order_form
   - active_loop: pizza_order_form
 
+- rule: Goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
 # - rule: stop pizza form
 #   condition:
 #   - active_loop: pizza_order_form

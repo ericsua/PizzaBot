@@ -567,3 +567,223 @@ stories:
     - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
+
+
+- story: three ask + stop at size
+  steps:
+  - user: |
+      I want to order a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      what
+    intent: explain
+  - action: utter_explain_pizza_quantities
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [one](pizza_amount) pizza
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: one
+  # - action: pizza_order_form # no
+  # - slot_was_set:
+  #   - pizza_amount: one
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      what pizzas do you have
+    intent: request_pizza_types
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+  - action: pizza_order_form # yes
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      what pizzas with [meat](pizza_category) do you have
+    intent: request_pizza_types
+  - slot_was_set:
+    - pizza_category: meat
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Pepperoni](pizza_type)
+    intent: item_type
+  - slot_was_set:
+    - pizza_type: Pepperoni
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Pepperoni
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      stop
+    intent: stop_order
+  - action: utter_ask_confirm
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_reset_pizza_form
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pending_order: null
+  - action: utter_confirm_order_canceled
+  - action: utter_anything_else
+
+- story: bot challenge, what types and crusts, vegetables, stop at sliced
+  steps:
+  - user: |
+      hi I'm [Eric](PERSON)
+    intent: welcome_greet
+  - slot_was_set:
+    - client_name: Eric
+  - action: utter_welcome_greet
+  - user: |
+      who am i talking to?
+    intent: bot_challenge
+  - action: utter_iambot
+  - action: utter_anything_else
+  - user: |
+      I want to buy some pizzas
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      I want [nine](pizza_amount) pizzas
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: nine
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_amount: nine
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      what pizzas do you have with [vegetables](pizza_category)
+    intent: request_pizza_types
+  - slot_was_set:
+    - pizza_category: vegetables
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      i'll have a [Veggie](pizza_type)
+    intent: item_type
+  - slot_was_set:
+    - pizza_type: Veggie
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_type: Veggie
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      I want an [extra large](pizza_size) pizza
+    intent: item_size
+  - slot_was_set:
+    - pizza_size: extra large
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_size: extra large
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      what crusts do you have?
+    intent: request_pizza_crusts
+  - action: utter_inform_pizza_crust
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      [thin](pizza_crust)
+    intent: pizza_crust
+  - slot_was_set:
+    - pizza_crust: thin
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_crust: thin
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - user: |
+      I want to cancel my order
+    intent: stop_order
+  - action: utter_ask_confirm
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_reset_pizza_form
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pending_order: null
+  - action: utter_confirm_order_canceled
+  - action: utter_anything_else
+
+- story: over informative in amount
+  steps:
+  - user: |
+      I want to order pizzas
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      I want [one](pizza_amount) [large](pizza_size) [thin](pizza_crust) [Margherita](pizza_type) pizza
+    intent: item_amount
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - user: |
+      yes
+    intent: pizza_sliced
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas

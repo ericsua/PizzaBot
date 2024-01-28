@@ -3,9 +3,11 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
+- bot_challenge
 - explain
 - extra_order_negative
 - extra_order_postive
+- goodbye
 - init_pizza_question
 - init_request
 - item_amount
@@ -36,17 +38,17 @@ intents:
 - stop_order
 - welcome_greet
 entities:
-- pizza_type
 - pizza_amount
 - pizza_crust
 - pizza_size
+- pizza_type
+- PERSON
+- pizza_category
 - future_pizza_type
 - future_pizza_size
 - future_pizza_amount
 - future_pizza_crust
-- PERSON
 - anti_pizza_type
-- pizza_category
 - item_size
 - pizza_sliced
 - active_form_pizza_order_form
@@ -153,6 +155,7 @@ slots:
       entity: pizza_category
   requested_slot:
     type: categorical
+    influence_conversation: true
     values:
     - pizza_amount
     - pizza_type
@@ -161,7 +164,6 @@ slots:
     - pizza_sliced
     mappings:
     - type: custom
-    influence_conversation: true
   toppings:
     type: any
     mappings:
@@ -375,7 +377,9 @@ responses:
   utter_inform_pizza_types_meat:
   - text: The meat pizza that we have is the Pepperoni.
   utter_inform_pizza_types_vegetarian:
-  - text: The vegetarian pizzas that we have are the Margherita, Veggie, Funghi, Hawaii.
+  - text: The vegetarian pizzas that we have are the Veggie, Funghi, and Margherita.
+  utter_inform_pizza_types_no_category:
+  - text: Sorry, that's too specific.
   utter_anything_else:
   - text: Is there anything else I can do for you?
   utter_anti_pizza:
@@ -391,11 +395,33 @@ responses:
   - text: No problem. Your order has been canceled.
   - text: Okay. Your order has been canceled.
   - text: Alright. Your order has been canceled.
+  utter_no_problem_lets_continue:
+  - text: No problem. Let's continue.
+  - text: Okay. Let's continue.
+  - text: Alright. Let's continue.
+  utter_goodbye:
+  - text: Bye! Have a great day!
+  - text: Thank you! Bye!
+  - text: Bye! Thank you!
+  - text: Bye! Thank you for choosing us!
+  - text: Bye! Thank you for choosing HMD pizzeria!
+  - text: Bye! Thank you for choosing HMD pizzeria! Have a great day!
+  utter_iambot:
+  - text: I am a bot, powered by Rasa, to help you order pizza.
+  - text: I am a bot, powered by Rasa, to help you order pizza. I am still learning, so please bear with me.
 actions:
-- action_reset_pizza_form
-- utter_confirm_order_canceled
-- utter_ask_confirm
 - utter_anything_else
+- utter_confirm_order_canceled
+- utter_welcome_greet
+- action_reset_pizza_form
+- utter_ask_confirm
+- utter_inform_pizza_crust
+- action_get_pizza_types
+- utter_iambot
+- utter_explain_pizza_quantities
+- utter_explain_pizza_types
+- utter_confirm
+- utter_no_problem_lets_continue
 - validate_pizza_order_form
 - action_confirm_pizzas
 - action_ask_pizza_amount
@@ -403,7 +429,6 @@ actions:
 - action_ask_pizza_crust
 - action_ask_pizza_size
 - action_ask_pizza_sliced
-- action_get_pizza_types
 - action_pizza_order_add
 - action_get_restaurant_location
 - action_change_order
@@ -429,8 +454,6 @@ actions:
 - utter_pizza_questions
 - utter_order_processing_positive
 - utter_order_processing_negative
-- utter_explain_pizza_quantities
-- utter_explain_pizza_types
 - utter_explain_pizza_crust
 - utter_explain_pizza_size
 - utter_explain_pizza_sliced
@@ -441,7 +464,7 @@ actions:
 - utter_inform_pizza_types_vegetarian
 - utter_anti_pizza
 - utter_inform_pizza_size
-- utter_inform_pizza_crust
+- utter_goodbye
 forms:
   pizza_order_form:
     required_slots:
