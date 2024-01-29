@@ -84,6 +84,10 @@ stories:
     - pizza_amount: null
   - slot_was_set:
     - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
 
@@ -116,6 +120,10 @@ stories:
     - pizza_amount: null
   - slot_was_set:
     - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
 
@@ -189,6 +197,10 @@ stories:
     - pizza_amount: null
   - slot_was_set:
     - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
   - user: |
@@ -240,7 +252,7 @@ stories:
     - requested_slot: pizza_size
   - user: |
       cancel
-  - intent: stop_order
+    intent: stop_order
   - action: utter_ask_confirm
   - user: |
       yes
@@ -258,6 +270,10 @@ stories:
     - pizza_amount: null
   - slot_was_set:
     - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
 
@@ -321,6 +337,10 @@ stories:
     - pizza_amount: null
   - slot_was_set:
     - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
 
@@ -392,6 +412,10 @@ stories:
     - pizza_amount: null
   - slot_was_set:
     - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
 
@@ -464,6 +488,10 @@ stories:
     - pizza_amount: null
   - slot_was_set:
     - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
 
@@ -518,7 +546,7 @@ stories:
   - slot_was_set:
     - requested_slot: pizza_sliced
   - user: |
-      [yes](pizza_sliced)
+      yes
     intent: response_positive
   - slot_was_set:
     - pizza_sliced: true
@@ -590,9 +618,9 @@ stories:
     intent: item_amount
   - slot_was_set:
     - pizza_amount: one
-  # - action: pizza_order_form # no
-  # - slot_was_set:
-  #   - pizza_amount: one
+  - action: pizza_order_form # no
+  - slot_was_set:
+    - pizza_amount: one
   - slot_was_set:
     - requested_slot: pizza_type
   - user: |
@@ -612,6 +640,7 @@ stories:
   - action: action_get_pizza_types
   - slot_was_set:
     - pizza_category: null
+  - action: pizza_order_form # yes
   - slot_was_set:
     - requested_slot: pizza_type
   - user: |
@@ -697,9 +726,9 @@ stories:
     intent: item_type
   - slot_was_set:
     - pizza_type: Veggie
-  # - action: pizza_order_form
-  # - slot_was_set:
-  #   - pizza_type: Veggie
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Veggie
   - slot_was_set:
     - requested_slot: pizza_size
   - user: |
@@ -707,9 +736,9 @@ stories:
     intent: item_size
   - slot_was_set:
     - pizza_size: extra large
-  # - action: pizza_order_form
-  # - slot_was_set:
-  #   - pizza_size: extra large
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_size: extra large
   - slot_was_set:
     - requested_slot: pizza_crust
   - user: |
@@ -724,9 +753,9 @@ stories:
     intent: pizza_crust
   - slot_was_set:
     - pizza_crust: thin
-  # - action: pizza_order_form
-  # - slot_was_set:
-  #   - pizza_crust: thin
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_crust: thin
   - slot_was_set:
     - requested_slot: pizza_sliced
   - user: |
@@ -776,13 +805,15 @@ stories:
     - pizza_type: Margherita
   - slot_was_set:
     - pizza_amount: one
+  - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_sliced
   - user: |
       yes
-    intent: pizza_sliced
+    intent: response_positive
   - slot_was_set:
     - pizza_sliced: true
+  - action: pizza_order_form
   - slot_was_set:
     - requested_slot: null
   - active_loop: null

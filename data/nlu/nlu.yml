@@ -159,6 +159,7 @@ nlu:
     - which pizza types do you have?
     - what types of pizza do you have?
     - what pizza types do you have?
+    - what pizzas with [meat](pizza_category) you have
 - intent: request_pizza_crusts
   examples: |
     - what crusts do you have?
@@ -225,6 +226,15 @@ nlu:
     - I want pizza
     - I want to order a pizza
     - want to order pizza
+    - I want to order some pizzas
+    - I want to order some pizza
+    - I want to order pizzas
+    - I want to order
+    - I'd like to order some pizzas
+    - I'd like to order some pizza
+    - I'd like to order pizzas
+    - I'd like to order
+    - pizzas
     - pizza
     - pizza please
     - Pizza please
@@ -456,6 +466,7 @@ nlu:
     - [Margherita](pizza_type)
     - [veggie]{"entity": "pizza_type", "value": "Veggie"}
     - [Veggie](pizza_type)
+    - [pepperoni]{"entity": "pizza_type", "value": "Pepperoni"}
 - intent: item_size
   examples: |
     - [8"]{"entity": "pizza_size", "value": "baby"}
@@ -646,6 +657,17 @@ nlu:
     - I want [one](pizza_amount) pizza
     - i want [nine](pizza_amount) pizzas
     - i want [one](pizza_amount) [large](pizza_size) [thin](pizza_crust) crust [margherita]{"entity": "pizza_type", "value": "Margherita"}
+    - [one](pizza_amount)
+- intent: pizza_sliced
+  examples: |
+    - [sliced]{"entity": "pizza_sliced", "value": "true"}
+    - [sliced]{"entity": "pizza_sliced", "value": "true"} please
+    - [sliced]{"entity": "pizza_sliced", "value": "true"} pizza
+    - [sliced]{"entity": "pizza_sliced", "value": "true"} pizza please
+    - [not sliced]{"entity": "pizza_sliced", "value": "false"}
+    - [not sliced]{"entity": "pizza_sliced", "value": "false"} please
+    - [not sliced]{"entity": "pizza_sliced", "value": "false"} pizza
+    - [one](pizza_amount) [sliced]{"entity": "pizza_sliced", "value": "true"}
 - intent: out_of_scope
   examples: |
     - What is 2 + 2?
@@ -657,6 +679,10 @@ nlu:
     - book a flight from milan to ny
     - how far is the square
     - give me the directions to time square
+    - what is the weather in new york
+    - what is the weather
+    - how is the weather
+    - what is the weather like
 - intent: goodbye
   examples: |
     - bye
@@ -771,6 +797,9 @@ nlu:
     - Extra large
     - XXL
     - size XXL
+- synonym: 'false'
+  examples: |
+    - not sliced
 - synonym: Americana
   examples: |
     - Americana

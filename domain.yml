@@ -38,19 +38,19 @@ intents:
 - stop_order
 - welcome_greet
 entities:
+- pizza_category
+- pizza_type
 - pizza_amount
+- pizza_sliced
 - pizza_crust
 - pizza_size
-- pizza_type
 - PERSON
-- pizza_category
 - future_pizza_type
 - future_pizza_size
 - future_pizza_amount
 - future_pizza_crust
 - anti_pizza_type
 - item_size
-- pizza_sliced
 - active_form_pizza_order_form
 - toppings
 - client_name
@@ -66,20 +66,8 @@ slots:
     type: bool
     influence_conversation: true
     mappings:
-    - type: from_intent
-      intent: response_positive
-      not_intent: stop_order
-      value: true
-      conditions:
-      - active_loop: pizza_order_form
-        requested_slot: pizza_sliced
-    - type: from_intent
-      intent: response_negative
-      not_intent: stop_order
-      value: false
-      conditions:
-      - active_loop: pizza_order_form
-        requested_slot: pizza_sliced
+    - type: custom
+      action: action_sliced_mapping
   anti_pizza_type:
     type: any
     mappings:
@@ -111,7 +99,6 @@ slots:
     mappings:
     - type: from_entity
       entity: pizza_amount
-      intent: item_amount
   pizza_size:
     type: text
     influence_conversation: true
@@ -410,15 +397,16 @@ responses:
   - text: I am a bot, powered by Rasa, to help you order pizza.
   - text: I am a bot, powered by Rasa, to help you order pizza. I am still learning, so please bear with me.
 actions:
+- utter_ask_confirm
+- action_get_pizza_types
+- utter_explain_pizza_quantities
+- action_reset_pizza_form
 - utter_anything_else
 - utter_confirm_order_canceled
+- action_sliced_mapping
 - utter_welcome_greet
-- action_reset_pizza_form
-- utter_ask_confirm
 - utter_inform_pizza_crust
-- action_get_pizza_types
 - utter_iambot
-- utter_explain_pizza_quantities
 - utter_explain_pizza_types
 - utter_confirm
 - utter_no_problem_lets_continue

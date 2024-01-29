@@ -269,6 +269,49 @@ class ValidatePizzaOrderForm(FormValidationAction):
 				dispatcher.utter_message(response="utter_inform_pizza_crust")
 				return {"pizza_crust": None}
 
+class ActionSlicedMapping(Action):
+    def name(self):
+        return "action_sliced_mapping"
+    
+    def run(self, dispatcher, tracker: Tracker, domain):
+        
+        last_intent = tracker.get_intent_of_latest_message()
+        # get intent of message before last message
+        reversed_events = list(reversed(tracker.events))
+        #print("reversed_events", reversed_events)
+        last_user_message_index = next((i for i, event in enumerate(reversed_events) if event.get('event') == 'user'), None)
+
+        # Find the index of the user message before the last one
+        previous_user_message_index = next((i for i, event in enumerate(reversed_events[last_user_message_index+1:]) if event.get('event') == 'user'), None)
+
+        # Calculate the actual index in the original events list
+        if previous_user_message_index is not None:
+            previous_user_message_index = len(tracker.events) - (last_user_message_index + previous_user_message_index + 2)
+
+            # Get the intent of the user message before the last one
+            prev_last_intent = tracker.events[previous_user_message_index]['parse_data']['intent']['name']
+            #print("prev_last_intent", prev_last_intent)
+        
+        entities = tracker.latest_message['entities']
+        pizza_sliced_entity = next((e for e in entities if e['entity'] == 'pizza_sliced'), None)
+        sliced = pizza_sliced_entity['value'] if pizza_sliced_entity else None
+        #sliced = entities['pizza_sliced']
+        # print("entities", entities)
+        # print("sliced", sliced)
+        requested_slot = tracker.get_slot("requested_slot")
+        active_loop = tracker.active_loop.get('name')
+        #print("active_loop", active_loop)
+        #print("requested_slot", requested_slot)
+        if active_loop == "pizza_order_form":
+            if last_intent == "response_positive" and requested_slot == "pizza_sliced" and prev_last_intent != "stop_order":
+                return [SlotSet("pizza_sliced", True)]
+            elif last_intent == "response_negative" and requested_slot == "pizza_sliced" and prev_last_intent != "stop_order":
+                return [SlotSet("pizza_sliced", False)]
+            elif last_intent in ["item_start_generic", "item_amount", "item_type", "pizza_size", "pizza_crust", "pizza_sliced"]:
+                if sliced is not None and sliced.lower() == "true":
+                    return [SlotSet("pizza_sliced", True)]
+                elif sliced is not None and sliced.lower() == "false":
+                    return [SlotSet("pizza_sliced", False)]
 class ActionAskPizzaAmount(Action):
 	def name(self):
 		return 'action_ask_pizza_amount'
