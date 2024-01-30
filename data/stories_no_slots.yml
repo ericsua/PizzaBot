@@ -488,7 +488,6 @@ stories:
   - action: action_get_pizza_types
   - slot_was_set:
     - pizza_category: null
-  - intent: item_change
   - intent: item_start_generic
   - action: pizza_order_form
   - active_loop: pizza_order_form
@@ -1884,3 +1883,538 @@ stories:
   - slot_was_set:
     - requested_slot: pizza_amount
   - intent: item_amount
+
+
+- story: change amount specific
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_amount
+  # - intent: item_amount
+  #   entities:
+  #   - pizza_amount: one
+  # - slot_was_set:
+  #   - pizza_amount: one
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_amount: one
+  # - slot_was_set:
+  #   - requested_slot: pizza_type
+  - intent: item_change
+  #   entities:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - modify_order: true
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - requested_slot: pizza_type
+  - action: action_change_order
+  # - slot_was_set:
+  #   - pizza_type: null
+  # - slot_was_set:
+  #   - pizza_size: null
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - pizza_crust: null
+  # - slot_was_set:
+  #   - pizza_sliced: null
+  # - slot_was_set:
+  #   - modify_order: null
+  - action: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_type
+  # - intent: item_type
+  #   entities:
+  #   - pizza_type: Margherita
+  # - slot_was_set:
+  #   - pizza_type: Margherita
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_type: Margherita
+  # - slot_was_set:
+  #   - requested_slot: pizza_size
+
+- story: change every step + double confirm
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_amount
+  # - intent: item_amount
+  #   entities:
+  #   - pizza_amount: one
+  # - slot_was_set:
+  #   - pizza_amount: one
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_amount: one
+  # - slot_was_set:
+  #   - requested_slot: pizza_type
+  - intent: item_change
+  #   entities:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: action_change_order
+  # - slot_was_set:
+  #   - pizza_type: null
+  # - slot_was_set:
+  #   - pizza_size: null
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - pizza_crust: null
+  # - slot_was_set:
+  #   - pizza_sliced: null
+  # - slot_was_set:
+  #   - modify_order: null
+  - action: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_type
+  # - intent: item_type
+  #   entities:
+  #   - pizza_type: Margherita
+  # - slot_was_set:
+  #   - pizza_type: Margherita
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_type: Margherita
+  # - slot_was_set:
+  #   - requested_slot: pizza_size
+  - intent: item_change
+  #   entities:
+  #   - pizza_type: Hawaii
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: action_change_order
+  # - slot_was_set:
+  #   - pizza_type: Hawaii
+  # - slot_was_set:
+  #   - pizza_size: null
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - pizza_crust: null
+  # - slot_was_set:
+  #   - pizza_sliced: null
+  # - slot_was_set:
+  #   - modify_order: null
+  - action: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_size
+  # - intent: item_size
+  #   entities:
+  #   - pizza_size: small
+  # - slot_was_set:
+  #   - pizza_size: small
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_size: small
+  # - slot_was_set:
+  #   - requested_slot: pizza_crust
+  - intent: item_change
+  #   entities:
+  #   - pizza_size: large
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: action_change_order
+  # - slot_was_set:
+  #   - pizza_type: Hawaii
+  # - slot_was_set:
+  #   - pizza_size: large
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - pizza_crust: null
+  # - slot_was_set:
+  #   - pizza_sliced: null
+  # - slot_was_set:
+  #   - modify_order: null
+  - action: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_crust
+  # - intent: pizza_crust
+  #   entities:
+  #   - pizza_crust: flatbread
+  # - slot_was_set:
+  #   - pizza_crust: flatbread
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_crust: flatbread
+  # - slot_was_set:
+  #   - requested_slot: pizza_sliced
+  - intent: item_change
+  #   entities:
+  #   - pizza_crust: thin
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: action_change_order
+  # - slot_was_set:
+  #   - pizza_type: Hawaii
+  # - slot_was_set:
+  #   - pizza_size: large
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - pizza_crust: thin
+  # - slot_was_set:
+  #   - pizza_sliced: null
+  # - slot_was_set:
+  #   - modify_order: null
+  - action: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_sliced
+  # - intent: response_positive
+  # - slot_was_set:
+  #   - pizza_sliced: true
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  # - slot_was_set:
+  #   - pending_order: three large thin crust Hawaii. All pizzas sliced.
+  - intent: item_change
+  #   entities:
+  #   - pizza_sliced: 'false'
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: action_change_order
+  # - slot_was_set:
+  #   - pizza_type: Hawaii
+  # - slot_was_set:
+  #   - pizza_size: large
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - pizza_crust: thin
+  # - slot_was_set:
+  #   - pizza_sliced: false
+  # - slot_was_set:
+  #   - modify_order: null
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - pizza_type: Hawaii
+  # - slot_was_set:
+  #   - pizza_size: large
+  # - slot_was_set:
+  #   - pizza_crust: thin
+  # - slot_was_set:
+  #   - pizza_sliced: false
+  # - slot_was_set:
+  #   - modify_order: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order: three large thin crust Hawaii. All pizzas not sliced.
+
+- story: vague change
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_amount
+  - intent: item_change_request_without_entity
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: utter_ask_changes
+  - intent: item_change
+    # entities:
+    # - pizza_amount: three
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: action_change_order
+  # - slot_was_set:
+  #   - modify_order: null
+  - action: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_amount
+
+- story: vague change + nevermind
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_amount
+  - intent: item_change_request_without_entity
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: utter_ask_changes
+  - intent: nevermind
+  - action: utter_no_problem_lets_continue
+  - action: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_amount
+  # - intent: item_amount
+  #   entities:
+  #   - pizza_amount: one
+  # - slot_was_set:
+  #   - pizza_amount: one
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_amount: one
+  # - slot_was_set:
+  #   - requested_slot: pizza_type
+
+- story: vague change at type
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_amount
+  # - intent: item_amount
+  #   entities:
+  #   - pizza_amount: one
+  # - slot_was_set:
+  #   - pizza_amount: one
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_amount: one
+  # - slot_was_set:
+  #   - requested_slot: pizza_type
+  - intent: item_change_request_without_entity
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: utter_ask_changes
+  - intent: item_change
+  #   entities:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: action_change_order
+  # - slot_was_set:
+  #   - pizza_type: null
+  # - slot_was_set:
+  #   - pizza_size: null
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - pizza_crust: null
+  # - slot_was_set:
+  #   - pizza_sliced: null
+  # - slot_was_set:
+  #   - modify_order: null
+  - action: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_type
+
+- story: vague change at size
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  # - intent: item_amount
+  #   entities:
+  #   - pizza_amount: five
+  # - slot_was_set:
+  #   - pizza_amount: five
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_amount: five
+  # - slot_was_set:
+  #   - requested_slot: pizza_type
+  # - intent: item_type
+  #   entities:
+  #   - pizza_type: Hawaii
+  # - slot_was_set:
+  #   - pizza_type: Hawaii
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_type: Hawaii
+  # - slot_was_set:
+  #   - requested_slot: pizza_size
+  - intent: item_change_request_without_entity
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: utter_ask_changes
+  - intent: item_change
+  #   entities:
+  #   - pizza_type: Funghi
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: action_change_order
+  # - slot_was_set:
+  #   - pizza_type: Funghi
+  # - slot_was_set:
+  #   - pizza_size: null
+  # - slot_was_set:
+  #   - pizza_amount: five
+  # - slot_was_set:
+  #   - pizza_crust: null
+  # - slot_was_set:
+  #   - pizza_sliced: null
+  # - slot_was_set:
+  #   - modify_order: null
+  - action: pizza_order_form
+  # # - slot_was_set:
+  # #   - requested_slot: pizza_size
+  # # - intent: item_size
+  # #   entities:
+  # #   - pizza_size: large
+  # # - slot_was_set:
+  # #   - pizza_size: large
+  # # - action: pizza_order_form
+  # # - slot_was_set:
+  # #   - pizza_size: large
+  # # - slot_was_set:
+  #   - requested_slot: pizza_crust
+
+- story: vague change at crust
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_amount
+  # - intent: item_amount
+  #   entities:
+  #   - pizza_amount: ten
+  # - slot_was_set:
+  #   - pizza_amount: ten
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_amount: ten
+  # - slot_was_set:
+  #   - requested_slot: pizza_type
+  # - intent: item_type
+  #   entities:
+  #   - pizza_type: Veggie
+  # - slot_was_set:
+  #   - pizza_type: Veggie
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_type: Veggie
+  # - slot_was_set:
+  #   - requested_slot: pizza_size
+  # - intent: item_size
+  #   entities:
+  #   - pizza_size: medium
+  # - slot_was_set:
+  #   - pizza_size: medium
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_size: medium
+  # - slot_was_set:
+  #   - requested_slot: pizza_crust
+  - intent: item_change_request_without_entity
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: utter_ask_changes
+  #   entities:
+  #   - pizza_size: extra large
+  # - slot_was_set:
+  #   - pizza_size: extra large
+  - intent: item_change
+  #   entities:
+  #   - pizza_size: extra large
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: action_change_order
+  # - slot_was_set:
+  #   - pizza_type: Veggie
+  # - slot_was_set:
+  #   - pizza_size: extra large
+  # - slot_was_set:
+  #   - pizza_amount: ten
+  # - slot_was_set:
+  #   - pizza_crust: null
+  # - slot_was_set:
+  #   - pizza_sliced: null
+  # - slot_was_set:
+  #   - modify_order: null
+  - action: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_crust
+
+- story: vague change at sliced
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_amount
+  # - intent: item_amount
+  #   entities:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - requested_slot: pizza_type
+  # - intent: item_type
+  #   entities:
+  #   - pizza_type: Hawaii
+  # - slot_was_set:
+  #   - pizza_type: Hawaii
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_type: Hawaii
+  # - slot_was_set:
+  #   - requested_slot: pizza_size
+  # - intent: item_size
+  #   entities:
+  #   - pizza_size: large
+  # - slot_was_set:
+  #   - pizza_size: large
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_size: large
+  # - slot_was_set:
+  #   - requested_slot: pizza_crust
+  # - intent: pizza_crust
+  #   entities:
+  #   - pizza_crust: thin
+  # - slot_was_set:
+  #   - pizza_crust: thin
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_crust: thin
+  # - slot_was_set:
+  #   - requested_slot: pizza_sliced
+  - intent: item_change_request_without_entity
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: utter_ask_changes
+  - intent: item_change
+  #   entities:
+  #   - pizza_crust: flatbread
+  # - slot_was_set:
+  #   - modify_order: true
+  - action: action_change_order
+  # - slot_was_set:
+  #   - pizza_type: Hawaii
+  # - slot_was_set:
+  #   - pizza_size: large
+  # - slot_was_set:
+  #   - pizza_amount: three
+  # - slot_was_set:
+  #   - pizza_crust: flatbread
+  # - slot_was_set:
+  #   - pizza_sliced: null
+  # - slot_was_set:
+  #   - modify_order: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_sliced

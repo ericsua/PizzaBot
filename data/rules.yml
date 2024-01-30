@@ -123,6 +123,74 @@ rules:
   - intent: goodbye
   - action: utter_goodbye
 
+- rule: change item specific
+  steps:
+  - intent: item_change
+  - action: action_change_order
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+
+- rule: change item vague
+  steps:
+  - intent: item_change_request_without_entity
+  - action: utter_ask_changes
+  - action: action_listen
+
+# - rule: change item size
+#   condition:
+#   - active_loop: pizza_order_form
+#   - slot_was_set:
+#     - requested_slot: pizza_size
+#   steps:
+#   - intent: item_change
+#   - action: action_change_order
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+
+# - rule: change item crust
+#   condition:
+#   - active_loop: pizza_order_form
+#   - slot_was_set:
+#     - requested_slot: pizza_crust
+#   steps:
+#   - intent: item_change
+#   - action: action_change_order
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+
+# - rule: change item sliced
+#   condition:
+#   - active_loop: pizza_order_form
+#   - slot_was_set:
+#     - requested_slot: pizza_sliced
+#   steps:
+#   - intent: item_change
+#   - action: action_change_order
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+
+# - rule: change item amount
+#   condition:
+#   - active_loop: pizza_order_form
+#   - slot_was_set:
+#     - pizza_amount: pizza_amount
+#   steps:
+#   - intent: item_change
+#   - action: action_change_order
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+
+# - rule: change item vague
+#   condition:
+#   - active_loop: pizza_order_form
+#   steps:
+#   - intent: item_change_request_without_entity
+#   - action: utter_ask_changes
+#   - action: action_change_order
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+
+
 # - rule: stop pizza form
 #   condition:
 #   - active_loop: pizza_order_form

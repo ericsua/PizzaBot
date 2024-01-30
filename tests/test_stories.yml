@@ -818,3 +818,598 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: action_confirm_pizzas
+
+- story: change every step + double confirm
+  steps:
+  - user: |
+      I want to order a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [one](pizza_amount) pizza
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: one
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      actually i'd like [three](pizza_amount) pizzas instead
+    intent: item_change
+  - slot_was_set:
+    - modify_order: true
+  - action: action_change_order
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - modify_order: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Margherita](pizza_type)
+    intent: item_type
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      actually i want [hawaii](pizza_type) instead
+    intent: item_change
+  - slot_was_set:
+    - modify_order: true
+  - action: action_change_order
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - modify_order: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      [small](pizza_size)
+    intent: item_size
+  - slot_was_set:
+    - pizza_size: small
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_size: small
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      actually i want it [large](pizza_size)
+    intent: item_change
+  - slot_was_set:
+    - modify_order: true
+  - action: action_change_order
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - modify_order: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      [flatbread](pizza_crust)
+    intent: pizza_crust
+  - slot_was_set:
+    - pizza_crust: flatbread
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_crust: flatbread
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - user: |
+      actually i want [thin](pizza_crust) crust instead
+    intent: item_change
+  - slot_was_set:
+    - modify_order: true
+  - action: action_change_order
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - modify_order: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - user: |
+      yes
+    intent: response_positive
+  - slot_was_set:
+    - pizza_sliced: true
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order: three large thin crust Hawaii. All pizzas sliced.
+  - user: |
+       actually i want it [unsliced]{"entity": "pizza_sliced", "value": "false"}
+    intent: item_change
+  - slot_was_set:
+    - modify_order: true
+  - action: action_change_order
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_sliced: false
+  - slot_was_set:
+    - modify_order: null
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_sliced: false
+  - slot_was_set:
+    - modify_order: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order: three large thin crust Hawaii. All pizzas not sliced.
+
+- story: change amount specific
+  steps:
+  - user: |
+      I want to order a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [one](pizza_amount) pizza
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: one
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      Actually I want [three](pizza_amount) pizzas instead
+    intent: item_change
+  # - intent: item_change
+  #   entities:
+  #   - pizza_amount: three
+  - slot_was_set:
+    - modify_order: true
+  - slot_was_set:
+    - pizza_amount: three
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_amount: three
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - action: action_change_order
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - modify_order: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Margherita](pizza_type)
+    intent: item_type
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - requested_slot: pizza_size
+
+- story: vague change
+  steps:
+  - user: |
+      I want to order a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      i want to change my order
+    intent: item_change_request_without_entity
+  - slot_was_set:
+    - modify_order: true
+  - action: utter_ask_changes
+  - user: |
+      Actually I want [three](pizza_amount) pizzas instead
+    intent: item_change
+  - slot_was_set:
+    - modify_order: true
+  - action: action_change_order
+  - slot_was_set:
+    - modify_order: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+
+- story: vague change + nevermind
+  steps:
+  - user: |
+      I want to order a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      i want to change my order
+    intent: item_change_request_without_entity
+  - slot_was_set:
+    - modify_order: true
+  - action: utter_ask_changes
+  - user: |
+      nevermind
+    intent: nevermind
+  - action: utter_no_problem_lets_continue
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [one](pizza_amount) pizza
+    intent: item_amount
+  - slot_was_set:
+    - pizza_amount: one
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - requested_slot: pizza_type
+
+- story: vague change at type
+  steps:
+  - user: |
+      I want to order a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [one](pizza_amount) pizza
+    intent: item_amount
+  # - intent: item_amount
+  #   entities:
+  #   - pizza_amount: one
+  - slot_was_set:
+    - pizza_amount: one
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      I want to change my order
+    intent: item_change_request_without_entity
+  - slot_was_set:
+    - modify_order: true
+  - action: utter_ask_changes
+  - user: |
+      Actually I want [three](pizza_amount) pizzas instead
+    intent: item_change
+  - slot_was_set:
+    - modify_order: true
+  - action: action_change_order
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - modify_order: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+
+- story: vague change at size
+  steps:
+  - user: |
+      I want to order a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [five](pizza_amount) pizza
+    intent: item_amount
+  # - intent: item_amount
+  #   entities:
+  #   - pizza_amount: five
+  - slot_was_set:
+    - pizza_amount: five
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: five
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Hawaii](pizza_type)
+    intent: item_type
+  # - intent: item_type
+  #   entities:
+  #   - pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      I want to change my order
+    intent: item_change_request_without_entity
+  - slot_was_set:
+    - modify_order: true
+  - action: utter_ask_changes
+  - user: |
+      Actually I want [Funghi](pizza_type) instead
+    intent: item_change
+  - slot_was_set:
+    - modify_order: true
+  - action: action_change_order
+  - slot_was_set:
+    - pizza_type: Funghi
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: five
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - modify_order: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      [large](pizza_size)
+    intent: item_size
+  - slot_was_set:
+    - pizza_size: large
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - requested_slot: pizza_crust
+
+- story: vague change at crust
+  steps:
+  - user: |
+      I want to order a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [ten](pizza_amount) pizza
+    intent: item_amount
+  # - intent: item_amount
+  #   entities:
+  #   - pizza_amount: ten
+  - slot_was_set:
+    - pizza_amount: ten
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: ten
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Veggie](pizza_type)
+    intent: item_type
+  # - intent: item_type
+  #   entities:
+  #  - pizza_type: Veggie
+  - slot_was_set:
+    - pizza_type: Veggie
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Veggie
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      [medium](pizza_size)
+    intent: item_size
+  # - intent: item_size
+  #   entities:
+  #   - pizza_size: medium
+  - slot_was_set:
+    - pizza_size: medium
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_size: medium
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      I want to change my order
+    intent: item_change_request_without_entity
+  - slot_was_set:
+    - modify_order: true
+  - action: utter_ask_changes
+  - user: |
+      Actually I want [extra large](pizza_size) instead
+    intent: item_change
+  - slot_was_set:
+    - modify_order: true
+  - action: action_change_order
+  - slot_was_set:
+    - pizza_type: Veggie
+  - slot_was_set:
+    - pizza_size: extra large
+  - slot_was_set:
+    - pizza_amount: ten
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - modify_order: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_crust
+
+- story: vague change at sliced
+  steps:
+  - user: |
+      I want to order a pizza
+    intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_amount
+  - user: |
+      [three](pizza_amount) pizza
+    intent: item_amount
+  # - intent: item_amount
+  #   entities:
+  #   - pizza_amount: three
+  - slot_was_set:
+    - pizza_amount: three
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      [Hawaii](pizza_type)
+    intent: item_type
+  # - intent: item_type
+  #   entities:
+  #   - pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      [large](pizza_size)
+    intent: item_size
+  # - intent: item_size
+  #   entities:
+  #   - pizza_size: large
+  - slot_was_set:
+    - pizza_size: large
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      [thin](pizza_crust)
+    intent: pizza_crust
+  # - intent: pizza_crust
+  #   entities:
+  #   - pizza_crust: thin
+  - slot_was_set:
+    - pizza_crust: thin
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - user: |
+      I want to change my order
+    intent: item_change_request_without_entity
+  - slot_was_set:
+    - modify_order: true
+  - action: utter_ask_changes
+  - user: |
+      Actually I want [flatbread](pizza_crust) crust instead
+    intent: item_change
+  - slot_was_set:
+    - modify_order: true
+  - action: action_change_order
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_crust: flatbread
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - modify_order: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_sliced
