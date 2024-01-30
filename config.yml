@@ -8,6 +8,8 @@ pipeline:
   min_ngram: 1
   max_ngram: 4
 - name: LogisticRegressionClassifier
+- name: FallbackClassifier
+  threshold: 0.4
 - name: CRFEntityExtractor
 - name: EntitySynonymMapper
 

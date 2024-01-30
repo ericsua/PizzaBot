@@ -36,6 +36,7 @@ intents:
 - response_name_phone
 - response_negative
 - response_positive
+- restart
 - stop_order
 - welcome_greet
 entities:
@@ -58,6 +59,12 @@ entities:
 - phone_number
 - order_number
 slots:
+  pizza_topping:
+    type: list
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: toppings
   modify_order:
     type: bool
     influence_conversation: true
@@ -127,25 +134,25 @@ slots:
       entity: pizza_type
       not_intent: item_change
   future_pizza_type:
-    type: text
+    type: list
     influence_conversation: true
     mappings:
     - type: from_entity
       entity: future_pizza_type
   future_pizza_size:
-    type: text
+    type: list
     influence_conversation: true
     mappings:
     - type: from_entity
       entity: future_pizza_size
   future_pizza_amount:
-    type: text
+    type: list
     influence_conversation: true
     mappings:
     - type: from_entity
       entity: future_pizza_amount
   future_pizza_crust:
-    type: text
+    type: list
     influence_conversation: true
     mappings:
     - type: from_entity
@@ -440,7 +447,12 @@ responses:
   - text: No problem. The pizza now will not be sliced.
   utter_warning_nothing_to_change:
   - text: Sorry, there is nothing to change, as you have not ordered anything yet.
+  utter_restart:
+  - text: No problem, let's start over.
+  utter_ask_rephrase:
+  - text: I'm sorry, I didn't quite understand that. Could you rephrase?
 actions:
+- action_restart
 - utter_ask_changes
 - action_change_order
 - utter_no_problem_lets_continue

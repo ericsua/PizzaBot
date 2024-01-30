@@ -10,12 +10,24 @@
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet, FollowupAction
+from rasa_sdk.events import SlotSet, FollowupAction, Restarted
+from rasa.shared.core.events import Event
 from typing import Text, List, Any, Dict
 
 from rasa_sdk import Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
+
+class ActionRestart(Action):
+
+    def name(self) -> Text:
+        return "action_restart"
+
+    async def run(
+        self, dispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ):
+
+        return [Restarted(), FollowupAction("action_listen")]
 
 class ActionConfirmPizzas(Action):
     def name(self):

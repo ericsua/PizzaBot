@@ -1,5 +1,18 @@
 version: "3.1"
 nlu:
+- intent: restart
+  examples: |
+    - start over
+    - start again
+    - restart
+    - restart please
+    - restart the order
+    - restart the order please
+    - start the order again
+    - start the order again please
+    - start from the beginning
+    - start from the beginning please
+    - start from scratch
 - intent: nevermind
   examples: |
     - nevermind
@@ -247,7 +260,13 @@ nlu:
     - do you offer pizza [Americana](pizza_category)
 - intent: item_start_generic
   examples: |
-    - [funghi]{"entity": "pizza_type", "value": "Funghi"} and [hawaii]{"entity": "pizza_type", "value": "Hawaii"}
+    - [funghi]{"entity": "pizza_type", "value": "Funghi"} and [hawaii]{"entity": "future_pizza_type", "value": "Hawaii"}
+    - i want to order [margherita]{"entity": "pizza_type", "value": "Margherita"} and [veggie]{"entity": "future_pizza_type", "value": "Veggie"}
+    - i want to order [Veggie](pizza_type) and [Margherita](future_pizza_type) and [Hawaii](future_pizza_type)
+    - i want [Funghi](pizza_type) and [Hawaii](future_pizza_type)
+    - i want [Margherita](pizza_type), [Veggie](future_pizza_type), [Hawaii](future_pizza_type), [Funghi](future_pizza_type), and [Pepperoni](future_pizza_type)
+    - I'd like to order [Hawaii](pizza_type), [Pepperoni](future_pizza_type), [Margherita](future_pizza_type), [Funghi](future_pizza_type), and [Veggie](future_pizza_type)
+    - I'd like to order [Hawaii](pizza_type) and [Pepperoni](future_pizza_type)
     - i want to buy a pizza
     - i want to order [olives](pizza_type) and [onion](pizza_type) pizza
     - I want pizza
@@ -268,15 +287,15 @@ nlu:
     - Pizza will do
     - pizza will do
     - Pizza
-    - I want to order [large](pizza_size) pizza with [olives](pizza_type)
-    - I want [large](pizza_size) [tomatoes](pizza_type) pizza
-    - I want a [medium](pizza_size) [cheese](pizza_type) pizza
+    - I want to order [large](pizza_size) pizza with [olives](toppings)
+    - I want [large](pizza_size) [tomatoes](toppings) pizza
+    - I want a [medium](pizza_size) [cheese](toppings) pizza
     - I like [small](pizza_size) [olives](pizza_type) pizza
     - [pepperoni](pizza_type)  [small](pizza_size) pizza
-    - [large](pizza_size) [onions](pizza_type)
+    - [large](pizza_size) [onions](toppings)
     - My favorite pizza is [Small](pizza_size) corn
     - my favorite pizza is [small](pizza_size) corn
-    - [cheese](pizza_type) and [SMALL]{"entity": "pizza_size", "value": "small"}
+    - [toppings](pizza_type) and [SMALL]{"entity": "pizza_size", "value": "small"}
     - [medium](pizza_size) and [olives](pizza_type)
     - peperoni, large
     - [small](pizza_size) pizza with [tomatoes](pizza_type) topping
@@ -528,7 +547,6 @@ nlu:
     - [Margherita](pizza_type)
     - [veggie]{"entity": "pizza_type", "value": "Veggie"}
     - [Veggie](pizza_type)
-    - [hawaii]{"entity": "pizza_type", "value": "Hawaii"}
 - intent: item_size
   examples: |
     - [8"]{"entity": "pizza_size", "value": "baby"}
@@ -573,7 +591,6 @@ nlu:
     - I would like [medium](pizza_size) please
     - I'd like [large](pizza_size)
     - I want it [extra large](pizza_size)
-    - [large](pizza_size)
 - intent: pizza_crust
   examples: |
     - [stuffed](pizza_crust) crust
@@ -607,24 +624,23 @@ nlu:
     - [four](pizza_amount) [medium](pizza_size) [stuffed](pizza_crust) crust [pepperoni](pizza_type)
     - [two](pizza_amount) [large](pizza_size) [flatbread](pizza_crust) crust [vegetarian](pizza_type)
     - i'll take the [thin](pizza_crust) crust
-    - [thin](pizza_crust)
 - intent: item_topping
   examples: |
-    - I want to order pizza with [olives](pizza_topping)
-    - My favourite topping is [cheese](pizza_topping)
-    - I like [olive](pizza_topping)
-    - Definitely [onion](pizza_topping)
-    - I love [tomatoes](pizza_topping)
-    - favorite topping is [Corns](pizza_topping)
-    - I love [cheese](pizza_topping)
-    - [cheese](pizza_topping)
-    - [Olive](pizza_topping)
-    - [tomatoes](pizza_topping)
-    - [Onions](pizza_topping)
-    - [Corn](pizza_topping)
-    - [mushrooms](pizza_topping), [artichokes](pizza_topping) and [olives](pizza_topping)
-    - [ham](pizza_topping), [mushrooms](pizza_topping), [bacon](pizza_topping) and [brie](pizza_topping)
-    - [onions](pizza_topping) and [tuna](pizza_topping)
+    - I want to order pizza with [olives](toppings)
+    - My favourite topping is [cheese](toppings)
+    - I like [olive](toppings)
+    - Definitely [onion](toppings)
+    - I love [tomatoes](toppings)
+    - favorite topping is [Corns](toppings)
+    - I love [cheese](toppings)
+    - [cheese](toppings)
+    - [Olive](toppings)
+    - [tomatoes](toppings)
+    - [Onions](toppings)
+    - [Corn](toppings)
+    - [mushrooms](toppings), [artichokes](toppings) and [olives](toppings)
+    - [ham](toppings), [mushrooms](toppings), [bacon](toppings) and [brie](toppings)
+    - [onions](toppings) and [tuna](toppings)
 - intent: explain
   examples: |
     - can you explain more?
@@ -721,7 +737,6 @@ nlu:
     - I want [one](pizza_amount) pizza
     - i want [nine](pizza_amount) pizzas
     - i want [one](pizza_amount) [large](pizza_size) [thin](pizza_crust) crust [margherita]{"entity": "pizza_type", "value": "Margherita"}
-    - [three](pizza_amount)
 - intent: pizza_sliced
   examples: |
     - [sliced]{"entity": "pizza_sliced", "value": "true"}
@@ -787,6 +802,19 @@ nlu:
     - Hawaiian
     - hawai
     - Hawai
+- synonym: Margherita
+  examples: |
+    - margherita
+    - Margherita
+- synonym: Veggie
+  examples: |
+    - veggie
+    - Vegetarian
+    - Vegetariana
+    - vegetarian
+    - vegetable
+    - Vegetable
+    - Veggie
 - synonym: small
   examples: |
     - SMALL
@@ -804,10 +832,6 @@ nlu:
     - Pepperoni
     - Peperoni
     - peperoni
-- synonym: Margherita
-  examples: |
-    - margherita
-    - Margherita
 - synonym: 'true'
   examples: |
     - sliced
@@ -815,15 +839,6 @@ nlu:
   examples: |
     - unsliced
     - not sliced
-- synonym: Veggie
-  examples: |
-    - veggie
-    - Vegetarian
-    - Vegetariana
-    - vegetarian
-    - vegetable
-    - Vegetable
-    - Veggie
 - synonym: baby
   examples: |
     - 8"
