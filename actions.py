@@ -284,7 +284,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
     
     
                         # slot_value = prev_pizza_type
-        print("slot val type", slot_value)
+        #print("slot val type", slot_value)
         if isinstance(slot_value, str):
             if slot_value.lower() in self.pizza_db():
                 self.warn_user_one_at_time(dispatcher, tracker, domain)
@@ -334,7 +334,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
         #         prev_pizza_amount = next((e['value'] for e in ents if e['entity'] == 'pizza_amount'), None)
         #         #print("prev_pizza_amount", prev_pizza_amount)
         #         slot_value = prev_pizza_amount
-        print("slot val amount", slot_value)
+        #print("slot val amount", slot_value)
         if isinstance(slot_value, str):
             if slot_value in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
                         "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
@@ -380,7 +380,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
             
         #         slot_value = prev_pizza_size
         
-        print("slot val size", slot_value)
+        #print("slot val size", slot_value)
         if isinstance(slot_value, str):
             if slot_value.lower() in ["baby", "small", "medium", "standard", "large", "extra large"]:
                 # validation succeeded, set the value of the "cuisine" slot to value
