@@ -5,18 +5,20 @@ stories:
   steps:
   - intent: welcome_greet
   - action: utter_welcome_greet
-  - checkpoint: start_questions_on_pizza
+  #- checkpoint: start_questions_on_pizza
+
 - story: greeting
   steps:
   - intent: welcome_greet
   - action: utter_welcome_greet
   - checkpoint: start_order
-- story: questions_on_pizza
-  steps:
-  - checkpoint: start_questions_on_pizza
-  - intent: init_pizza_question
-  - action: utter_init_pizza_question
-  - checkpoint: start_order
+
+# - story: questions_on_pizza
+#   steps:
+#   - checkpoint: start_questions_on_pizza
+#   - intent: init_pizza_question
+#   - action: utter_init_pizza_question
+#   - checkpoint: start_order
 
 - story: pizza interjection
   steps:
@@ -212,13 +214,10 @@ stories:
 
 - story: interactive_story_10
   steps:
-  - intent: item_size
+  - intent: item_start_generic
     entities:
     - pizza_size: large
   - slot_was_set:
-    - pizza_size: large
-  - intent: item_start_generic
-    entities:
     - pizza_size: large
   - action: pizza_order_form
   - active_loop: pizza_order_form
@@ -239,6 +238,36 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
+
+# - story: interactive_story_10
+#   steps:
+#   - intent: item_size
+#     entities:
+#     - pizza_size: large
+#   - slot_was_set:
+#     - pizza_size: large
+#   - intent: item_start_generic
+#     entities:
+#     - pizza_size: large
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - slot_was_set:
+#     - pizza_size: large
+#   - slot_was_set:
+#     - requested_slot: pizza_amount
+#   - intent: explain
+#   - action: utter_explain_pizza_quantities
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - requested_slot: pizza_amount
+#   - intent: item_amount
+#     entities:
+#     - pizza_amount: three
+#   - slot_was_set:
+#     - pizza_amount: three
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - requested_slot: pizza_type
 
 - story: interactive_story_11
   steps:
@@ -398,6 +427,11 @@ stories:
     - pizza_amount: '10'
   - slot_was_set: 
     - pizza_amount: '10'
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: '10'
+  - slot_was_set:
+    - requested_slot: pizza_type
 
 - story: interactive_story_14
   steps:
@@ -411,6 +445,11 @@ stories:
     - pizza_amount: '8'
   - slot_was_set: 
     - pizza_amount: '8'
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: '8'
+  - slot_was_set:
+    - requested_slot: pizza_type
 
 - story: interactive_story_13
   steps:
@@ -424,6 +463,11 @@ stories:
     - pizza_amount: '10'
   - slot_was_set: 
     - pizza_amount: '10'
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: '10'
+  - slot_was_set:
+    - requested_slot: pizza_type
 
 - story: extra large
   steps:
@@ -603,6 +647,89 @@ stories:
   - slot_was_set:
     - pizza_category: null
 
+# - story: name greet anti pizza full order
+#   steps:
+#   - intent: welcome_greet
+#     entities:
+#     - PERSON: Leonardo
+#   - slot_was_set:
+#     - client_name: Leonardo
+#   - action: utter_welcome_greet
+#   - intent: order_anti_pizza
+#     entities:
+#     - anti_pizza_type: Chicken Wings
+#   - slot_was_set:
+#     - anti_pizza_type: Chicken Wings
+#   - action: utter_anti_pizza
+#   - action: action_get_pizza_types
+#   - slot_was_set:
+#     - pizza_category: null
+#   - intent: order_anti_pizza
+#     entities:
+#     - anti_pizza_type: Prosciutto
+#   - slot_was_set:
+#     - anti_pizza_type: Prosciutto
+#   - action: utter_anti_pizza
+#   - action: action_get_pizza_types
+#   - slot_was_set:
+#     - pizza_category: null
+#   - intent: item_type
+#     entities:
+#     - pizza_type: Margherita
+#   - slot_was_set:
+#     - pizza_type:
+#       - Margherita
+#   - intent: item_start_generic
+#     entities:
+#     - pizza_type: Margherita
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - slot_was_set:
+#     - pizza_type: Margherita
+#   - slot_was_set:
+#     - requested_slot: pizza_amount
+#   - intent: item_amount
+#     entities:
+#     - pizza_amount: '1'
+#   - slot_was_set:
+#     - pizza_amount: '1'
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_amount: '1'
+#   - slot_was_set:
+#     - requested_slot: pizza_size
+#   - intent: item_size
+#     entities:
+#     - pizza_size: large
+#   - slot_was_set:
+#     - pizza_size: large
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_size: large
+#   - slot_was_set:
+#     - requested_slot: pizza_crust
+#   - intent: pizza_crust
+#     entities:
+#     - pizza_crust: cracker
+#   - slot_was_set:
+#     - pizza_crust: cracker
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_crust: cracker
+#   - slot_was_set:
+#     - requested_slot: pizza_sliced
+#   - intent: response_positive
+#   - slot_was_set:
+#     - pizza_sliced: true
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_sliced: true
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - intent: response_positive
+
 - story: name greet anti pizza full order
   steps:
   - intent: welcome_greet
@@ -629,15 +756,12 @@ stories:
   - action: action_get_pizza_types
   - slot_was_set:
     - pizza_category: null
-  - intent: item_type
+  - intent: item_start_generic
     entities:
     - pizza_type: Margherita
   - slot_was_set:
     - pizza_type:
       - Margherita
-  - intent: item_start_generic
-    entities:
-    - pizza_type: Margherita
   - action: pizza_order_form
   - active_loop: pizza_order_form
   - slot_was_set:
@@ -3030,3 +3154,327 @@ stories:
   - intent: restart
   - action: utter_restart
   - action: action_restart
+
+- story: pizza type + anti pizza type
+  steps:
+  - intent: order_anti_pizza
+    entities:
+    - pizza_type: Margherita
+    - anti_pizza_type: Diavola
+  - slot_was_set:
+    - anti_pizza_type: Diavola
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: utter_anti_pizza
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+
+# - story: future pizza type
+#   steps:
+#   - intent: item_start_generic
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - slot_was_set:
+#     - requested_slot: pizza_amount
+#   - intent: item_type
+#     entities:
+#     - pizza_type: Margherita
+#     - pizza_type: Hawaii
+#       role: future_pizza_type
+#   - slot_was_set:
+#     - pizza_type: Hawaii
+#   - intent: item_type
+#     entities:
+#     - pizza_type: Margherita
+#     - future_pizza_type: Hawaii
+
+- story: pizza + beer then future pizza
+  steps:
+  - intent: order_anti_pizza
+    entities:
+    - pizza_type: Margherita
+    - anti_pizza_type: beer
+  - slot_was_set:
+    - anti_pizza_type: beer
+  - action: utter_anti_pizza
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+  - intent: item_type
+    entities:
+    - pizza_type: Margherita
+    - future_pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - future_pizza_type:
+      - Hawaii
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - future_pizza_type:
+      - Hawaii
+  - slot_was_set:
+    - requested_slot: pizza_amount
+
+# - story: multi order
+#   steps:
+#   - intent: item_start_generic
+#     entities:
+#     - pizza_amount: two
+#     - pizza_size: large
+#     - pizza_type: Margherita
+#     - future_pizza_amount: three
+#     - future_pizza_type: Hawaii
+#   - slot_was_set:
+#     - pizza_amount: two
+#   - slot_was_set:
+#     - pizza_size: large
+#   - slot_was_set:
+#     - pizza_type: Margherita
+#   - slot_was_set:
+#     - future_pizza_type:
+#       - Hawaii
+#   - slot_was_set:
+#     - future_pizza_amount:
+#       - three
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - slot_was_set:
+#     - pizza_amount: two
+#   - slot_was_set:
+#     - pizza_type: Margherita
+#   - slot_was_set:
+#     - pizza_size: large
+#   - slot_was_set:
+#     - future_pizza_type:
+#       - Hawaii
+#   - slot_was_set:
+#     - future_pizza_amount:
+#       - three
+#   - slot_was_set:
+#     - requested_slot: pizza_crust
+#   - intent: pizza_crust
+#     entities:
+#     - pizza_crust: thin
+#   - slot_was_set:
+#     - pizza_crust: thin
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_crust: thin
+#   - slot_was_set:
+#     - requested_slot: pizza_sliced
+#   - intent: response_positive
+#   - slot_was_set:
+#     - pizza_sliced: true
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_sliced: true
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - slot_was_set:
+#     - pending_order:
+#       - two large thin crust Margherita. All pizzas sliced.
+#   - intent: response_positive
+#   - action: action_next_order
+#   - slot_was_set:
+#     - pizza_type: Hawaii
+#   - slot_was_set:
+#     - future_pizza_type: null
+#   - slot_was_set:
+#     - pizza_size: null
+#   - slot_was_set:
+#     - pizza_amount: three
+#   - slot_was_set:
+#     - future_pizza_amount: null
+#   - slot_was_set:
+#     - pizza_crust: null
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - slot_was_set:
+#     - pizza_amount: three
+#   - slot_was_set:
+#     - pizza_type: Hawaii
+#   - slot_was_set:
+#     - pizza_sliced: true
+#   - slot_was_set:
+#     - requested_slot: pizza_size
+#   - intent: item_size
+#     entities:
+#     - pizza_size: baby
+#   - slot_was_set:
+#     - pizza_size: baby
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_size: large
+#   - slot_was_set:
+#     - requested_slot: pizza_crust
+#   - intent: pizza_crust
+#     entities:
+#     - pizza_crust: stuffed
+#   - slot_was_set:
+#     - pizza_crust: stuffed
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_crust: thin
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - slot_was_set:
+#     - pending_order:
+#       - two large thin crust Margherita. All pizzas sliced.
+#       - three large thin crust Hawaii. All pizzas sliced.
+#   - intent: response_positive
+
+- story: multi order
+  steps:
+  - intent: item_start_generic
+    entities:
+    - pizza_amount: two
+    - pizza_size: large
+    - pizza_type: Margherita
+    - future_pizza_amount: three
+    - future_pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_amount: two
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - future_pizza_type:
+      - Hawaii
+  - slot_was_set:
+    - future_pizza_amount:
+      - three
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: two
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - future_pizza_type:
+      - Hawaii
+  - slot_was_set:
+    - future_pizza_amount:
+      - three
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  # - intent: pizza_crust
+  #   entities:
+  #   - pizza_crust: thin
+  - slot_was_set:
+    - pizza_crust: thin
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_crust: thin
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  # - intent: response_positive
+  - slot_was_set:
+    - pizza_sliced: true
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - two large thin crust Margherita. All pizzas sliced.
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - intent: response_positive
+  - action: action_next_order
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - future_pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - future_pizza_amount: null
+  - slot_was_set:
+    - pizza_crust: null
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - requested_slot: pizza_size
+  # - intent: item_size
+  #   entities:
+  #   - pizza_size: baby
+  - slot_was_set:
+    - pizza_size: baby
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_size: baby
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  # - intent: pizza_crust
+  #   entities:
+  #   - pizza_crust: stuffed
+  - slot_was_set:
+    - pizza_crust: stuffed
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_crust: stuffed
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  # - intent: response_negative
+  - slot_was_set:
+    - pizza_sliced: false
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_sliced: false
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - two large thin crust Margherita. All pizzas sliced.
+      - three baby stuffed crust Hawaii. All pizzas not sliced.
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - intent: response_positive
+  - action: action_next_order
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_crust: null

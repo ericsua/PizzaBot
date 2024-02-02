@@ -3,12 +3,12 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
+- book_table
 - bot_challenge
 - explain
 - extra_order_negative
 - extra_order_postive
 - goodbye
-- init_pizza_question
 - init_request
 - item_amount
 - item_change
@@ -33,6 +33,7 @@ intents:
 - request_pizza_crusts
 - request_pizza_sizes
 - request_pizza_types
+- request_restaurant_location
 - response_name_phone
 - response_negative
 - response_positive
@@ -40,28 +41,28 @@ intents:
 - stop_order
 - welcome_greet
 entities:
-- pizza_size
-- pizza_type
-- pizza_amount
 - pizza_crust
+- pizza_type
+- pizza_size
+- future_pizza_type
+- pizza_amount
+- future_pizza_amount
+- anti_pizza_type
 - pizza_sliced
 - pizza_category
 - PERSON
-- future_pizza_type
 - future_pizza_size
-- future_pizza_amount
 - future_pizza_crust
-- anti_pizza_type
-- item_size
 - active_form_pizza_order_form
 - toppings
 - client_name
 - phone_number
 - order_number
+- number_people
 slots:
-  pizza_topping:
+  pizza_toppings:
     type: list
-    influence_conversation: true
+    influence_conversation: false
     mappings:
     - type: from_entity
       entity: toppings
@@ -95,9 +96,8 @@ slots:
     type: text
     influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: pizza_crust
-      not_intent: item_change
+    - type: custom
+      action: action_crust_mapping
   client_name:
     type: any
     mappings:
@@ -116,23 +116,20 @@ slots:
     type: text
     influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: pizza_amount
-      not_intent: item_change
+    - type: custom
+      action: action_amount_mapping
   pizza_size:
     type: text
     influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: pizza_size
-      not_intent: item_change
+    - type: custom
+      action: action_size_mapping
   pizza_type:
     type: text
     influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: pizza_type
-      not_intent: item_change
+    - type: custom
+      action: action_type_mapping
   future_pizza_type:
     type: list
     influence_conversation: true
@@ -173,11 +170,6 @@ slots:
     - pizza_sliced
     mappings:
     - type: custom
-  toppings:
-    type: any
-    mappings:
-    - type: from_entity
-      entity: toppings
   total_order:
     type: list
     mappings:
@@ -223,16 +215,16 @@ responses:
   - text: And what size would you like for your {pizza_amount} pizza?
   - text: Okay, and what size would you like for your {pizza_amount} pizza?
   utter_ask_pizza_size_ack_crust:
-  - text: Great choice! And what size would you like for your {pizza_crust} crust pizza?
-  - text: Nice choice! And what size would you like for your {pizza_crust} crust pizza?
-  - text: My favourite! And what size would you like for your {pizza_crust} crust pizza?
+  - text: '{pizza_crust} crust, great choice! And what size would you like for your pizza?'
+  - text: '{pizza_crust} crust, nice choice! And what size would you like for your pizza?'
+  - text: '{pizza_crust} crust, my favourite! And what size would you like for your pizza?'
   - text: Perfect combination! And what size would you like for your {pizza_crust} crust pizza?
   - text: Yummy! And what size would you like for your {pizza_crust} crust pizza?
   utter_ask_pizza_size_ack_type:
-  - text: Nice choice! And what size would you like for your {pizza_type} pizza?
-  - text: Great choice! And what size would you like for your {pizza_type} pizza?
-  - text: My favourite! And what size would you like for your {pizza_type} pizza?
-  - text: Perfect combination! And what size would you like for your {pizza_type} pizza?
+  - text: Nice choice! And what size would you like for your {pizza_type}?
+  - text: '{pizza_type}, great choice! And what size would you like for your pizza?'
+  - text: '{pizza_type}, my favourite! And what size would you like for your pizza?'
+  - text: Perfect combination! And what size would you like for your {pizza_type}?
   - text: Yummy! And what size would you like for your {pizza_type} pizza?
   - text: Wonderful! And what size would you like for your {pizza_type} pizza?
   utter_ask_pizza_size_again:
@@ -243,20 +235,20 @@ responses:
   - text: Okay, what type of pizza do you want?
   - text: Alright, what type of pizza do you want?
   utter_ask_pizza_type_ack_amount:
-  - text: And what type of pizza would you like for your {pizza_amount} pizza?
+  - text: Alright {pizza_amount}, and what type of pizza would you like for your pizza?
   - text: Okay, what type of pizza would you like for your {pizza_amount} pizza?
   utter_ask_pizza_type_ack_crust:
-  - text: Excellent choice! And what type of pizza would you like for your {pizza_crust} crust pizza?
-  - text: Yummy! And what type of pizza would you like for your {pizza_crust} crust pizza?
-  - text: Nice choice! And what type of pizza would you like for your {pizza_crust} crust pizza?
-  - text: Great choice! And what type of pizza would you like for your {pizza_crust} crust pizza?
-  - text: My favourite! And what type of pizza would you like for your {pizza_crust} crust pizza?
+  - text: '{pizza_crust} crust, excellent choice! And what type of pizza would you like for your pizza?'
+  - text: '{pizza_crust} crust, yummy! And what type of pizza would you like for your pizza?'
+  - text: '{pizza_crust} crust, nice choice! And what type of pizza would you like for your pizza?'
+  - text: '{pizza_crust} crust, great choice! And what type of pizza would you like for your pizza?'
+  - text: '{pizza_crust} crust, my favourite! And what type of pizza would you like for your pizza?'
   utter_ask_pizza_type_ack_size:
-  - text: Excellent choice! And what type of pizza would you like for your {pizza_size} pizza?
-  - text: Nice! And what type of pizza would you like for your {pizza_size} pizza?
-  - text: Wonderful! And what type of pizza would you like for your {pizza_size} pizza?
-  - text: Perfect! And what type of pizza would you like for your {pizza_size} pizza?
-  - text: Great! And what type of pizza would you like for your {pizza_size} pizza?
+  - text: '{pizza_size}, excellent choice! And what type of pizza would you like for your pizza?'
+  - text: '{pizza_size}, nice! And what type of pizza would you like for your pizza?'
+  - text: '{pizza_size}, wonderful! And what type of pizza would you like for your pizza?'
+  - text: '{pizza_size}, perfect! And what type of pizza would you like for your pizza?'
+  - text: '{pizza_size}, great! And what type of pizza would you like for your pizza?'
   utter_ask_pizza_type_again:
   - text: Sorry, I didn't understand which pizza type you want, can you tell me again?
   utter_ask_pizza_amount:
@@ -293,11 +285,11 @@ responses:
   - text: And what crust do you want for your {pizza_amount} pizza?
   - text: Okay, and what crust do you want for your {pizza_amount} pizza?
   utter_ask_pizza_crust_ack_size:
-  - text: Yummy! And what crust do you want for your {pizza_size}?
-  - text: Nice choice! And what crust do you want for your {pizza_size}?
-  - text: Great choice! And what crust do you want for your {pizza_size}?
-  - text: My favourite! And what crust do you want for your {pizza_size}?
-  - text: Perfect combination! And what crust do you want for your {pizza_size}?
+  - text: Yummy! And what crust do you want for your {pizza_size} pizza?
+  - text: '{pizza_size}, nice choice! And what crust do you want for your pizza?'
+  - text: '{pizza_size}, great choice! And what crust do you want for your pizza?'
+  - text: '{pizza_size}, my favourite! And what crust do you want for your pizza?'
+  - text: Perfect combination! And what crust do you want for your {pizza_size} pizza?
   utter_ask_pizza_crust_ack_type:
   - text: Good! And what crust do you want for your {pizza_type}?
   - text: Nice! And what crust do you want for your {pizza_type}?
@@ -315,11 +307,11 @@ responses:
   - text: And do you want your {pizza_amount} pizza to be sliced?
   - text: Okay, and do you want your {pizza_amount} pizza to be sliced?
   utter_ask_pizza_sliced_ack_crust:
-  - text: Delicious! Do you want your {pizza_crust} pizza to be sliced?
-  - text: Nice! Do you want your {pizza_crust} pizza to be sliced?
+  - text: '{pizza_crust} crust, delicious! Do you want your pizza to be sliced?'
+  - text: '{pizza_crust} crust, nice! Do you want your pizza to be sliced?'
   - text: Great! Do you want your {pizza_crust} pizza to be sliced?
   - text: Perfect! Do you want your {pizza_crust} pizza to be sliced?
-  - text: Yummy! Do you want your {pizza_crust} pizza to be sliced?
+  - text: '{pizza_crust} crust, yummy! Do you want your pizza to be sliced?'
   utter_ask_pizza_sliced_ack_size:
   - text: Beautiful! Do you want your {pizza_size} pizza to be sliced?
   - text: Nice choice! Do you want your {pizza_size} pizza to be sliced?
@@ -346,11 +338,11 @@ responses:
   utter_order_complete:
   - text: Here is your order number {order_number}. Your order will be ready in 15 minutes. Thanks for the opportunity to serve you
   utter_delivery_address:
-  - text: Please provide us with your home/ office address
+  - text: Please provide us with your home/office address
   utter_order_add:
   - text: which pizza would you like to add in your order?
   utter_default:
-  - text: Sorry, I didn’t understand that. Can you please retype it?
+  - text: Sorry, I didn’t understand that. Can you rephrase it, please?
   utter_item_type_start_negative:
   - text: sadly , we don't offer {pizza_type}
   utter_item_type_start_postive:
@@ -451,14 +443,22 @@ responses:
   - text: No problem, let's start over.
   utter_ask_rephrase:
   - text: I'm sorry, I didn't quite understand that. Could you rephrase?
+  utter_no_table_booking:
+  - text: Sorry, we don't take table bookings. We only do takeaways and home deliveries.
 actions:
+- action_confirm_pizzas
+- action_next_order
+- action_crust_mapping
+- action_amount_mapping
+- action_size_mapping
+- action_type_mapping
+- action_get_pizza_types
+- utter_anti_pizza
 - action_restart
 - utter_ask_changes
 - action_change_order
 - utter_no_problem_lets_continue
-- action_confirm_pizzas
 - utter_ask_confirm
-- action_get_pizza_types
 - utter_explain_pizza_quantities
 - action_reset_pizza_form
 - utter_anything_else
@@ -468,7 +468,6 @@ actions:
 - utter_inform_pizza_crust
 - utter_iambot
 - utter_explain_pizza_types
-- utter_confirm
 - validate_pizza_order_form
 - action_ask_pizza_amount
 - action_ask_pizza_type
@@ -507,7 +506,6 @@ actions:
 - utter_inform_pizza_types
 - utter_inform_pizza_types_meat
 - utter_inform_pizza_types_vegetarian
-- utter_anti_pizza
 - utter_inform_pizza_size
 - utter_goodbye
 forms:

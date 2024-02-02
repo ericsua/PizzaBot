@@ -2,6 +2,8 @@ version: "3.1"
 
 rules:
 - rule: Activate form
+  condition:
+    - active_loop: null
   steps:
   - intent: item_start_generic
   - action: pizza_order_form
@@ -58,8 +60,6 @@ rules:
 - rule: anti pizza
   steps:
     - intent: order_anti_pizza
-    - slot_was_set:
-      - anti_pizza_type: "true"
     - action: utter_anti_pizza
     - action: action_get_pizza_types
 
@@ -146,7 +146,12 @@ rules:
   - intent: nlu_fallback
   - action: action_two_stage_fallback
   - active_loop: action_two_stage_fallback
-  
+
+- rule: book table
+  steps:
+  - intent: book_table
+  - action: utter_no_table_booking
+
 
 # - rule: change item size
 #   condition:

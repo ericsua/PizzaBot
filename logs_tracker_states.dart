@@ -638,3 +638,256 @@
         'active_loop': {'name': 'pizza_order_form'}
     }
 ]
+
+
+{
+        'event': 'slot',
+        'timestamp': 1706793244.320821,
+        'name': 'pizza_type',
+        'value': 'Hawaii'
+    },
+    {
+        'event': 'action',
+        'timestamp': 1706793244.320844,
+        'name': 'pizza_order_form',
+        'policy': None,
+        'confidence': None,
+        'action_text': None,
+        'hide_rule_turn': False
+    },
+    {
+        'event': 'slot',
+        'timestamp': 1706793244.320839,
+        'name': 'requested_slot',
+        'value': 'pizza_size'
+    },
+    {
+        'event': 'slot',
+        'timestamp': 1706793242.9656892,
+        'metadata': {
+            'model_id': '0a8b3da4fcdb4390ad4396fbd8822b04',
+            'assistant_id': '20231202-221250-mode-flour'
+        },
+        'name': 'pizza_type',
+        'value': 'Hawaii'
+    },
+    {
+        'event': 'user',
+        'timestamp': 1706793242.938963,
+        'metadata': {
+            'model_id': '0a8b3da4fcdb4390ad4396fbd8822b04',
+            'assistant_id': '20231202-221250-mode-flour'
+        },
+        'text': 'hawaii',
+        'parse_data': {
+            'intent': {
+                'name': 'item_type',
+                'confidence': 0.8719838472288226
+            },
+            'entities': [
+                {
+                    'entity': 'pizza_type',
+                    'start': 0,
+                    'end': 6,
+                    'confidence_entity': 0.9206412032225909,
+                    'value': 'Hawaii',
+                    'extractor': 'CRFEntityExtractor',
+                    'processors': ['EntitySynonymMapper']
+                }
+            ],
+            'text': 'hawaii',
+            'message_id': '28dd5a89cf55474483713d2bd95987e1',
+            'metadata': {},
+            'text_tokens': [[0, 6]],
+            'intent_ranking': [
+                {
+                    'name': 'item_type',
+                    'confidence': 0.8719838472288226
+                },
+                {
+                    'name': 'item_start_generic',
+                    'confidence': 0.06515974180135257
+                },
+                {
+                    'name': 'welcome_greet',
+                    'confidence': 0.016008915475038427
+                },
+                {
+                    'name': 'explain',
+                    'confidence': 0.013893261348263105
+                },
+                {
+                    'name': 'item_amount',
+                    'confidence': 0.007749404547614211
+                },
+                {
+                    'name': 'order_anti_pizza',
+                    'confidence': 0.006645942378334167
+                },
+                {
+                    'name': 'pizza_crust',
+                    'confidence': 0.004519541029619611
+                },
+                {
+                    'name': 'response_positive',
+                    'confidence': 0.0030643380857035495
+                },
+                {
+                    'name': 'response_negative',
+                    'confidence': 0.002290502739328093
+                },
+                {
+                    'name': 'order_take_home',
+                    'confidence': 0.0017085648570768252
+                }
+            ]
+        },
+        'input_channel': None,
+        'message_id': '28dd5a89cf55474483713d2bd95987e1'
+    },
+    {
+        'event': 'action',
+        'timestamp': 1706793240.49472,
+        'metadata': {
+            'model_id': '0a8b3da4fcdb4390ad4396fbd8822b04',
+            'assistant_id': '20231202-221250-mode-flour'
+        },
+        'name': 'action_listen',
+        'policy': 'RulePolicy',
+        'confidence': 1.0,
+        'action_text': None,
+        'hide_rule_turn': False
+    },
+    {
+        'event': 'bot',
+        'timestamp': 1706793182.669695,
+        'metadata': {
+            'utter_action': 'utter_ask_pizza_size_again',
+            'template': 'utter_ask_pizza_size_again',
+            'model_id': '0a8b3da4fcdb4390ad4396fbd8822b04',
+            'assistant_id': '20231202-221250-mode-flour'
+        },
+        'text': "Sorry, I didn't understand which size you want, can you tell me again?",
+        'data': {
+            'elements': None,
+            'quick_replies': None,
+            'buttons': None,
+            'attachment': None,
+            'image': None,
+            'custom': None
+        }
+    },
+    {
+        'event': 'slot',
+        'timestamp': 1706793182.669693,
+        'metadata': {
+            'model_id': '0a8b3da4fcdb4390ad4396fbd8822b04',
+            'assistant_id': '20231202-221250-mode-flour'
+        },
+        'name': 'requested_slot',
+        'value': 'pizza_size'
+    },
+    {
+        'event': 'slot',
+        'timestamp': 1706793182.6696901,
+        'metadata': {
+            'model_id': '0a8b3da4fcdb4390ad4396fbd8822b04',
+            'assistant_id': '20231202-221250-mode-flour'
+        },
+        'name': 'pizza_type',
+        'value': 'Funghi'
+    },
+    {
+        'event': 'action',
+        'timestamp': 1706793182.669643,
+        'metadata': {
+            'model_id': '0a8b3da4fcdb4390ad4396fbd8822b04',
+            'assistant_id': '20231202-221250-mode-flour'
+        },
+        'name': 'pizza_order_form',
+        'policy': 'RulePolicy',
+        'confidence': 1.0,
+        'action_text': None,
+        'hide_rule_turn': False
+    },
+    {
+        'event': 'slot',
+        'timestamp': 1706793180.072917,
+        'metadata': {
+            'model_id': '0a8b3da4fcdb4390ad4396fbd8822b04',
+            'assistant_id': '20231202-221250-mode-flour'
+        },
+        'name': 'pizza_type',
+        'value': 'Funghi'
+    },
+    {
+        'event': 'user',
+        'timestamp': 1706793180.0469692,
+        'metadata': {
+            'model_id': '0a8b3da4fcdb4390ad4396fbd8822b04',
+            'assistant_id': '20231202-221250-mode-flour'
+        },
+        'text': 'funghi',
+        'parse_data': {
+            'intent': {
+                'name': 'item_start_generic',
+                'confidence': 0.4829858161368021
+            },
+            'entities': [
+                {
+                    'entity': 'pizza_type',
+                    'start': 0,
+                    'end': 6,
+                    'confidence_entity': 0.9241917957497626,
+                    'value': 'Funghi',
+                    'extractor': 'CRFEntityExtractor',
+                    'processors': ['EntitySynonymMapper']
+                }
+            ],
+            'text': 'funghi',
+            'message_id': '8ef7236c7c634180ba6509cda80a565c',
+            'metadata': {},
+            'text_tokens': [[0, 6]],
+            'intent_ranking': [
+                {
+                    'name': 'item_start_generic',
+                    'confidence': 0.4829858161368021
+                },
+                {
+                    'name': 'item_type',
+                    'confidence': 0.22889970333726656
+                },
+                {
+                    'name': 'welcome_greet',
+                    'confidence': 0.10047732578115684
+                },
+                {
+                    'name': 'pizza_crust',
+                    'confidence': 0.0370008866143795
+                },
+                {
+                    'name': 'explain',
+                    'confidence': 0.03653117171065119
+                },
+                {
+                    'name': 'order_anti_pizza',
+                    'confidence': 0.03256083861863975
+                },
+                {
+                    'name': 'response_positive',
+                    'confidence': 0.01925140569672313
+                },
+                {
+                    'name': 'response_negative',
+                    'confidence': 0.015905441744919892
+                },
+                {
+                    'name': 'item_size',
+                    'confidence': 0.013859231055814174
+                },
+                {
+                    'name': 'item_amount',
+                    'confidence': 0.006612185824926771
+                }
+            ]
+        },

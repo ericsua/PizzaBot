@@ -2,26 +2,68 @@ version: "3.1"
 nlu:
 - lookup: anti_pizza_type
   examples: |
-    - Americana
-    - Calzone
-    - Caprese
-    - Crudo
-    - Diavola
-    - Focaccia
-    - Pioggia
-    - Quattro Stagioni
-    - Quattro Formaggi
-    - Salsiccia
-    - Siciliana
-    - Capricciosa
-    - Prosciutto
-    - Bufalina
-    - Marinara
-    - Salsiccia e Patate
-    - Chicken BBC
-    - Chicken BBQ
-    - Chicken Wings
-    - Garlic Bread
-    - Garlic Bread with Cheese
-    - Onion Rings
-    - Potato Wedges
+    - americana
+    - calzone
+    - caprese
+    - crudo
+    - diavola
+    - focaccia
+    - pioggia
+    - quattro stagioni
+    - quattro formaggi
+    - salsiccia
+    - siciliana
+    - capricciosa
+    - prosciutto
+    - bufalina
+    - marinara
+    - salsiccia e patate
+    - chicken bbc
+    - chicken bbq
+    - chicken wings
+    - garlic bread
+    - garlic bread with cheese
+    - onion rings
+    - potato wedges
+    - chicken nuggets
+    - prosciutto e funghi
+    - frutti di mare
+    - romana
+    - siciliana
+    - pugliese
+    - montanara
+    - tirolese
+    - ortolana
+    - salsiccia e friarielli
+    - tonno e cipolla
+    - fungi e tartufo
+    - boscaiola
+    - patate e rosmarino
+    - pesto e pomodorini
+    - gorgonzola e noci
+    - ricotta e spinaci
+    - melanzane alla parmigiana
+    - carciofi e pancetta
+    - zucchine e taleggio
+    - speck e rucola
+    - salmone e rucola
+    - beer
+    - coke
+    - diet coke
+    - fanta
+    - sprite
+    - water
+    - wine
+    - chicken
+    - beef
+    - pork
+    - fish
+    - steak
+    - tuna
+    - ice tea
+    - ice coffee
+    - coffee
+    - tea
+    - milk
+    - orange juice
+    - apple juice

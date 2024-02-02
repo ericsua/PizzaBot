@@ -331,6 +331,7 @@ stories:
   - slot_was_set:
     - requested_slot: pizza_amount
   - intent: item_amount
+  - action: pizza_order_form
 
 - story: interactive_story_14
   steps:
@@ -340,6 +341,7 @@ stories:
   - slot_was_set:
     - requested_slot: pizza_amount
   - intent: item_amount
+  - action: pizza_order_form
 
 - story: interactive_story_13
   steps:
@@ -2418,3 +2420,22 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_sliced
+
+
+- story: multi order
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_next_order
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - or:
+    - intent: response_positive
+    - intent: response_negative
+  - action: action_next_order
