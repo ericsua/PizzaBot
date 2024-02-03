@@ -54,14 +54,44 @@ class ActionConfirmPizzas(Action):
         else:
             order_details += f"{pizza_amount} {pizza_size} {pizza_crust} crust {pizza_type}"
         #order_details = ", ".join(order_details)
-        order_details += ". All pizzas" + ( " sliced." if pizza_sliced == True else " not sliced.")
+        order_details += ", all pizza" + ( " sliced" if pizza_sliced == True else " not sliced")
         if tracker.get_slot("future_pizza_amount") is not None or tracker.get_slot("future_pizza_type") is not None or tracker.get_slot("future_pizza_size") is not None or tracker.get_slot("future_pizza_crust") is not None:
             dispatcher.utter_message(text="So, for now, you want to order "+order_details+" Is everything correct?")
         else:
-            dispatcher.utter_message(text="So, you want to order "+order_details+" Is everything correct?")
+            dispatcher.utter_message(text="So, you want to order "+order_details+". Is everything correct?")
         old_order = tracker.get_slot("pending_order")
         pending_order = (old_order + [order_details]) if old_order is not None else [order_details]
-        return [SlotSet("pending_order", pending_order), SlotSet("pizza_type", None),SlotSet("pizza_size", None),SlotSet("pizza_amount", None), SlotSet("pizza_sliced", None), SlotSet("pizza_crust", None)]
+        return [SlotSet("pending_order", pending_order)]
+
+class ActionTotalOrder(Action):
+    def name(self):
+        return 'action_total_order'
+
+    async def run(self, dispatcher, tracker, domain):
+        total_order = tracker.get_slot("total_order")
+        if total_order is None:
+            dispatcher.utter_message(text="Sorry, there is an error. You have no pending order")
+            return []
+        else:
+            total_order = ", and ".join(total_order)
+            dispatcher.utter_message(text=f"Okay, great! So your total order is {total_order}. Do you prefer take away or home delivery?")
+            return [SlotSet("total_order", total_order)]
+        
+        
+class ActionCancelPendingOrder(Action):
+    def name(self):
+        return 'action_cancel_pending_order'
+
+    async def run(self, dispatcher, tracker, domain):
+        pending_order = tracker.get_slot("pending_order")
+        if pending_order is None:
+            dispatcher.utter_message(text="Sorry, there is an error. You have no pending order")
+            return []
+        else:
+            if len(pending_order) > 0:
+                pending_order.pop(-1)
+                return [SlotSet("pending_order", pending_order if len(pending_order) > 0 else None)]
+            return [SlotSet("pending_order", None)]
 
 class ActionNextOrder(Action):
     def name(self) -> Text:
@@ -117,7 +147,11 @@ class ActionNextOrder(Action):
             next_order += f"{next_pizza_type}" if next_pizza_type is not None else ""
             dispatcher.utter_message(text=f"Alright, let's go through the next {next_order} pizza")
         #print("events", (events + [FollowupAction("pizza_order_form")]) if doForm else [])
-        return events + ([FollowupAction("pizza_order_form")] if doForm else [])
+        if doForm:
+            events += [SlotSet("pizza_sliced", None), FollowupAction("pizza_order_form")]
+            return events
+        else:
+            return []
     
 class ActionPizzaOrderAdd(Action):
     def name(self):
@@ -133,10 +167,11 @@ class ActionPizzaOrderAdd(Action):
         if pending_order is None:
             dispatcher.utter_message(text="Sorry, there is an error. You have no pending order")
             return []
-        order_details =  pending_order
-        old_order = tracker.get_slot("total_order")
-        dispatcher.utter_message(response="utter_order_added")
-        return[SlotSet("total_order", [order_details]) if old_order is None else SlotSet("total_order", [old_order[0]+' and '+order_details])]
+        total_order = tracker.get_slot("total_order")
+        if total_order is None:
+            total_order = []
+        total_order.extend(tracker.get_slot("pending_order"))
+        return [SlotSet("total_order", total_order), SlotSet("pizza_type", None),SlotSet("pizza_size", None),SlotSet("pizza_amount", None), SlotSet("pizza_sliced", None), SlotSet("pizza_crust", None),  SlotSet("pizza_toppings", None), SlotSet("pending_order", None)]
 
 class ActionResetPizzaForm(Action):
     def name(self):
@@ -833,32 +868,45 @@ class ActionChangeOrder(Action):
         if pizza_size is None and pizza_type is None and pizza_amount is None and pizza_crust is None and pizza_sliced is None:
             dispatcher.utter_message(response="utter_warning_nothing_to_change")
             return [SlotSet("modify_order", None)]
+        changes = []
         if typeChanged:
             pizza_type = typeChanged
             #dispatcher.utter_message(response="utter_confirm_change_type")
-            dispatcher.utter_message(text=f"Alright, I changed the pizza type to {pizza_type}")
+            #dispatcher.utter_message(text=f"Alright, I changed the pizza type to {pizza_type}")
+            changes.append(f"the pizza type to {pizza_type}")
         if sizeChanged:
             pizza_size = sizeChanged
             #dispatcher.utter_message(response="utter_confirm_change_size")
-            dispatcher.utter_message(text=f"No problem, I changed the size to {pizza_size}")
+            #dispatcher.utter_message(text=f"No problem, I changed the size to {pizza_size}")
+            changes.append(f"the size to {pizza_size}")
         if amountChanged:
             pizza_amount = amountChanged
             #dispatcher.utter_message(response="utter_confirm_change_amount")
-            dispatcher.utter_message(text=f"Sure, I changed the number of pizzas to {pizza_amount}")
+            #dispatcher.utter_message(text=f"Sure, I changed the number of pizzas to {pizza_amount}")
+            changes.append(f"the number of pizzas to {pizza_amount}")
         if crustChanged:
             pizza_crust = crustChanged
             #dispatcher.utter_message(response="utter_confirm_change_crust")
-            dispatcher.utter_message(text=f"Alright, I changed the crust to {pizza_crust}")
+            #dispatcher.utter_message(text=f"Alright, I changed the crust to {pizza_crust}")
+            changes.append(f"the crust to {pizza_crust}")
         if slicedChanged:
             pizza_sliced = slicedChanged
             if pizza_sliced == "true":
                 #dispatcher.utter_message(response="utter_confirm_change_sliced")
-                dispatcher.utter_message(text=f"Alright, the pizzas will be sliced")
+                #dispatcher.utter_message(text=f"Alright, the pizzas will be sliced")
+                changes.append("the pizzas to be sliced")
                 pizza_sliced = True
             else:
                 #dispatcher.utter_message(response="utter_confirm_change_not_sliced")
-                dispatcher.utter_message(text=f"Alright, the pizzas won't be sliced")
+                #dispatcher.utter_message(text=f"Alright, the pizzas won't be sliced")
+                changes.append("the pizzas won't be sliced")
                 pizza_sliced = False
+        if len(changes) > 0:
+            if len(changes) > 1:
+                # substitute the last comma with "and"
+                changes[-1] = "and " + changes[-1]
+            total_changes = "Alright, I changed " + ", ".join(changes)
+            dispatcher.utter_message(text=total_changes)
         return [
             SlotSet("pizza_type", pizza_type),
             SlotSet("pizza_size", pizza_size),
@@ -866,4 +914,5 @@ class ActionChangeOrder(Action):
             SlotSet("pizza_crust", pizza_crust),
             SlotSet("pizza_sliced", pizza_sliced),
             SlotSet("modify_order", None),
+            SlotSet("pending_order", None)
         ]

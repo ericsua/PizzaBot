@@ -2422,7 +2422,130 @@ stories:
     - requested_slot: pizza_sliced
 
 
-- story: multi order
+# - story: multi order
+#   steps:
+#   - intent: item_start_generic
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - intent: response_positive
+#   - action: action_next_order
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - intent: response_positive
+#   - action: action_next_order
+#   - slot_was_set:
+#     - pizza_type: null
+#   - slot_was_set:
+#     - pizza_size: null
+#   - slot_was_set:
+#     - pizza_amount: null
+#   - slot_was_set:
+#     - pizza_crust: null
+#   - slot_was_set:
+#     - pizza_sliced: null
+#   - action: utter_anything_else
+
+# - story: multi order
+#   steps:
+#   - intent: item_start_generic
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - intent: response_positive
+#   - action: action_next_order
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - intent: response_positive
+#   - action: action_next_order
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - intent: response_positive
+#   - action: action_next_order
+#   - slot_was_set:
+#     - pizza_type: null
+#   - slot_was_set:
+#     - pizza_size: null
+#   - slot_was_set:
+#     - pizza_amount: null
+#   - slot_was_set:
+#     - pizza_crust: null
+#   - slot_was_set:
+#     - pizza_sliced: null
+#   - action: utter_anything_else
+
+
+# - story: story after order to delivery
+#   steps:
+#   - intent: item_start_generic
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - intent: response_positive
+#   - action: utter_anything_else
+#   - intent: item_start_generic
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - intent: response_positive
+#   - action: action_next_order
+#   - slot_was_set:
+#     - pizza_type: null
+#   - slot_was_set:
+#     - pizza_size: null
+#   - slot_was_set:
+#     - pizza_amount: null
+#   - slot_was_set:
+#     - pizza_crust: null
+#   - slot_was_set:
+#     - pizza_sliced: null
+#   - action: utter_anything_else
+#   - intent: response_negative
+#   - action: action_total_order
+#   - intent: order_take_home
+
+
+
+# - story: interactive_story_1
+#   steps:
+#   - intent: item_start_generic
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - intent: response_positive
+#   - action: action_next_order
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - intent: response_positive
+#   - action: action_next_order
+#   - slot_was_set:
+#     - pizza_type: null
+#   - slot_was_set:
+#     - pizza_size: null
+#   - slot_was_set:
+#     - pizza_amount: null
+#   - slot_was_set:
+#     - pizza_crust: null
+#   - slot_was_set:
+#     - pizza_sliced: null
+#   - action: utter_anything_else
+#   - intent: response_negative
+#   - action: action_total_order
+
+- story: happy path new
   steps:
   - intent: item_start_generic
   - action: pizza_order_form
@@ -2430,12 +2553,127 @@ stories:
   - active_loop: null
   - action: action_confirm_pizzas
   - intent: response_positive
+  - action: action_pizza_order_add
+  - action: action_next_order
+  - action: utter_anything_else
+  - intent: response_negative
+  - action: action_total_order
+  - intent: order_take_home
+
+- story: happy path two orders simple
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_pizza_order_add
+  - action: action_next_order
+  - action: utter_anything_else
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_pizza_order_add
+  - action: action_next_order
+  - action: utter_anything_else
+  - intent: response_negative
+  - action: action_total_order
+  - intent: order_delivery
+
+
+- story: multi order new
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_pizza_order_add
   - action: action_next_order
   - action: pizza_order_form
   - active_loop: pizza_order_form
   - active_loop: null
   - action: action_confirm_pizzas
-  - or:
-    - intent: response_positive
-    - intent: response_negative
+  - intent: response_positive
+  - action: action_pizza_order_add
   - action: action_next_order
+  - action: utter_anything_else
+
+- story: multi order triple
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_pizza_order_add
+  - action: action_next_order
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_pizza_order_add
+  - action: action_next_order
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_pizza_order_add
+  - action: action_next_order
+  - action: utter_anything_else
+  - intent: response_negative
+  - action: action_total_order
+  - intent: order_take_home
+
+- story: negative confirm pizza order
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_negative
+  - action: action_cancel_pending_order
+  - action: utter_order_confirm_negative
+  - intent: item_change
+  - action: action_change_order
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_pizza_order_add
+  - action: action_next_order
+  - action: utter_anything_else
+  - intent: response_negative
+  - action: action_total_order
+  - intent: order_delivery
+
+- story: change order at end with intent item_change
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: item_change
+  - action: action_change_order
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_pizza_order_add
+  - action: action_next_order
+  - action: utter_anything_else
+  - intent: response_negative
+  - action: action_total_order
+  - intent: order_delivery

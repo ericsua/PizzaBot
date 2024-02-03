@@ -141,11 +141,16 @@ rules:
 #   - intent: restart
 #   - action: action_restart
 
-- rule: Implementation of the Two-Stage-Fallback
+- rule: Ask the user to rephrase whenever they send a message with low NLU confidence
   steps:
   - intent: nlu_fallback
-  - action: action_two_stage_fallback
-  - active_loop: action_two_stage_fallback
+  - action: utter_default
+
+# - rule: Implementation of the Two-Stage-Fallback
+#   steps:
+#   - intent: nlu_fallback
+#   - action: action_two_stage_fallback
+#   - active_loop: action_two_stage_fallback
 
 - rule: book table
   steps:

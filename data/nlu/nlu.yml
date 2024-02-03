@@ -574,7 +574,11 @@ nlu:
     - i want to order [two](pizza_amount) [large](pizza_size) [margherita]{"entity": "pizza_type", "value": "Margherita"} and [three](future_pizza_amount) [small](future_pizza_size) [hawaii]{"entity": "future_pizza_type", "value": "Hawaii"}
     - i want to order [two](pizza_amount) [large](pizza_size) [margherita]{"entity": "pizza_type", "value": "Margherita"} and [three](future_pizza_amount) [hawaii]{"entity": "future_pizza_type", "value": "Hawaii"}
     - i want to order [two](pizza_amount) [large](pizza_size) [margherita]{"entity": "pizza_type", "value": "Margherita"} and [three](future_pizza_amount) [hawaii]{"entity": "future_pizza_type", "value": "Hawaii"} pizza
-    - i want to order [two](pizza_amount) [large](pizza_size) [margherita]{"entity": "pizza_type", "value": "Margherita"} and [three](future_pizza_amount) [hawaii]{"entity": "future_pizza_type", "value": "Hawaii"} pizza
+    - i want to order pizza
+    - i also want to order a [hawaii]{"entity": "pizza_type", "value": "Hawaii"} pizza
+    - i want to order [hawaii]{"entity": "pizza_type", "value": "Hawaii"}
+    - I want to order [Hawaii](pizza_type)
+    - i want to order [one](pizza_amount) [funghi]{"entity": "pizza_type", "value": "Funghi"}, [three](future_pizza_amount) [pepperoni]{"entity": "future_pizza_type", "value": "Pepperoni"}, and [two](future_pizza_amount) [hawaii]{"entity": "future_pizza_type", "value": "Hawaii"}
 - intent: item_change
   examples: |
     - I changed my mind. Can I get a [funghi](pizza_type) instead?
@@ -617,6 +621,8 @@ nlu:
     - actually i want a [funghi]{"entity": "pizza_type", "value": "Funghi"} instead
     - actually i want them [extra large](pizza_size)
     - actually i want [flatbread](pizza_crust) crust instead
+    - actually, i want [seven](pizza_amount) pizza instead
+    - actually i want [five](pizza_amount) [funghi]{"entity": "pizza_type", "value": "Funghi"}
 - intent: response_negative
   examples: |
     - actually no
@@ -651,11 +657,41 @@ nlu:
     - take away
     - i prefer take away
     - take away please
+    - I want to take away
+    - I want to take away please
+    - I want to take away my order
+    - I want to take away my order please
+    - I'll pick it up
+    - I'll pick it up please
+    - I'll pick it up myself
+    - I'll pick it up myself please
+    - I'll pick my order up
+    - I'll pick my order up please
+    - I want to pick it up
+    - I want to pick it up please
+    - Takeout
+    - I want takeout
+    - I want takeout please
 - intent: order_delivery
   examples: |
     - delivery please
     - delivery
     - i prefer delivery
+    - i want delivery
+    - i want delivery please
+    - I'd like the delivery
+    - I'd like the delivery please
+    - I want it delivered
+    - I want it delivered please
+    - I want it to be delivered
+    - I want it to be delivered please
+    - I want it to be delivered to my address
+    - I want it to be delivered to my address please
+    - I want my order to be delivered
+    - I want my order to be delivered please
+    - I'd like my order to be delivered
+    - I'd like my order to be delivered please
+    - I would like my order to be delivered
 - intent: order_delivery_address
   examples: |
     - my address is #46, 655 avenue du techno pole
@@ -784,6 +820,7 @@ nlu:
     - I want [two](pizza_amount) [Veggie](pizza_type), [four](future_pizza_amount) [Funghi](future_pizza_type) and [three](future_pizza_amount) [Margherita](future_pizza_type)
     - I want [four](pizza_amount) [small](pizza_size) [Veggie](pizza_type), [two](future_pizza_amount) [large](pizza_size) [Funghi](future_pizza_type) and [one](future_pizza_amount) [baby](pizza_size) [Margherita](future_pizza_type)
     - i'll take a [margherita]{"entity": "pizza_type", "value": "Margherita"} and a [hawaii]{"entity": "future_pizza_type", "value": "Hawaii"}
+    - [veggie]{"entity": "pizza_type", "value": "Veggie"}
 - intent: item_size
   examples: |
     - [8 inches]{"entity": "pizza_size", "value": "baby"}
@@ -819,7 +856,7 @@ nlu:
     - I would like [medium](pizza_size) please
     - I'd like [large](pizza_size)
     - I want it [extra large](pizza_size)
-    - [baby](pizza_size)
+    - [large](pizza_size)
 - intent: pizza_crust
   examples: |
     - [stuffed](pizza_crust) crust
@@ -866,7 +903,6 @@ nlu:
     - [Integral](pizza_crust) crust
     - [Sourdough](pizza_crust) crust
     - [Whole Wheat](pizza_crust) crust
-    - [thin](pizza_crust)
     - [stuffed](pizza_crust)
 - intent: explain
   examples: |
@@ -963,6 +999,7 @@ nlu:
     - I want [one](pizza_amount) pizza
     - i want [nine](pizza_amount) pizzas
     - i want [one](pizza_amount) [large](pizza_size) [thin](pizza_crust) crust [margherita]{"entity": "pizza_type", "value": "Margherita"}
+    - [three](pizza_amount)
 - intent: pizza_sliced
   examples: |
     - [sliced]{"entity": "pizza_sliced", "value": "true"}
