@@ -156,7 +156,7 @@ stories:
   - intent: item_start_generic
   - action: pizza_order_form
   - active_loop: pizza_order_form
-  - intent: item_amount
+  - intent: item_start_generic
   - action: utter_item_change
 
 - story: interactive_story_09
@@ -171,25 +171,24 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
-  - intent: item_topping
+  - intent: item_start_generic
     entities:
     - pizza_type: onions
     - pizza_type: tuna
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_size
-  - intent: item_size
+  - intent: item_start_generic
   - action: utter_item_change
   - intent: response_positive
   - action: utter_total_order_final
 
 - story: interactive_story_10
   steps:
-  - intent: item_size
   - intent: item_start_generic
   - action: pizza_order_form
   - active_loop: pizza_order_form
@@ -200,7 +199,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
@@ -217,11 +216,11 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_size
-  - intent: item_size
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: null
@@ -240,11 +239,11 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_size
-  - intent: item_size
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: null
@@ -272,7 +271,7 @@ stories:
 #   - active_loop: pizza_order_form
 #   - slot_was_set:
 #     - requested_slot: pizza_amount
-#   - intent: item_amount
+#   - intent: item_start_generic
 #     entities:
 #     - pizza_amount: one
 #   - slot_was_set:
@@ -292,7 +291,7 @@ stories:
 #     - pizza_type: Funghi
 #   - slot_was_set:
 #     - requested_slot: pizza_size
-#   - intent: item_size
+#   - intent: item_start_generic
 #     entities:
 #     - pizza_size: small
 #   - slot_was_set:
@@ -302,7 +301,7 @@ stories:
 #     - pizza_size: small
 #   - slot_was_set:
 #     - requested_slot: pizza_crust
-#   - intent: pizza_crust
+#   - intent: item_start_generic
 #     entities:
 #     - pizza_crust: stuffed crust
 #   - slot_was_set:
@@ -330,7 +329,7 @@ stories:
   - active_loop: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
   - action: pizza_order_form
 
 - story: interactive_story_14
@@ -340,17 +339,8 @@ stories:
   - active_loop: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
-  - action: pizza_order_form
-
-- story: interactive_story_13
-  steps:
   - intent: item_start_generic
   - action: pizza_order_form
-  - active_loop: pizza_order_form
-  - slot_was_set:
-    - requested_slot: pizza_amount
-  - intent: item_amount
 
 - story: extra large
   steps:
@@ -359,14 +349,14 @@ stories:
   - active_loop: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
   - slot_was_set:
     - requested_slot: pizza_type
-  - intent: item_type
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_size
-  - intent: item_size
+  - intent: item_start_generic
 
 - story: name greet
   steps:
@@ -377,7 +367,7 @@ stories:
   - active_loop: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
@@ -495,15 +485,15 @@ stories:
   - active_loop: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_size
-  - intent: item_size
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_crust
-  - intent: pizza_crust
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_sliced
@@ -529,7 +519,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
@@ -538,7 +528,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
-  - intent: item_type
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_size
@@ -547,7 +537,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_size
-  - intent: item_size
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_crust
@@ -556,7 +546,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_crust
-  - intent: pizza_crust
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_sliced
@@ -586,7 +576,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
@@ -595,7 +585,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
-  - intent: item_type
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_size
@@ -604,7 +594,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_size
-  - intent: item_size
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_crust
@@ -613,7 +603,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_crust
-  - intent: pizza_crust
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_sliced
@@ -644,7 +634,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
@@ -666,7 +656,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
@@ -675,7 +665,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
-  - intent: item_type
+  - intent: item_start_generic
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_size
@@ -1362,7 +1352,7 @@ stories:
 #   - active_loop: pizza_order_form
 #   - slot_was_set:
 #     - requested_slot: pizza_amount
-#   - intent: item_amount
+#   - intent: item_start_generic
 #     entities:
 #     - pizza_amount: one
 #   - slot_was_set:
@@ -1390,7 +1380,7 @@ stories:
 #   - action: pizza_order_form
 #   - slot_was_set:
 #     - requested_slot: pizza_type
-#   - intent: item_type
+#   - intent: item_start_generic
 #     entities:
 #     - pizza_type: Pepperoni
 #   - slot_was_set:
@@ -1436,7 +1426,7 @@ stories:
 #   - active_loop: pizza_order_form
 #   - slot_was_set:
 #     - requested_slot: pizza_amount
-#   - intent: item_amount
+#   - intent: item_start_generic
 #     entities:
 #     - pizza_amount: one
 #   - slot_was_set:
@@ -1469,7 +1459,7 @@ stories:
 #   - action: pizza_order_form
 #   - slot_was_set:
 #     - requested_slot: pizza_type
-#   - intent: item_type
+#   - intent: item_start_generic
 #     entities:
 #     - pizza_type: Pepperoni
 #   - slot_was_set:
@@ -1509,14 +1499,14 @@ stories:
 #   - intent: item_start_generic
 #   - action: pizza_order_form
 #   - active_loop: pizza_order_form
-#   - intent: item_amount
+#   - intent: item_start_generic
 #   - intent: explain
 #   - action: utter_explain_pizza_types
 #   - intent: request_pizza_types
 #   - action: action_get_pizza_types
 #   - intent: request_pizza_types
 #   - action: action_get_pizza_types
-#   - intent: item_type
+#   - intent: item_start_generic
 #   - intent: stop_order
 #   - action: utter_confirm
 #   - intent: response_positive
@@ -1571,7 +1561,7 @@ stories:
 #   - active_loop: pizza_order_form
 #   - slot_was_set:
 #     - requested_slot: pizza_amount
-#   - intent: item_amount
+#   - intent: item_start_generic
 #     entities:
 #     - pizza_amount: one
 #   - slot_was_set:
@@ -1604,7 +1594,7 @@ stories:
 #   - action: pizza_order_form
 #   - slot_was_set:
 #     - requested_slot: pizza_type
-#   - intent: item_type
+#   - intent: item_start_generic
 #     entities:
 #     - pizza_type: Pepperoni
 #   - slot_was_set:
@@ -1699,7 +1689,7 @@ stories:
 #   - action: pizza_order_form
 #   - slot_was_set:
 #     - requested_slot: pizza_amount
-#   # - intent: item_amount # no
+#   # - intent: item_start_generic # no
 #   #   entities:
 #   #   - pizza_amount: one
 #   - slot_was_set:
@@ -1749,7 +1739,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  # - intent: item_amount # no
+  # - intent: item_start_generic # no
   #   entities:
   #   - pizza_amount: one
   # - action: pizza_order_form # no
@@ -1810,7 +1800,7 @@ stories:
   - active_loop: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  # - intent: item_amount
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_amount: nine
   # - action: pizza_order_form
@@ -1825,7 +1815,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
-  # - intent: item_type
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_type: Veggie
   # - action: pizza_order_form
@@ -1833,7 +1823,7 @@ stories:
   #   - pizza_type: Veggie
   - slot_was_set:
     - requested_slot: pizza_size
-  # - intent: item_size
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_size: extra large
   # - action: pizza_order_form
@@ -1846,7 +1836,7 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_crust
-  # - intent: pizza_crust
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_crust: thin
   # - action: pizza_order_form
@@ -1884,7 +1874,7 @@ stories:
   - active_loop: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  - intent: item_amount
+  - intent: item_start_generic
 
 
 - story: change amount specific
@@ -1894,7 +1884,7 @@ stories:
   - active_loop: pizza_order_form
   # - slot_was_set:
   #   - requested_slot: pizza_amount
-  # - intent: item_amount
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_amount: one
   # - slot_was_set:
@@ -1932,7 +1922,7 @@ stories:
   - action: pizza_order_form
   # - slot_was_set:
   #   - requested_slot: pizza_type
-  # - intent: item_type
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_type: Margherita
   # - slot_was_set:
@@ -1950,7 +1940,7 @@ stories:
   - active_loop: pizza_order_form
   # - slot_was_set:
   #   - requested_slot: pizza_amount
-  # - intent: item_amount
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_amount: one
   # - slot_was_set:
@@ -1981,7 +1971,7 @@ stories:
   - action: pizza_order_form
   # - slot_was_set:
   #   - requested_slot: pizza_type
-  # - intent: item_type
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_type: Margherita
   # - slot_was_set:
@@ -2012,7 +2002,7 @@ stories:
   - action: pizza_order_form
   # - slot_was_set:
   #   - requested_slot: pizza_size
-  # - intent: item_size
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_size: small
   # - slot_was_set:
@@ -2043,7 +2033,7 @@ stories:
   - action: pizza_order_form
   # - slot_was_set:
   #   - requested_slot: pizza_crust
-  # - intent: pizza_crust
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_crust: flatbread
   # - slot_was_set:
@@ -2164,7 +2154,7 @@ stories:
   - action: pizza_order_form
   # - slot_was_set:
   #   - requested_slot: pizza_amount
-  # - intent: item_amount
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_amount: one
   # - slot_was_set:
@@ -2182,7 +2172,7 @@ stories:
   - active_loop: pizza_order_form
   # - slot_was_set:
   #   - requested_slot: pizza_amount
-  # - intent: item_amount
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_amount: one
   # - slot_was_set:
@@ -2225,7 +2215,7 @@ stories:
   - active_loop: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-  # - intent: item_amount
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_amount: five
   # - slot_was_set:
@@ -2235,7 +2225,7 @@ stories:
   #   - pizza_amount: five
   # - slot_was_set:
   #   - requested_slot: pizza_type
-  # - intent: item_type
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_type: Hawaii
   # - slot_was_set:
@@ -2270,7 +2260,7 @@ stories:
   - action: pizza_order_form
   # # - slot_was_set:
   # #   - requested_slot: pizza_size
-  # # - intent: item_size
+  # # - intent: item_start_generic
   # #   entities:
   # #   - pizza_size: large
   # # - slot_was_set:
@@ -2288,7 +2278,7 @@ stories:
   - active_loop: pizza_order_form
   # - slot_was_set:
   #   - requested_slot: pizza_amount
-  # - intent: item_amount
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_amount: ten
   # - slot_was_set:
@@ -2298,7 +2288,7 @@ stories:
   #   - pizza_amount: ten
   # - slot_was_set:
   #   - requested_slot: pizza_type
-  # - intent: item_type
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_type: Veggie
   # - slot_was_set:
@@ -2308,7 +2298,7 @@ stories:
   #   - pizza_type: Veggie
   # - slot_was_set:
   #   - requested_slot: pizza_size
-  # - intent: item_size
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_size: medium
   # - slot_was_set:
@@ -2355,7 +2345,7 @@ stories:
   - active_loop: pizza_order_form
   # - slot_was_set:
   #   - requested_slot: pizza_amount
-  # - intent: item_amount
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_amount: three
   # - slot_was_set:
@@ -2365,7 +2355,7 @@ stories:
   #   - pizza_amount: three
   # - slot_was_set:
   #   - requested_slot: pizza_type
-  # - intent: item_type
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_type: Hawaii
   # - slot_was_set:
@@ -2375,7 +2365,7 @@ stories:
   #   - pizza_type: Hawaii
   # - slot_was_set:
   #   - requested_slot: pizza_size
-  # - intent: item_size
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_size: large
   # - slot_was_set:
@@ -2385,7 +2375,7 @@ stories:
   #   - pizza_size: large
   # - slot_was_set:
   #   - requested_slot: pizza_crust
-  # - intent: pizza_crust
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_crust: thin
   # - slot_was_set:

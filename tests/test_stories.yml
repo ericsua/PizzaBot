@@ -65,7 +65,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [10](pizza_amount)
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set: 
     - pizza_amount: '10'
   - slot_was_set:
@@ -82,14 +82,14 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [10](pizza_amount)
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: '10'
   - slot_was_set:
     - requested_slot: pizza_type
   - user: |
       I want [Hawaii](pizza_type) pizza
-    intent: item_type
+    intent: item_start_generic
   - slot_was_set:
     - pizza_type:
       - Hawaii
@@ -100,7 +100,7 @@ stories:
     - requested_slot: pizza_size
   - user: |
       [extra large](pizza_size)
-    intent: item_size
+    intent: item_start_generic
   - slot_was_set:
     - pizza_size: extra large
 
@@ -121,7 +121,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [10](pizza_amount) pizza
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: '10'
   - action: pizza_order_form
@@ -212,7 +212,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [1](pizza_amount) pizza please
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: '1'
   - action: pizza_order_form
@@ -222,7 +222,7 @@ stories:
     - requested_slot: pizza_size
   - user: |
       [large](pizza_size)
-    intent: item_size
+    intent: item_start_generic
   - slot_was_set:
     - pizza_size: large
   - action: pizza_order_form
@@ -232,7 +232,7 @@ stories:
     - requested_slot: pizza_crust
   - user: |
       [cracker](pizza_crust)
-    intent: pizza_crust
+    intent: item_start_generic
   - slot_was_set:
     - pizza_crust: cracker
   - action: pizza_order_form
@@ -272,7 +272,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [3](pizza_amount)
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: '3'
   - action: pizza_order_form
@@ -289,7 +289,7 @@ stories:
     - requested_slot: pizza_type
   - user: |
       [Margherita](pizza_type)
-    intent: item_type
+    intent: item_start_generic
   - slot_was_set:
     - pizza_type: Margherita
   - action: pizza_order_form
@@ -310,7 +310,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [three](pizza_amount)
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: three
   - action: pizza_order_form
@@ -396,7 +396,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [three](pizza_amount)
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: three
   - action: pizza_order_form
@@ -406,7 +406,7 @@ stories:
     - requested_slot: pizza_type
   - user: |
       [Margherita](pizza_type)
-    intent: item_type
+    intent: item_start_generic
   - slot_was_set:
     - pizza_type: Hawaii
   - action: pizza_order_form
@@ -423,7 +423,7 @@ stories:
     - requested_slot: pizza_size
   - user: |
       [small](pizza_size)
-    intent: item_size
+    intent: item_start_generic
   - slot_was_set:
     - pizza_size: small
   - action: pizza_order_form
@@ -466,7 +466,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [nine](pizza_amount)
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: nine
   - action: pizza_order_form
@@ -486,7 +486,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [1](pizza_amount)
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: '1'
   - action: pizza_order_form
@@ -496,7 +496,7 @@ stories:
     - requested_slot: pizza_type
   - user: |
       [Margherita](pizza_type)
-    intent: item_type
+    intent: item_start_generic
   - slot_was_set:
     - pizza_type: Margherita
   - action: pizza_order_form
@@ -543,7 +543,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [1](pizza_amount)
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: '1'
   - action: pizza_order_form
@@ -553,7 +553,7 @@ stories:
     - requested_slot: pizza_type
   - user: |
       [Margherita](pizza_type)
-    intent: item_type
+    intent: item_start_generic
   - slot_was_set:
     - pizza_type: Margherita
   - action: pizza_order_form
@@ -563,7 +563,7 @@ stories:
     - requested_slot: pizza_size
   - user: |
       [small](pizza_size)
-    intent: item_size
+    intent: item_start_generic
   - slot_was_set:
     - pizza_size: small
   - action: pizza_order_form
@@ -609,7 +609,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [1](pizza_amount)
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: '1'
   - action: pizza_order_form
@@ -628,7 +628,7 @@ stories:
     - requested_slot: pizza_size
   - user: |
       [small](pizza_size)
-    intent: item_size
+    intent: item_start_generic
   - slot_was_set:
     - pizza_size: small
   - action: pizza_order_form
@@ -637,8 +637,8 @@ stories:
   - slot_was_set:
     - requested_slot: pizza_crust
   - user: |
-      [cracker](pizza_crust)
-    intent: pizza_crust
+      [cracker](pizza_crust) crust
+    intent: item_start_generic
   - slot_was_set:
     - pizza_crust: cracker
   - action: pizza_order_form
@@ -684,7 +684,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [3](pizza_amount)
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: '3'
   - action: pizza_order_form
@@ -694,7 +694,7 @@ stories:
     - requested_slot: pizza_type
   - user: |
       [Margherita](pizza_type)
-    intent: item_type
+    intent: item_start_generic
   - slot_was_set:
     - pizza_type: Margherita
   - action: pizza_order_form
@@ -704,7 +704,7 @@ stories:
     - requested_slot: pizza_size
   - user: |
       [large](pizza_size)
-    intent: item_size
+    intent: item_start_generic
   - slot_was_set:
     - pizza_size: large
   - action: pizza_order_form
@@ -714,7 +714,7 @@ stories:
     - requested_slot: pizza_crust
   - user: |
       [flatbread](pizza_crust)
-    intent: pizza_crust
+    intent: item_start_generic
   - slot_was_set:
     - pizza_crust: flatbread
   - action: pizza_order_form
@@ -761,7 +761,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [1](pizza_amount)
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: '1'
   - action: pizza_order_form
@@ -771,7 +771,7 @@ stories:
     - requested_slot: pizza_type
   - user: |
       [Margherita](pizza_type)
-    intent: item_type
+    intent: item_start_generic
   - slot_was_set:
     - pizza_type: Margherita
   - action: pizza_order_form
@@ -781,7 +781,7 @@ stories:
     - requested_slot: pizza_size
   - user: |
       [medium](pizza_size)
-    intent: item_size
+    intent: item_start_generic
   - slot_was_set:
     - pizza_size: medium
   - action: pizza_order_form
@@ -791,7 +791,7 @@ stories:
     - requested_slot: pizza_crust
   - user: |
       [flatbread](pizza_crust)
-    intent: pizza_crust
+    intent: item_start_generic
   - slot_was_set:
     - pizza_crust: flatbread
   - action: pizza_order_form
@@ -869,7 +869,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [one](pizza_amount) pizza
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: one
   - action: pizza_order_form # no
@@ -899,7 +899,7 @@ stories:
     - requested_slot: pizza_type
   - user: |
       [Pepperoni](pizza_type)
-    intent: item_type
+    intent: item_start_generic
   - slot_was_set:
     - pizza_type: Pepperoni
   - action: pizza_order_form
@@ -956,7 +956,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       I want [nine](pizza_amount) pizzas
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: nine
   # - action: pizza_order_form
@@ -977,7 +977,7 @@ stories:
     - requested_slot: pizza_type
   - user: |
       i'll have a [Veggie](pizza_type)
-    intent: item_type
+    intent: item_start_generic
   - slot_was_set:
     - pizza_type: Veggie
   - action: pizza_order_form
@@ -987,7 +987,7 @@ stories:
     - requested_slot: pizza_size
   - user: |
       I want an [extra large](pizza_size) pizza
-    intent: item_size
+    intent: item_start_generic
   - slot_was_set:
     - pizza_size: extra large
   - action: pizza_order_form
@@ -1004,7 +1004,7 @@ stories:
     - requested_slot: pizza_crust
   - user: |
       [thin](pizza_crust)
-    intent: pizza_crust
+    intent: item_start_generic
   - slot_was_set:
     - pizza_crust: thin
   - action: pizza_order_form
@@ -1050,7 +1050,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       I want [one](pizza_amount) [large](pizza_size) [thin](pizza_crust) [Margherita](pizza_type) pizza
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_crust: thin
   - slot_was_set:
@@ -1084,7 +1084,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [one](pizza_amount) pizza
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: one
   - action: pizza_order_form
@@ -1115,7 +1115,7 @@ stories:
     - requested_slot: pizza_type
   - user: |
       [Margherita](pizza_type)
-    intent: item_type
+    intent: item_start_generic
   - slot_was_set:
     - pizza_type: Margherita
   - action: pizza_order_form
@@ -1146,7 +1146,7 @@ stories:
     - requested_slot: pizza_size
   - user: |
       [small](pizza_size)
-    intent: item_size
+    intent: item_start_generic
   - slot_was_set:
     - pizza_size: small
   - action: pizza_order_form
@@ -1177,7 +1177,7 @@ stories:
     - requested_slot: pizza_crust
   - user: |
       [flatbread](pizza_crust)
-    intent: pizza_crust
+    intent: item_start_generic
   - slot_was_set:
     - pizza_crust: flatbread
   - action: pizza_order_form
@@ -1270,7 +1270,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [one](pizza_amount) pizza
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: one
   - action: pizza_order_form
@@ -1311,7 +1311,7 @@ stories:
     - requested_slot: pizza_type
   - user: |
       [Margherita](pizza_type)
-    intent: item_type
+    intent: item_start_generic
   - slot_was_set:
     - pizza_type: Margherita
   - action: pizza_order_form
@@ -1371,7 +1371,7 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [one](pizza_amount) pizza
-    intent: item_amount
+    intent: item_start_generic
   - slot_was_set:
     - pizza_amount: one
   - action: pizza_order_form
@@ -1391,8 +1391,8 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [one](pizza_amount) pizza
-    intent: item_amount
-  # - intent: item_amount
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_amount: one
   - slot_was_set:
@@ -1441,8 +1441,8 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [five](pizza_amount) pizza
-    intent: item_amount
-  # - intent: item_amount
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_amount: five
   - slot_was_set:
@@ -1454,8 +1454,8 @@ stories:
     - requested_slot: pizza_type
   - user: |
       [Hawaii](pizza_type)
-    intent: item_type
-  # - intent: item_type
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_type: Hawaii
   - slot_was_set:
@@ -1494,7 +1494,7 @@ stories:
     - requested_slot: pizza_size
   - user: |
       [large](pizza_size)
-    intent: item_size
+    intent: item_start_generic
   - slot_was_set:
     - pizza_size: large
   - action: pizza_order_form
@@ -1514,8 +1514,8 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [ten](pizza_amount) pizza
-    intent: item_amount
-  # - intent: item_amount
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_amount: ten
   - slot_was_set:
@@ -1527,8 +1527,8 @@ stories:
     - requested_slot: pizza_type
   - user: |
       [Veggie](pizza_type)
-    intent: item_type
-  # - intent: item_type
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #  - pizza_type: Veggie
   - slot_was_set:
@@ -1540,8 +1540,8 @@ stories:
     - requested_slot: pizza_size
   - user: |
       [medium](pizza_size)
-    intent: item_size
-  # - intent: item_size
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_size: medium
   - slot_was_set:
@@ -1590,8 +1590,8 @@ stories:
     - requested_slot: pizza_amount
   - user: |
       [three](pizza_amount) pizza
-    intent: item_amount
-  # - intent: item_amount
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_amount: three
   - slot_was_set:
@@ -1603,8 +1603,8 @@ stories:
     - requested_slot: pizza_type
   - user: |
       [Hawaii](pizza_type)
-    intent: item_type
-  # - intent: item_type
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_type: Hawaii
   - slot_was_set:
@@ -1616,8 +1616,8 @@ stories:
     - requested_slot: pizza_size
   - user: |
       [large](pizza_size)
-    intent: item_size
-  # - intent: item_size
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_size: large
   - slot_was_set:
@@ -1629,8 +1629,8 @@ stories:
     - requested_slot: pizza_crust
   - user: |
       [thin](pizza_crust)
-    intent: pizza_crust
-  # - intent: pizza_crust
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_crust: thin
   - slot_was_set:
@@ -1704,8 +1704,8 @@ stories:
     - requested_slot: pizza_crust
   - user: |
       [thin](pizza_crust)
-    intent: pizza_crust
-  # - intent: pizza_crust
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_crust: thin
   - slot_was_set:
@@ -1766,8 +1766,8 @@ stories:
     - requested_slot: pizza_size
   - user: |
       [baby](pizza_size)
-    intent: item_size
-  # - intent: item_size
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_size: baby
   - slot_was_set:
@@ -1779,8 +1779,8 @@ stories:
     - requested_slot: pizza_crust
   - user: |
       [stuffed](pizza_crust)
-    intent: pizza_crust
-  # - intent: pizza_crust
+    intent: item_start_generic
+  # - intent: item_start_generic
   #   entities:
   #   - pizza_crust: stuffed
   - slot_was_set:
