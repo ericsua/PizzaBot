@@ -5,6 +5,11 @@ session_config:
 intents:
 - book_table
 - bot_challenge
+- client_address
+- client_name
+- client_payment
+- delivery_change
+- delivery_change_request_without_entity
 - explain
 - goodbye
 - init_request
@@ -14,9 +19,10 @@ intents:
 - nevermind
 - order_anti_pizza
 - order_delivery
-- order_delivery_address
 - order_take_home
 - out_of_scope
+- request_delivery_areas
+- request_payment_methods
 - request_pizza_crusts
 - request_pizza_sizes
 - request_pizza_types
@@ -28,35 +34,44 @@ intents:
 - stop_order
 - welcome_greet
 entities:
-- pizza_type
 - pizza_crust
-- pizza_amount
+- PERSON
+- pizza_type
+- pizza_sliced
 - pizza_size
+- pizza_amount
+- client_payment
+- client_address
 - future_pizza_amount
 - future_pizza_type
 - anti_pizza_type
-- pizza_sliced
 - pizza_category
-- PERSON
 - future_pizza_size
 - future_pizza_crust
-- active_form_pizza_order_form
 - toppings
-- client_name
-- client_address
-- client_payment
 - phone_number
 - order_number
 - number_people
 slots:
+  takeaway_boolean:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_intent
+      intent: order_take_home
+      value: true
   client_address:
     type: text
+    influence_conversation: true
     mappings:
     - type: custom
+      action: action_address_mapping
   client_payment:
     type: text
+    influence_conversation: true
     mappings:
     - type: custom
+      action: action_payment_mapping
   pizza_toppings:
     type: list
     influence_conversation: false
@@ -96,10 +111,11 @@ slots:
     - type: custom
       action: action_crust_mapping
   client_name:
-    type: any
+    type: text
+    influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: PERSON
+    - type: custom
+      action: action_client_name_mapping
   order_number:
     type: any
     mappings:
@@ -165,6 +181,9 @@ slots:
     - pizza_size
     - pizza_crust
     - pizza_sliced
+    - client_name
+    - client_address
+    - client_payment
     mappings:
     - type: custom
   total_order:
@@ -436,6 +455,8 @@ responses:
   - text: No problem. The pizza now will not be sliced.
   utter_warning_nothing_to_change:
   - text: Sorry, there is nothing to change, as you have not ordered anything yet.
+  utter_warning_nothing_to_change_delivery:
+  - text: Sorry, there is nothing to change, since you have not provided any delivery details yet.
   utter_restart:
   - text: No problem, let's start over.
   utter_ask_rephrase:
@@ -446,12 +467,78 @@ responses:
   - text: Your total order is {total_order}. Do you prefer take away or home delivery?
   utter_conclude_order_takeaway:
   - text: Okay, take away it is. When would you like to pick it up?
+  utter_explain_client_name_takeaway:
+  - text: We need your name to be sure that the order will be picked up by the right person.
+  utter_explain_client_name_delivery:
+  - text: We need your name to be sure that the order will be delivered to the right person.
+  utter_explain_payment_method:
+  - text: We need to know how you will pay for the order so that the delivery person can be prepared.
+  utter_explain_client_address:
+  - text: We need an address to be sure that the order will be delivered to the right place.
+  utter_ask_client_name:
+  - text: What is your name?
+  utter_ask_client_name_ack:
+  - text: Okay, what is your name?
+  - text: Alright, what is your name?
+  utter_ask_client_name_ack_delivery:
+  - text: Okay, what is your name for the delivery?
+  - text: Alright, what is your name for the delivery?
+  - text: Okay, what is your name for the delivery?
+  utter_ask_client_name_ack_takeaway:
+  - text: Okay, what is your name for the take away?
+  - text: Alright, what is your name for the take away?
+  - text: Okay, what is your name for the take away?
+  utter_ask_client_address_ack:
+  - text: Okay, what address should we deliver the order to?
+  - text: Alright, what address should we deliver the order to?
+  utter_ask_client_address_ack_name:
+  - text: Okay {client_name}, what address should we deliver the order to?
+  - text: Alright {client_name}, what address should we deliver the order to?
+  utter_ask_client_address:
+  - text: What address should we deliver the order to?
+  utter_ask_client_payment:
+  - text: How would like to pay for the order?
+  utter_ask_client_payment_ack:
+  - text: Okay, how would like to pay for the order?
+  - text: Alright, how would like to pay for the order?
+  utter_ask_client_payment_ack_name:
+  - text: Okay {client_name}, how would like to pay for the order?
+  - text: Alright {client_name}, how would like to pay for the order?
+  utter_ask_client_payment_ack_address:
+  - text: Got it, how would like to pay for the order?
+  - text: Alright, how would like to pay for the order?
+  - text: Okay, how would like to pay for the order?
+  utter_ask_client_name_again:
+  - text: Sorry, I didn't understand your name. Can you tell me again?
+  utter_ask_client_address_again:
+  - text: Sorry, I didn't understand your address. Can you tell me again?
+  utter_ask_client_payment_again:
+  - text: Sorry, I didn't understand your payment method. Can you tell me again?
+  utter_inform_delivery_address:
+  - text: We deliver our pizza in all Trento area and the delivery is free.
+  utter_inform_delivery_payment:
+  - text: We accept cash, credit card, and debit card for payment.
 actions:
-- action_total_order
-- action_next_order
+- action_change_delivery
+- action_confirm_takeaway
 - action_confirm_pizzas
 - action_pizza_order_add
 - utter_anything_else
+- action_next_order
+- action_total_order
+- action_confirm_delivery
+- utter_ask_changes
+- utter_no_problem_lets_continue
+- action_payment_mapping
+- action_client_name_mapping
+- action_address_mapping
+- utter_inform_delivery_payment
+- utter_inform_delivery_address
+- utter_explain_client_name_delivery
+- utter_explain_payment_method
+- utter_explain_client_address
+- validate_delivery_form
+- validate_takeaway_form
 - action_change_order
 - action_cancel_pending_order
 - utter_order_confirm_negative
@@ -462,8 +549,6 @@ actions:
 - action_get_pizza_types
 - utter_anti_pizza
 - action_restart
-- utter_ask_changes
-- utter_no_problem_lets_continue
 - utter_ask_confirm
 - utter_explain_pizza_quantities
 - action_reset_pizza_form
@@ -479,6 +564,9 @@ actions:
 - action_ask_pizza_crust
 - action_ask_pizza_size
 - action_ask_pizza_sliced
+- action_ask_client_name
+- action_ask_client_address
+- action_ask_client_payment
 - action_get_restaurant_location
 - action_order_number
 - utter_stop_order
@@ -519,13 +607,11 @@ forms:
     - pizza_size
     - pizza_crust
     - pizza_sliced
-
   delivery_form:
     required_slots:
     - client_name
     - client_address
     - client_payment
-
   takeaway_form:
     required_slots:
     - client_name

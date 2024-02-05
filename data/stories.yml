@@ -3950,7 +3950,6 @@ stories:
   - action: action_total_order
   - slot_was_set:
     - total_order: one large thin crust Margherita, all pizza sliced
-  - intent: order_take_home
 
 - story: happy path two orders simple
   steps:
@@ -4113,7 +4112,6 @@ stories:
   - action: action_total_order
   - slot_was_set:
     - total_order: one large thin crust Margherita, all pizza sliced, and two small cracker crust Hawaii, all pizza not sliced
-  - intent: order_delivery
 
 - story: multi order new
   steps:
@@ -4524,7 +4522,6 @@ stories:
   - action: action_total_order
   - slot_was_set:
     - total_order: one large thin crust Funghi, all pizza sliced, and three small flatbread crust Pepperoni, all pizza sliced, and two extra large cracker crust Hawaii, all pizza sliced
-  - intent: order_take_home
 
 - story: negative pizza confirm order
   steps:
@@ -4655,7 +4652,6 @@ stories:
   - action: action_total_order
   - slot_was_set:
     - total_order: seven medium flatbread crust Funghi, all pizza sliced
-  - intent: order_delivery
 
 - story: change order at end with intent item_change
   steps:
@@ -4784,4 +4780,666 @@ stories:
   - action: action_total_order
   - slot_was_set:
     - total_order: five large stuffed crust Funghi, all pizza sliced
+
+- story: over informative at start
+  steps:
+  - intent: item_start_generic
+    entities:
+    - pizza_amount: one
+    - pizza_size: large
+    - pizza_crust: thin
+    - pizza_sliced: 'true'
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - one large thin crust Margherita, all pizza sliced
+  - intent: response_positive
+  - action: action_pizza_order_add
+  - slot_was_set:
+    - total_order:
+      - one large thin crust Margherita, all pizza sliced
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_toppings: null
+  - slot_was_set:
+    - pending_order: null
+  - action: action_next_order
+  - action: utter_anything_else
+  - intent: response_negative
+  - action: action_total_order
+  - slot_was_set:
+    - total_order: one large thin crust Margherita, all pizza sliced
+  - checkpoint: checkpoint_full_pizza_first_turn
+
+- story: happy path delivery
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
   - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  # - intent: client_address
+  #   entities:
+  #   - client_address: number five roma street trento
+  - slot_was_set:
+    - client_address: number five roma street trento
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_address: number five roma street trento
+  - slot_was_set:
+    - requested_slot: client_payment
+  # - intent: client_payment
+  #   entities:
+  #   - client_payment: cash
+  - slot_was_set:
+    - client_payment: cash
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: explain every step delivery
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  - intent: explain
+  - action: utter_explain_client_name_delivery
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  - intent: explain
+  - action: utter_explain_client_address
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_address
+  # - intent: client_address
+  #   entities:
+  #   - client_address: at number five roma street
+  - slot_was_set:
+    - client_address: at number five roma street
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_address: at number five roma street
+  - slot_was_set:
+    - requested_slot: client_payment
+  - intent: explain
+  - action: utter_explain_payment_method
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_payment
+  # - intent: client_name
+  #   entities:
+  #   - client_payment: cash
+  - slot_was_set:
+    - client_payment: cash
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: ask delivery areas
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  - intent: request_delivery_areas
+  - action: utter_inform_delivery_address
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_address
+  # - intent: client_address
+  #   entities:
+  #   - client_address: number five of roma street trento
+  - slot_was_set:
+    - client_address: number five of roma street trento
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_address: number five of roma street trento
+  - slot_was_set:
+    - requested_slot: client_payment
+  # - intent: client_name
+  #   entities:
+  #   - client_payment: cash
+  - slot_was_set:
+    - client_payment: cash
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: ask payment options
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  # - intent: client_address
+  #   entities:
+  #   - client_address: roma street number 5 trento
+  - slot_was_set:
+    - client_address: roma street number 5 trento
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_address: roma street number 5 trento
+  - slot_was_set:
+    - requested_slot: client_payment
+  - intent: request_payment_methods
+  - action: utter_inform_delivery_payment
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_payment
+  # - intent: client_name
+  #   entities:
+  #   - client_payment: card
+  - slot_was_set:
+    - client_payment: card
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_payment: card
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: change name
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  # - intent: client_address
+  #   entities:
+  #   - client_address: roma street number five trento
+  - slot_was_set:
+    - client_address: roma street number five trento
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_address: roma street number five trento
+  - slot_was_set:
+    - requested_slot: client_payment
+  # - intent: client_payment
+  #   entities:
+  #   - client_payment: cash
+  - slot_was_set:
+    - client_payment: cash
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+  - intent: delivery_change
+    entities:
+    - PERSON: Giuliano
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Giuliano
+  - slot_was_set:
+    - client_address: roma street number five trento
+  - slot_was_set:
+    - client_payment: cash
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - client_name: Giuliano
+  - slot_was_set:
+    - client_address: roma street number five trento
+  - slot_was_set:
+    - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: delivery change every step specific
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  # - intent: delivery_change
+  #   entities:
+  #   - PERSON: Mahed
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Mahed
+  - slot_was_set:
+    - client_address: null
+  - slot_was_set:
+    - client_payment: null
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_address
+  # - intent: client_address
+  #   entities:
+  #   - client_address: roma street number five trento
+  - slot_was_set:
+    - client_address: roma street number five trento
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_address: roma street number five trento
+  - slot_was_set:
+    - requested_slot: client_payment
+  - intent: delivery_change
+    entities:
+    - client_address: roma street number six trento
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Mahed
+  - slot_was_set:
+    - client_address: roma street number six trento
+  - slot_was_set:
+    - client_payment: null
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_payment
+  # - intent: client_payment
+  #   entities:
+  #   - client_payment: cash
+  - slot_was_set:
+    - client_payment: cash
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+  - intent: delivery_change
+    entities:
+    - client_payment: card
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Mahed
+  - slot_was_set:
+    - client_address: roma street number six trento
+  - slot_was_set:
+    - client_payment: card
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - client_name: Mahed
+  - slot_was_set:
+    - client_address: roma street number six trento
+  - slot_was_set:
+    - client_payment: card
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: vague change name
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  - intent: delivery_change_request_without_entity
+  - action: utter_ask_changes
+  - intent: delivery_change
+    entities:
+    - PERSON: Giuliano
+    - PERSON: Giuliano
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Giuliano
+  - slot_was_set:
+    - client_address: null
+  - slot_was_set:
+    - client_payment: null
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_address
+
+- story: vague change name + nevermind
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  - intent: delivery_change_request_without_entity
+  - action: utter_ask_changes
+  - intent: nevermind
+  - action: utter_no_problem_lets_continue
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_address
+  # - intent: client_address
+  #   entities:
+  #   - client_address: roma street number five trento
+  - slot_was_set:
+    - client_address: roma street number five trento
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_address: roma street number five trento
+  - slot_was_set:
+    - requested_slot: client_payment
+  # - intent: client_payment
+  #   entities:
+  #   - client_payment: cash
+  - slot_was_set:
+    - client_payment: cash
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: vague change address
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  # - intent: client_address
+  #   entities:
+  #   - client_address: roma street number five trento
+  - slot_was_set:
+    - client_address: roma street number five trento
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_address: roma street number five trento
+  - slot_was_set:
+    - requested_slot: client_payment
+  - intent: delivery_change_request_without_entity
+  - action: utter_ask_changes
+  - intent: delivery_change
+    entities:
+    - client_address: roma street number six trento
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - client_address: roma street number six trento
+  - slot_was_set:
+    - client_payment: null
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_payment
+  # - intent: client_payment
+  #   entities:
+  #   - client_payment: cash
+  - slot_was_set:
+    - client_payment: cash
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: vague change payment
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  # - intent: client_address
+  #   entities:
+  #   - client_address: roma street number five trento
+  - slot_was_set:
+    - client_address: roma street number five trento
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_address: roma street number five trento
+  - slot_was_set:
+    - requested_slot: client_payment
+  # - intent: client_payment
+  #   entities:
+  #   - client_payment: card
+  - slot_was_set:
+    - client_payment: card
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_payment: card
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+  - intent: delivery_change_request_without_entity
+  - action: utter_ask_changes
+  - intent: delivery_change
+    entities:
+    - PERSON: Mahed
+    - PERSON: Mahed
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Mahed
+  - slot_was_set:
+    - client_address: roma street number five trento
+  - slot_was_set:
+    - client_payment: card
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - client_name: Mahed
+  - slot_was_set:
+    - client_address: roma street number five trento
+  - slot_was_set:
+    - client_payment: card
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: takeaway change name
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_take_home
+  - slot_was_set:
+    - takeaway_boolean: true
+  - action: takeaway_form
+  - active_loop: takeaway_form
+  - slot_was_set:
+    - takeaway_boolean: true
+  - slot_was_set:
+    - requested_slot: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Giuliano
+  #   - PERSON: Giuliano
+  - slot_was_set:
+    - client_name: Giuliano
+  # - action: takeaway_form
+  # - slot_was_set:
+  #   - client_name: Giuliano
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_takeaway
+  - intent: delivery_change
+    entities:
+    - PERSON: Eric
+    - PERSON: Eric
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - client_address: null
+  - slot_was_set:
+    - client_payment: null
+  - action: takeaway_form
+  - active_loop: takeaway_form
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_takeaway

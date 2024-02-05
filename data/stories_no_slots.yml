@@ -1875,6 +1875,7 @@ stories:
   - slot_was_set:
     - requested_slot: pizza_amount
   - intent: item_start_generic
+  - action: pizza_order_form
 
 
 - story: change amount specific
@@ -2548,7 +2549,6 @@ stories:
   - action: utter_anything_else
   - intent: response_negative
   - action: action_total_order
-  - intent: order_take_home
 
 - story: happy path two orders simple
   steps:
@@ -2572,7 +2572,6 @@ stories:
   - action: utter_anything_else
   - intent: response_negative
   - action: action_total_order
-  - intent: order_delivery
 
 
 - story: multi order new
@@ -2621,7 +2620,6 @@ stories:
   - action: utter_anything_else
   - intent: response_negative
   - action: action_total_order
-  - intent: order_take_home
 
 - story: negative confirm pizza order
   steps:
@@ -2645,7 +2643,6 @@ stories:
   - action: utter_anything_else
   - intent: response_negative
   - action: action_total_order
-  - intent: order_delivery
 
 - story: change order at end with intent item_change
   steps:
@@ -2666,4 +2663,178 @@ stories:
   - action: utter_anything_else
   - intent: response_negative
   - action: action_total_order
+
+- story: over informative at start
+  steps:
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_pizza_order_add
+  - action: action_next_order
+  - action: utter_anything_else
+  - intent: response_negative
+  - action: action_total_order
+  - checkpoint: checkpoint_full_pizza_first_turn
+
+- story: happy path delivery
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
   - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: explain every step delivery
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - intent: explain
+  - action: utter_explain_client_name_delivery
+  - action: delivery_form
+  - intent: explain
+  - action: utter_explain_client_address
+  - action: delivery_form
+  - intent: explain
+  - action: utter_explain_payment_method
+  - action: delivery_form
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: ask delivery areas
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - intent: request_delivery_areas
+  - action: utter_inform_delivery_address
+  - action: delivery_form
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: ask payment options
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - intent: request_payment_methods
+  - action: utter_inform_delivery_payment
+  - action: delivery_form
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: change name
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - active_loop: null
+  - action: action_confirm_delivery
+  - intent: delivery_change
+  - action: action_change_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: delivery change every step specific
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - action: action_change_delivery
+  - action: delivery_form
+  - intent: delivery_change
+  - action: action_change_delivery
+  - action: delivery_form
+  - active_loop: null
+  - action: action_confirm_delivery
+  - intent: delivery_change
+  - action: action_change_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: vague change name
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - intent: delivery_change_request_without_entity
+  - action: utter_ask_changes
+  - intent: delivery_change
+  - action: action_change_delivery
+  - action: delivery_form
+
+- story: vague change name + nevermind
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - intent: delivery_change_request_without_entity
+  - action: utter_ask_changes
+  - intent: nevermind
+  - action: utter_no_problem_lets_continue
+  - action: delivery_form
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: vague change address
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - intent: delivery_change_request_without_entity
+  - action: utter_ask_changes
+  - intent: delivery_change
+  - action: action_change_delivery
+  - action: delivery_form
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: vague change payment
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - active_loop: null
+  - action: action_confirm_delivery
+  - intent: delivery_change_request_without_entity
+  - action: utter_ask_changes
+  - intent: delivery_change
+  - action: action_change_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: takeaway change name
+  steps:
+  - checkpoint: checkpoint_full_pizza_first_turn
+  - intent: order_take_home
+  - slot_was_set:
+    - takeaway_boolean: true
+  - action: takeaway_form
+  - active_loop: takeaway_form
+  - active_loop: null
+  - action: action_confirm_takeaway
+  - intent: delivery_change
+  - action: action_change_delivery
+  - action: takeaway_form
+  - active_loop: takeaway_form
+  - active_loop: null
+  - action: action_confirm_takeaway

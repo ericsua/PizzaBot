@@ -1828,3 +1828,690 @@ stories:
     - pizza_amount: null
   - slot_was_set:
     - pizza_crust: null
+
+
+
+- story: happy path delivery
+  steps:
+  - user: |
+      i want to order [one](pizza_amount) [large](pizza_size) [thin](pizza_crust) crust [sliced]{"entity": "pizza_sliced", "value": "true"} [margherita](pizza_type)
+    intent: item_start_generic
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - one large thin crust Margherita, all pizza sliced
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_pizza_order_add
+  - slot_was_set:
+    - total_order:
+      - one large thin crust Margherita, all pizza sliced
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_toppings: null
+  - slot_was_set:
+    - pending_order: null
+  - action: action_next_order
+  - action: utter_anything_else
+  - user: |
+      no
+    intent: response_negative
+  - action: action_total_order
+  - slot_was_set:
+    - total_order: one large thin crust Margherita, all pizza sliced
+  - user: |
+      delivery
+    intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  - user: |
+      [Eric](PERSON)
+    intent: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  - action: delivery_form
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  - user: |
+      [number five roma street trento](client_address)
+    intent: client_address
+  # - intent: client_address
+  #   entities:
+  #   - client_address: number five roma street trento
+  - slot_was_set:
+    - client_address: number five roma street trento
+  - action: delivery_form
+  - slot_was_set:
+    - client_address: number five roma street trento
+  - slot_was_set:
+    - requested_slot: client_payment
+  - user: |
+      [cash](client_payment)
+    intent: client_payment
+  # - intent: client_payment
+  #   entities:
+  #   - client_payment: cash
+  - slot_was_set:
+    - client_payment: cash
+  - action: delivery_form
+  - slot_was_set:
+    - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+
+
+- story: vague change name
+  steps:
+  - user: |
+      i want to order [one](pizza_amount) [large](pizza_size) [thin](pizza_crust) crust [sliced]{"entity": "pizza_sliced", "value": "true"} [margherita](pizza_type)
+    intent: item_start_generic
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - one large thin crust Margherita, all pizza sliced
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_pizza_order_add
+  - slot_was_set:
+    - total_order:
+      - one large thin crust Margherita, all pizza sliced
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_toppings: null
+  - slot_was_set:
+    - pending_order: null
+  - action: action_next_order
+  - action: utter_anything_else
+  - user: |
+      no
+    intent: response_negative
+  - action: action_total_order
+  - slot_was_set:
+    - total_order: one large thin crust Margherita, all pizza sliced
+  - user: |
+      delivery
+    intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  - user: |
+      [Eric](PERSON)
+    intent: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  - action: delivery_form
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  - user: |
+      I want to change the name
+    intent: delivery_change_request_without_entity
+  - action: utter_ask_changes
+  - user: |
+      I want to change the name to [Giuliano](PERSON)
+    intent: delivery_change
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Giuliano
+  - slot_was_set:
+    - client_address: null
+  - slot_was_set:
+    - client_payment: null
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_address
+
+- story: vague change name + nevermind
+  steps:
+  - user: |
+      i want to order [one](pizza_amount) [large](pizza_size) [thin](pizza_crust) crust [sliced]{"entity": "pizza_sliced", "value": "true"} [margherita](pizza_type)
+    intent: item_start_generic
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - one large thin crust Margherita, all pizza sliced
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_pizza_order_add
+  - slot_was_set:
+    - total_order:
+      - one large thin crust Margherita, all pizza sliced
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_toppings: null
+  - slot_was_set:
+    - pending_order: null
+  - action: action_next_order
+  - action: utter_anything_else
+  - user: |
+      no
+    intent: response_negative
+  - action: action_total_order
+  - slot_was_set:
+    - total_order: one large thin crust Margherita, all pizza sliced
+  - user: |
+      delivery
+    intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  - user: |
+      [Eric](PERSON)
+    intent: client_name
+  - slot_was_set:
+    - client_name: Eric
+  - action: delivery_form
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  - user: |
+      I want to change the name
+    intent: delivery_change_request_without_entity
+  - action: utter_ask_changes
+  - user: |
+      nevermind
+    intent: nevermind
+  - action: utter_no_problem_lets_continue
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_address
+  - user: |
+      [roma street number five trento](client_address)
+    intent: client_address
+  - slot_was_set:
+    - client_address: roma street number five trento
+  - action: delivery_form
+  - slot_was_set:
+    - client_address: roma street number five trento
+  - slot_was_set:
+    - requested_slot: client_payment
+  - user: |
+      [cash](client_payment)
+    intent: client_payment
+  - slot_was_set:
+    - client_payment: cash
+  - action: delivery_form
+  - slot_was_set:
+    - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: vague change address
+  steps:
+  - user: |
+      i want to order [one](pizza_amount) [large](pizza_size) [thin](pizza_crust) crust [sliced]{"entity": "pizza_sliced", "value": "true"} [margherita](pizza_type)
+    intent: item_start_generic
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - one large thin crust Margherita, all pizza sliced
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_pizza_order_add
+  - slot_was_set:
+    - total_order:
+      - one large thin crust Margherita, all pizza sliced
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_toppings: null
+  - slot_was_set:
+    - pending_order: null
+  - action: action_next_order
+  - action: utter_anything_else
+  - user: |
+      no
+    intent: response_negative
+  - action: action_total_order
+  - slot_was_set:
+    - total_order: one large thin crust Margherita, all pizza sliced
+  - user: |
+      delivery
+    intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  - user: |
+      [Eric](PERSON)
+    intent: client_name
+  - slot_was_set:
+    - client_name: Eric
+  - action: delivery_form
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  - user: |
+      [roma street number five trento](client_address)
+    intent: client_address
+  - slot_was_set:
+    - client_address: roma street number five trento
+  - action: delivery_form
+  - slot_was_set:
+    - client_address: roma street number five trento
+  - slot_was_set:
+    - requested_slot: client_payment
+  - user: |
+      actually i want to change the address
+    intent: delivery_change_request_without_entity
+  - action: utter_ask_changes
+  - user: |
+      I want to change the address to [roma street number six trento](client_address)
+    intent: delivery_change
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - client_address: roma street number six trento
+  - slot_was_set:
+    - client_payment: null
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_payment
+  - user: |
+      [cash](client_payment)
+    intent: client_payment
+  - slot_was_set:
+    - client_payment: cash
+  - action: delivery_form
+  - slot_was_set:
+    - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+- story: vague change payment
+  steps:
+  - user: |
+      i want to order [one](pizza_amount) [large](pizza_size) [thin](pizza_crust) crust [sliced]{"entity": "pizza_sliced", "value": "true"} [margherita](pizza_type)
+    intent: item_start_generic
+    entities:
+    - pizza_amount: one
+    - pizza_size: large
+    - pizza_crust: thin
+    - pizza_sliced: 'true'
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - one large thin crust Margherita, all pizza sliced
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_pizza_order_add
+  - slot_was_set:
+    - total_order:
+      - one large thin crust Margherita, all pizza sliced
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_toppings: null
+  - slot_was_set:
+    - pending_order: null
+  - action: action_next_order
+  - action: utter_anything_else
+  - user: |
+      no
+    intent: response_negative
+  - action: action_total_order
+  - slot_was_set:
+    - total_order: one large thin crust Margherita, all pizza sliced
+  - user: |
+      delivery
+    intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  - user: |
+      [Eric](PERSON)
+    intent: client_name
+  - slot_was_set:
+    - client_name: Eric
+  - action: delivery_form
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  - user: |
+      [roma street number five trento](client_address)
+    intent: client_address
+  - slot_was_set:
+    - client_address: roma street number five trento
+  - action: delivery_form
+  - slot_was_set:
+    - client_address: roma street number five trento
+  - slot_was_set:
+    - requested_slot: client_payment
+  - user: |
+      [card](client_payment)
+    intent: client_payment
+  - slot_was_set:
+    - client_payment: card
+  - action: delivery_form
+  - slot_was_set:
+    - client_payment: card
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+  - user: |
+      I want to change the payment
+    intent: delivery_change_request_without_entity
+  - action: utter_ask_changes
+  - user: |
+      I want to change the name to [Mahed](PERSON)
+    intent: delivery_change
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Mahed
+  - slot_was_set:
+    - client_address: roma street number five trento
+  - slot_was_set:
+    - client_payment: card
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - client_name: Mahed
+  - slot_was_set:
+    - client_address: roma street number five trento
+  - slot_was_set:
+    - client_payment: card
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+
+
+- story: takeaway change name
+  steps:
+  - user: |
+      i want to order [one](pizza_amount) [large](pizza_size) [thin](pizza_crust) crust [sliced]{"entity": "pizza_sliced", "value": "true"} [margherita](pizza_type)
+    intent: item_start_generic
+    entities:
+    - pizza_amount: one
+    - pizza_size: large
+    - pizza_crust: thin
+    - pizza_sliced: 'true'
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_type: Margherita
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: one
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - one large thin crust Margherita, all pizza sliced
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_pizza_order_add
+  - slot_was_set:
+    - total_order:
+      - one large thin crust Margherita, all pizza sliced
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_toppings: null
+  - slot_was_set:
+    - pending_order: null
+  - action: action_next_order
+  - action: utter_anything_else
+  - user: |
+      no
+    intent: response_negative
+  - action: action_total_order
+  - slot_was_set:
+    - total_order: one large thin crust Margherita, all pizza sliced
+  - user: |
+      takeaway
+    intent: order_take_home
+  - slot_was_set:
+    - takeaway_boolean: true
+  - action: takeaway_form
+  - active_loop: takeaway_form
+  - slot_was_set:
+    - takeaway_boolean: true
+  - slot_was_set:
+    - requested_slot: client_name
+  - user: |
+      [Giuliano](PERSON)
+    intent: client_name
+  - slot_was_set:
+    - client_name: Giuliano
+  - action: takeaway_form
+  - slot_was_set:
+    - client_name: Giuliano
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_takeaway
+  - user: |
+      I want to change the name to [Eric](PERSON)
+    intent: delivery_change
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - client_address: null
+  - slot_was_set:
+    - client_payment: null
+  - action: takeaway_form
+  - active_loop: takeaway_form
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_takeaway

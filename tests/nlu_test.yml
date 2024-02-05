@@ -1,0 +1,226 @@
+version: "3.1"
+nlu:
+- intent: delivery_change
+  examples: |
+- intent: request_delivery_areas
+  examples: |
+- intent: request_payment_methods
+  examples: |
+- intent: client_payment
+  examples: |
+- intent: client_name
+  examples: |
+- intent: client_address
+  examples: |
+- intent: book_table
+  examples: |
+- intent: restart
+  examples: |
+- intent: nevermind
+  examples: |
+- intent: order_anti_pizza
+  examples: |
+- intent: stop_order
+  examples: |
+- intent: request_pizza_types
+  examples: |
+- intent: request_pizza_crusts
+  examples: |
+- intent: request_pizza_sizes
+  examples: |
+- intent: welcome_greet
+  examples: |
+- intent: item_start_generic
+  examples: |
+   
+- intent: item_change
+  examples: |
+    
+- intent: response_negative
+  examples: |
+  
+- intent: response_positive
+  examples: |
+    
+- intent: order_take_home
+  examples: |
+  
+- intent: order_delivery
+  examples: |
+    
+- intent: item_change_request_without_entity
+  examples: |
+    
+- intent: delivery_change_request_without_entity
+  examples: |
+    
+- intent: explain
+  examples: |
+    
+- intent: request_restaurant_location
+  examples: |
+    
+- intent: out_of_scope
+  examples: |
+    
+- intent: goodbye
+  examples: |
+    
+- intent: bot_challenge
+  examples: |
+    
+- synonym: card
+  examples: |
+    - credit card
+    - debit card
+    - visa
+    - mastercard
+    - american express
+- synonym: Eric
+  examples: |
+    - eric
+- synonym: Chicken Wings
+  examples: |
+    - chicken wings
+- synonym: Margherita
+  examples: |
+    - margherita
+    - margarita
+    - Margherita
+- synonym: Veggie
+  examples: |
+    - veggie
+    - Vegetarian
+    - Vegetariana
+    - vegetarian
+    - vegetable
+    - Vegetable
+    - Veggie
+- synonym: Pepperoni
+  examples: |
+    - pepperoni
+    - Pepp
+    - Pepperoni
+    - Peperoni
+    - peperoni
+- synonym: Hawaii
+  examples: |
+    - hawaii
+    - Hawaii
+    - hawaiian
+    - Hawaiian
+    - hawai
+    - Hawai
+- synonym: Funghi
+  examples: |
+    - funghi
+    - Funghi
+- synonym: 'true'
+  examples: |
+    - sliced
+- synonym: 'false'
+  examples: |
+    - unsliced
+    - not sliced
+- synonym: baby
+  examples: |
+    - 8 inches
+    - 8"
+    - 8 inch
+    - baby
+    - Baby
+    - size XS
+- synonym: small
+  examples: |
+    - 10 inches
+    - Little
+    - 10"
+    - SMALL
+    - 10 inch
+    - small
+    - Small
+    - size S
+- synonym: medium
+  examples: |
+    - 12 inches
+    - standard
+    - avg
+    - average
+    - Average
+    - 12"
+    - 12 inch
+    - Medium
+    - medium
+    - twelve inch
+    - size M
+- synonym: large
+  examples: |
+    - 14 inches
+    - 14"
+    - 14 inch
+    - large
+    - fourteen inch
+    - size L
+    - big
+- synonym: extra large
+  examples: |
+    - 18 inches
+    - huge
+    - 18"
+    - jumbo
+    - 18 inch
+    - extra large
+    - Extra large
+    - XXL
+    - size XXL
+- synonym: thin
+  examples: |
+    - normal
+    - thin
+    - Thin
+    - tin
+    - Thinn
+    - thhin
+- synonym: Americana
+  examples: |
+    - Americana
+    - american
+- synonym: Calzone
+  examples: |
+    - Calzone
+    - Calzoni
+- synonym: Caprese
+  examples: |
+    - Caprese
+- synonym: Crudo
+  examples: |
+    - Crudo
+- synonym: Chicken BBC
+  examples: |
+    - Chicken BBC
+- synonym: Rustica
+  examples: |
+    - Rustica
+- synonym: cracker
+  examples: |
+    - cracker
+    - Cracker
+    - crecker
+    - Craker
+    - crakcer
+- synonym: flatbread
+  examples: |
+    - flatbread
+    - Flatbread
+    - flat bread
+    - Flat bread
+    - flat-bread
+    - Flat-bread
+- synonym: stuffed
+  examples: |
+    - stuffed
+    - Stuffed
+    - stuff
+    - Stuff
+    - stufed
+    - Stufd

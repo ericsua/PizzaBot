@@ -653,7 +653,7 @@ class ActionAskPizzaAmount(Action):
 
         requested_slot = tracker.get_slot("requested_slot")
         #if requested_slot == "pizza_amount" and last_intent not in ["pizza_crust", "stop_order", "explain", "response_negative", "bot_challenge", "item_change", "item_change_request_without_entity", "nevermind", "book_table"]:
-        if requested_slot == "pizza_amount" and last_intent not in ["request_pizza_crusts", "request_pizza_sizes", "request_pizza_types", "stop_order", "explain", "response_negative", "bot_challenge", "item_change", "item_change_request_without_entity", "nevermind", "book_table"]:
+        if requested_slot == "pizza_amount" and last_intent not in ["request_pizza_crusts", "request_pizza_sizes", "request_pizza_types", "request_delivery_areas", "request_payment_methods", "stop_order", "explain", "response_negative", "bot_challenge", "item_change", "item_change_request_without_entity", "nevermind", "book_table"]:
             dispatcher.utter_message(response="utter_ask_pizza_amount_again")
             return []
 
@@ -714,7 +714,7 @@ class ActionAskPizzaType(Action):
 
         requested_slot = tracker.get_slot("requested_slot")
         #if requested_slot == "pizza_type" and last_intent not in ["pizza_crust", "stop_order", "explain", "request_pizza_types", "response_negative", "bot_challenge", "item_change", "item_change_request_without_entity", "nevermind", "book_table"]:
-        if requested_slot == "pizza_type" and last_intent not in ["request_pizza_crusts", "request_pizza_sizes", "request_pizza_types", "stop_order", "explain", "response_negative", "bot_challenge", "item_change", "item_change_request_without_entity", "nevermind", "book_table"]:
+        if requested_slot == "pizza_type" and last_intent not in ["request_pizza_crusts", "request_pizza_sizes", "request_pizza_types", "request_delivery_areas", "request_payment_methods", "stop_order", "explain", "response_negative", "bot_challenge", "item_change", "item_change_request_without_entity", "nevermind", "book_table"]:
             dispatcher.utter_message(response="utter_ask_pizza_type_again")
             return []
         
@@ -769,7 +769,7 @@ class ActionAskPizzaSize(Action):
         #         return [FollowupAction("action_change_order")] 
 
         requested_slot = tracker.get_slot("requested_slot")
-        if requested_slot == "pizza_size" and last_intent not in ["request_pizza_crusts", "request_pizza_sizes", "request_pizza_types", "stop_order", "explain", "response_negative", "bot_challenge", "item_change", "item_change_request_without_entity", "nevermind", "book_table"]:
+        if requested_slot == "pizza_size" and last_intent not in ["request_pizza_crusts", "request_pizza_sizes", "request_pizza_types", "request_delivery_areas", "request_payment_methods", "stop_order", "explain", "response_negative", "bot_challenge", "item_change", "item_change_request_without_entity", "nevermind", "book_table"]:
             dispatcher.utter_message(response="utter_ask_pizza_size_again")
             return []
 
@@ -828,7 +828,7 @@ class ActionAskPizzaSliced(Action):
         #         return [FollowupAction("action_change_order")] 
 
         requested_slot = tracker.get_slot("requested_slot")
-        if requested_slot == "pizza_sliced" and last_intent not in ["request_pizza_crusts", "request_pizza_sizes", "request_pizza_types", "stop_order", "explain", "bot_challenge", "item_change", "item_change_request_without_entity", "nevermind", "book_table"]:
+        if requested_slot == "pizza_sliced" and last_intent not in ["request_pizza_crusts", "request_pizza_sizes", "request_pizza_types", "request_delivery_areas", "request_payment_methods", "stop_order", "explain", "bot_challenge", "item_change", "item_change_request_without_entity", "nevermind", "book_table"]:
             dispatcher.utter_message(response="utter_ask_pizza_sliced_again")
             return []
 
@@ -883,7 +883,7 @@ class ActionAskPizzaCrust(Action):
         #         return [FollowupAction("action_change_order")] 
 
         requested_slot = tracker.get_slot("requested_slot")
-        if requested_slot == "pizza_crust" and last_intent not in ["request_pizza_crusts", "request_pizza_sizes", "request_pizza_types", "stop_order", "explain", "response_negative", "bot_challenge", "item_change", "item_change_request_without_entity", "nevermind", "book_table"]:
+        if requested_slot == "pizza_crust" and last_intent not in ["request_pizza_crusts", "request_pizza_sizes", "request_pizza_types","request_delivery_areas", "request_payment_methods", "stop_order", "explain", "response_negative", "bot_challenge", "item_change", "item_change_request_without_entity", "nevermind", "book_table"]:
             dispatcher.utter_message(response="utter_ask_pizza_crust_again")
             return []
 
@@ -990,4 +990,304 @@ class ActionChangeOrder(Action):
             SlotSet("pizza_sliced", pizza_sliced),
             SlotSet("modify_order", None),
             SlotSet("pending_order", None)
+        ]
+        
+
+
+
+
+# ---------------------------------------------------------------------------- #
+#                                   DELIVERY                                   #
+# ---------------------------------------------------------------------------- #
+
+class ValidataDeliveryForm(FormValidationAction):
+    
+    def name(self) -> Text:
+        return "validate_delivery_form"
+    
+    async def validate_client_name(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        if isinstance(slot_value, str):
+            return {"client_name": slot_value}
+        elif isinstance(slot_value, list):
+            if len(slot_value) > 0:
+                concatenated_slot = ", ".join(slot_value)
+                return {"client_name": concatenated_slot}
+            else:
+                dispatcher.utter_message(text="Please tell me your name")
+                return {"client_name": None}
+    
+    async def validate_client_address(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        
+        if tracker.active_loop.get('name') != "delivery_form":
+            dispatcher.utter_message(text="We'll get to the delivery in a moment")
+            return {"client_address": None}
+        
+        if isinstance(slot_value, str):
+            return {"client_address": slot_value}
+        elif isinstance(slot_value, list):
+            if len(slot_value) > 0:
+                concatenated_slot = ", ".join(slot_value)
+                return {"client_address": concatenated_slot}
+            else:
+                dispatcher.utter_message(text="Please tell me your address")
+                return {"client_address": None}
+            
+    async def validate_client_payment(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        
+        if tracker.active_loop.get('name') != "delivery_form":
+            dispatcher.utter_message(text="We'll get to the payment later.")
+            return {"client_payment": None}
+        
+        if isinstance(slot_value, str):
+            if slot_value.lower() in ["cash", "card"]:
+                return {"client_payment": slot_value}
+            else:
+                dispatcher.utter_message(text="Sorry, we only accept cash or card as payment methods.")
+                return {"client_payment": None}
+        elif isinstance(slot_value, list):
+            if len(slot_value) > 0:
+                concatenated_slot = ", ".join(slot_value)
+                return {"client_payment": concatenated_slot}
+            else:
+                dispatcher.utter_message(text="Please tell me your payment method")
+                return {"client_payment": None}
+            
+class ValidateTakeawayForm(FormValidationAction):
+    
+    def name(self) -> Text:
+        return "validate_takeaway_form"
+    
+    async def validate_client_name(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        
+        if isinstance(slot_value, str):
+            return {"client_name": slot_value}
+        elif isinstance(slot_value, list):
+            if len(slot_value) > 0:
+                concatenated_slot = ", ".join(slot_value)
+                return {"client_name": concatenated_slot}
+            else:
+                dispatcher.utter_message(text="Please tell me your name")
+                return {"client_name": None}
+            
+class ActionClientNameMapping(Action):
+    def name(self):
+        return "action_client_name_mapping"
+    
+    async def run(self, dispatcher, tracker, domain):
+        last_intent = tracker.get_intent_of_latest_message()
+        
+        if last_intent == "client_name" or last_intent == "welcome_greet":
+            client_name = tracker.get_slot("client_name")
+            #print("client_name", client_name)
+            ent_client_name = next(tracker.get_latest_entity_values("PERSON"), None)
+            if ent_client_name is None:
+                return []
+            else:
+                if client_name is None:
+                    return [SlotSet("client_name", ent_client_name)]
+                else:
+                    return [SlotSet("client_name", client_name)]
+        return []
+
+
+class ActionAddressMapping(Action):
+    def name(self):
+        return "action_address_mapping"
+    
+    async def run(self, dispatcher, tracker, domain):
+        last_intent = tracker.get_intent_of_latest_message()
+        
+        if tracker.active_loop.get('name') != "delivery_form":
+            dispatcher.utter_message(text="We'll get to the delivery later.")
+        
+        if last_intent == "client_address":
+            client_address = tracker.get_slot("client_address")
+            ent_client_address = next(tracker.get_latest_entity_values("client_address"), None)
+            if ent_client_address is None:
+                return []
+            else:
+                if client_address is None:
+                    return [SlotSet("client_address", ent_client_address)]
+                else:
+                    return [SlotSet("client_address", client_address)]
+        return []
+    
+class ActionPaymentMapping(Action):
+    def name(self):
+        return "action_payment_mapping"
+    
+    async def run(self, dispatcher, tracker, domain):
+        last_intent = tracker.get_intent_of_latest_message()
+        
+        if tracker.active_loop.get('name') != "delivery_form":
+            dispatcher.utter_message(text="We'll get to the payment later.")
+        
+        if last_intent == "client_payment":
+            client_payment = tracker.get_slot("client_payment")
+            ent_client_payment = next(tracker.get_latest_entity_values("client_payment"), None)
+            if ent_client_payment is None:
+                return []
+            else:
+                if client_payment is None:
+                    return [SlotSet("client_payment", ent_client_payment)]
+                else:
+                    return [SlotSet("client_payment", client_payment)]
+        return []
+class ActionAskClientName(Action):
+    def name(self):
+        return 'action_ask_client_name'
+
+    async def run(self, dispatcher, tracker, domain):
+        last_intent = tracker.get_intent_of_latest_message()
+        active_loop = tracker.active_loop.get('name')
+        requested_slot = tracker.get_slot("requested_slot")
+        if requested_slot == "client_name" and last_intent not in ["delivery_change", "delivery_change_request_without_entity", "item_change_request_without_entity", "stop_order", "explain", "response_negative", "bot_challenge", "nevermind", "book_table"]:
+            dispatcher.utter_message(response="utter_ask_client_name_again")
+            return []
+        
+        if active_loop == "delivery_form":
+            if requested_slot == "client_address" and tracker.get_slot("client_address") is not None:
+                dispatcher.utter_message(response="utter_ask_client_name_ack_address")
+            elif requested_slot == "client_payment" and tracker.get_slot("client_payment") is not None:
+                dispatcher.utter_message(response="utter_ask_client_name_ack_payment")
+            else:
+                dispatcher.utter_message(response="utter_ask_client_name_ack_delivery")
+        elif active_loop == "takeaway_form":
+            dispatcher.utter_message(response="utter_ask_client_name_ack_takeaway")
+        else:
+            dispatcher.utter_message(response="utter_ask_client_name")
+        return []
+    
+class ActionAskClientAddress(Action):
+    def name(self):
+        return 'action_ask_client_address'
+    
+    async def run(self, dispatcher, tracker, domain):
+        last_intent = tracker.get_intent_of_latest_message()
+        requested_slot = tracker.get_slot("requested_slot")
+        active_loop = tracker.active_loop.get('name')
+        if requested_slot == "client_address" and last_intent not in ["delivery_change", "delivery_change_request_without_entity", "item_change_request_without_entity", "request_pizza_crusts", "request_pizza_sizes", "request_pizza_types", "request_delivery_areas", "request_payment_methods", "stop_order", "explain", "response_negative", "bot_challenge", "nevermind", "book_table"]:
+            dispatcher.utter_message(response="utter_ask_client_address_again")
+            return []
+        
+        if last_intent in ["client_name", "client_address", "client_payment"]:
+            if requested_slot == "client_payment" and tracker.get_slot("client_payment") is not None:
+                dispatcher.utter_message(response="utter_ask_client_address_ack_payment")
+            elif requested_slot == "client_name" and tracker.get_slot("client_name") is not None:
+                dispatcher.utter_message(response="utter_ask_client_address_ack_name")
+            else:
+                dispatcher.utter_message(response="utter_ask_client_address_ack")
+        else:
+            dispatcher.utter_message(response="utter_ask_client_address")
+        return []
+    
+class ActionAskClientPayment(Action):
+    def name(self):
+        return 'action_ask_client_payment'
+    
+    async def run(self, dispatcher, tracker, domain):
+        last_intent = tracker.get_intent_of_latest_message()
+        requested_slot = tracker.get_slot("requested_slot")
+        active_loop = tracker.active_loop.get('name')
+        if requested_slot == "client_payment" and last_intent not in ["delivery_change", "delivery_change_request_without_entity",  "item_change_request_without_entity", "request_pizza_crusts", "request_pizza_sizes", "request_pizza_types", "request_delivery_areas", "request_payment_methods","stop_order", "explain", "response_negative", "bot_challenge", "nevermind", "book_table"]:
+            dispatcher.utter_message(response="utter_ask_client_payment_again")
+            return []
+        
+        if last_intent in ["client_name", "client_address", "client_payment"]:
+            if requested_slot == "client_name" and tracker.get_slot("client_name") is not None:
+                dispatcher.utter_message(response="utter_ask_client_payment_ack_name")
+            elif requested_slot == "client_address" and tracker.get_slot("client_address") is not None:
+                dispatcher.utter_message(response="utter_ask_client_payment_ack_address")
+            else:
+                dispatcher.utter_message(response="utter_ask_client_payment_ack")
+        else:
+            dispatcher.utter_message(response="utter_ask_client_payment")
+
+        return []
+    
+class ActionConfirmDelivery(Action):
+    def name(self):
+        return 'action_confirm_delivery'
+    
+    async def run(self, dispatcher, tracker, domain):
+        client_name = tracker.get_slot("client_name")
+        client_address = tracker.get_slot("client_address")
+        client_payment = tracker.get_slot("client_payment")
+        
+        message = f"Great! Can you confirm that the order will be delivered to {client_name} at {client_address} and that it will be paid with {client_payment}?"
+        dispatcher.utter_message(text=message)
+        return []
+    
+class ActionConfirmTakeaway(Action):
+    def name(self):
+        return 'action_confirm_takeaway'
+    
+    async def run(self, dispatcher, tracker, domain):
+        client_name = tracker.get_slot("client_name")
+        
+        message = f"Great! Can you confirm that the order will be for {client_name} to take away?"
+        dispatcher.utter_message(text=message)
+        return []
+    
+    
+class ActionChangeDelivery(Action):
+    def name(self):
+        return 'action_change_delivery'
+    
+    async def run(self, dispatcher, tracker, domain):
+        client_name = tracker.get_slot("client_name")
+        client_address = tracker.get_slot("client_address")
+        client_payment = tracker.get_slot("client_payment")
+        
+        nameChanged = next(tracker.get_latest_entity_values("PERSON"), None)
+        addressChanged = next(tracker.get_latest_entity_values("client_address"), None)
+        paymentChanged = next(tracker.get_latest_entity_values("client_payment"), None)
+        
+        if client_name is None and client_address is None and client_payment is None:
+            dispatcher.utter_message(response="utter_warning_nothing_to_change_delivery")
+            return []
+        changes = []
+        if nameChanged:
+            client_name = nameChanged
+            changes.append(f"the name to {client_name}")
+        if addressChanged:
+            client_address = addressChanged
+            changes.append(f"the address to {client_address}")
+        if paymentChanged:
+            client_payment = paymentChanged
+            changes.append(f"the payment method to {client_payment}")
+        if len(changes) > 0:
+            if len(changes) > 1:
+                # substitute the last comma with "and"
+                changes[-1] = "and " + changes[-1]
+            total_changes = "Alright, I changed " + ", ".join(changes)
+            dispatcher.utter_message(text=total_changes)
+        return [
+            SlotSet("client_name", client_name),
+            SlotSet("client_address", client_address),
+            SlotSet("client_payment", client_payment),
         ]
