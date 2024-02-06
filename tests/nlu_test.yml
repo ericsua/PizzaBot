@@ -1,74 +1,180 @@
 version: "3.1"
 nlu:
+- intent: request_bot_skills
+  examples: |
+    - What can you do?
+    - What are you abilities?
+    - What are you able to do?
+- intent: request_time_openings
+  examples: |
+    - What time are you open?
+    - Are you open in the morning?
+    - Can you tell me your opening hours?
+- intent: time_change_request_without_entity
+  examples: |
+    - I would like to change the time
+    - I would like to move the time up
+    - Actually, I would like to change the time
+- intent: time_change
+  examples: |
+    - I want to change the delivery time to [ten p.m.](time)
+    - Change the delivery time to [eight o'clock](time) 
+    - I changed my mind, I want the delivery at [seven p.m.](time) instead
+- intent: username
+  examples: |
+    - My username is [pizza lover](username)
+    - [pizza lover](username)
+    - It's [pizza lover](username)
+- intent: time
+  examples: |
+    - At [eight o clock](time)
+    - not before [seven pm](time)
+    - At [ten pm](time)
 - intent: delivery_change
   examples: |
+    - I want to change the address, the correct one is [roma street number five trento](client_address)
+    - Change the name to [Francesca](PERSON)
+    - Change the payment to [debit card](client_payment)
 - intent: request_delivery_areas
   examples: |
+    - Do you also deliver to far areas?
+    - Do you deliver everywhere?
+    - Do you deliver also in moutain?
 - intent: request_payment_methods
   examples: |
+    - How can I pay?
+    - What payment methods do you have?
+    - Can i know the payment methods?
 - intent: client_payment
   examples: |
+    - [debit card]{"entity": "client_payment", "value": "card"}
+    - [bancomat]{"entity": "client_payment", "value": "card"}
+    - [cash](client_payment)
 - intent: client_name
   examples: |
+    - My name is [Francesca](PERSON)
+    - I'm [Leonardo](PERSON)
+    - [Luisa](PERSON)
 - intent: client_address
   examples: |
+    - I live in [roma street number five trento](client_address)
+    - You can find me at the address [roma street number five trento](client_address)
+    - Deliver it to [roma street number five trento](client_address)
 - intent: book_table
   examples: |
+    - Can I book a table?
+    - I would need a table
+    - Do you have a table available?
 - intent: restart
   examples: |
+    - Sorry but I would like to restart the order
+    - I'm sorry I want to restart everything
+    - I want to start the order from the beginning
 - intent: nevermind
   examples: |
+    - No thanks leave the order as it is
+    - No thanks it's fine
+    - I changed my mind, it's fine
 - intent: order_anti_pizza
   examples: |
+    - I want to order a [prosciutto e funghi](anti_pizza_type)
+    - I want to order a [bianca](anti_pizza_type) pizza
+    - I want to order a [beer](anti_pizza_type)
+    - I want to order a [coke](anti_pizza_type)
+    - I want to order a [coffee](anti_pizza_type)
+    - I want to order a [dessert](anti_pizza_type)
 - intent: stop_order
   examples: |
+    - Sorry, I changed my mind, cancel the order please
+    - Sorry, I decided to cancel the order
+    - I would like to cancel the order
 - intent: request_pizza_types
   examples: |
+    - What pizza types do you make?
+    - Do you have pizza without [lactose](pizza_category)?
+    - Do you have pizza without [gluten](pizza_category)?
+    - Can you tell me the list of pizza types?
 - intent: request_pizza_crusts
   examples: |
+    - Which crusts do you have?
+    - Which crusts do you have available?
+    - What crusts are there?
 - intent: request_pizza_sizes
   examples: |
+    - What kind of sizes do you have?
+    - What sizes are available?
+    - Can you tell me what sizes you have please?
 - intent: welcome_greet
   examples: |
+    - Good morning I'm [Francesca](PERSON)
+    - Good evening
+    - Hello I'm [Francesca](PERSON)
 - intent: item_start_generic
   examples: |
-   
+    - Can I order some pizza?
+    - I'd like to order some pizza
+    - Is it possible to order some pizza?
 - intent: item_change
   examples: |
-    
+    - Sorry instead of [Margherita](pizza_type) I would like [Pepperoni](pizza_type)
+    - I would like to change the [Margherita](pizza_type) to [Hawaii](pizza_type)
+    - Could you change the pizza to [Veggie](pizza_type) please?
 - intent: response_negative
   examples: |
-  
+    - No
+    - No thank you
+    - No I don't
 - intent: response_positive
   examples: |
-    
+    - Yes please
+    - Yes it's fine
+    - Yes I confirm
 - intent: order_take_home
   examples: |
-  
+    - To take away
+    - I'll pick it up
+    - I would like to take it away
 - intent: order_delivery
   examples: |
-    
+    - I would like to have it delivered to my house
+    - I would like it delivered
+    - I want it delivered
+    - delivery please
 - intent: item_change_request_without_entity
   examples: |
-    
+    - Sorry can I modify the order?
+    - I would like to change something in the order
+    - Can I change something in the order?
 - intent: delivery_change_request_without_entity
   examples: |
-    
+    - I want to change the delivery address
+    - I want to modify the payment method
+    - There's an error, I want to change the name
 - intent: explain
   examples: |
-    
+    - can you repeat please
+    - I didn't understand
+    - what did you say?
 - intent: request_restaurant_location
   examples: |
-    
+    - Where is your restaurant located?
+    - Where can I find you?
+    - Can you tell me where you are?
 - intent: out_of_scope
   examples: |
-    
+    - Is it crowded right now?
+    - Are you getting a lot of orders?
+    - Are you paid well?
 - intent: goodbye
   examples: |
-    
+    - Goodbye, thanks
+    - Bye, see you next time
+    - Bye, see you later
 - intent: bot_challenge
   examples: |
-    
+    - Who am I talking to?
+    - Am I talking to a bot
+    - Am I talking to a person?
 - synonym: card
   examples: |
     - credit card

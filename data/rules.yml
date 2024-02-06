@@ -25,6 +25,26 @@ rules:
   - action: takeaway_form
   - active_loop: takeaway_form
 
+- rule: Activate form time takeaway
+  condition:
+    - active_loop: null
+  steps:
+  - action: action_confirm_takeaway
+  - intent: response_positive
+  - action: utter_confirm_takeaway_final
+  - action: time_form
+  - active_loop: time_form
+
+- rule: Activate form time delivery
+  condition:
+    - active_loop: null
+  steps:
+  - action: action_confirm_delivery
+  - intent: response_positive
+  - action: utter_confirm_delivery_final
+  - action: time_form
+  - active_loop: time_form
+
 - rule: greet
   steps:
   - intent: welcome_greet
@@ -55,16 +75,27 @@ rules:
       - active_loop: null
       - action: action_confirm_takeaway
 
+- rule: submit form time
+  condition:
+    - active_loop: time_form
+  steps:
+      - action: time_form      # run the form
+      - active_loop: null
+      - action: action_confirm_time
+
+- rule: finish dialogue
+  condition:
+    - active_loop: null
+  steps:
+    - action: action_confirm_time
+    - intent: response_positive
+    - action: utter_final_order
+    - action: utter_goodbye
 
 - rule: out-of-scope
   steps:
   - intent: out_of_scope
   - action: utter_out_of_scope
-
-- rule: start
-  steps:
-    - intent: init_request
-    - action: utter_init_request
 
 
 - rule: where are you?
@@ -98,6 +129,18 @@ rules:
   steps:
     - intent: request_payment_methods
     - action: utter_inform_delivery_payment
+
+- rule: time questions
+  steps:
+    - intent: request_time_openings
+    - action: utter_inform_time
+
+# - rule: pizza order add
+#   steps:
+#     - action: action_confirm_pizzas
+#     - intent: response_positive
+#     - action: action_pizza_order_add
+#     - action: action_next_order
 
 - rule: anti pizza
   steps:
@@ -204,6 +247,37 @@ rules:
   - action: delivery_form
   - active_loop: delivery_form
 
+- rule: explain premium subscription boolean
+  condition:
+  - active_loop: time_form
+  - slot_was_set:
+    - requested_slot: premium_subscription_boolean
+  steps:
+  - intent: explain
+  - action: utter_explain_premium_subscription_boolean
+  - action: time_form
+  - active_loop: time_form
+
+- rule: explain premium subscription username
+  condition:
+  - active_loop: time_form
+  - slot_was_set:
+    - requested_slot: premium_subscription_username
+  steps:
+  - intent: explain
+  - action: utter_explain_premium_subscription_username
+  - action: time_form
+  - active_loop: time_form
+
+- rule: explain time
+  condition:
+  - active_loop: time_form
+  - slot_was_set:
+    - requested_slot: time
+  steps:
+  - intent: explain
+  - action: utter_explain_time
+
 - rule: Goodbye
   steps:
   - intent: goodbye
@@ -251,6 +325,19 @@ rules:
   - action: takeaway_form
   - active_loop: takeaway_form
 
+- rule: change time specific
+  steps:
+  - intent: time_change
+  - action: action_change_time
+  - action: time_form
+  - active_loop: time_form
+
+- rule: change time vague
+  steps:
+  - intent: time_change_request_without_entity
+  - action: utter_ask_changes
+  - action: action_listen
+
 # - rule: restart
 #   steps:
 #   - intent: restart
@@ -272,6 +359,16 @@ rules:
   - intent: book_table
   - action: utter_no_table_booking
 
+- rule: bot challenge
+  steps:
+  - intent: bot_challenge
+  - action: utter_iambot
+  wait_for_user_input: false
+
+- rule: skills
+  steps:
+  - intent: request_bot_skills
+  - action: utter_inform_bot_skills
 
 # - rule: change item size
 #   condition:

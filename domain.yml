@@ -12,7 +12,6 @@ intents:
 - delivery_change_request_without_entity
 - explain
 - goodbye
-- init_request
 - item_change
 - item_change_request_without_entity
 - item_start_generic
@@ -21,38 +20,62 @@ intents:
 - order_delivery
 - order_take_home
 - out_of_scope
+- request_bot_skills
 - request_delivery_areas
 - request_payment_methods
 - request_pizza_crusts
 - request_pizza_sizes
 - request_pizza_types
 - request_restaurant_location
-- response_name_phone
+- request_time_openings
 - response_negative
 - response_positive
 - restart
 - stop_order
+- time
+- time_change
+- time_change_request_without_entity
+- username
 - welcome_greet
 entities:
-- pizza_crust
-- PERSON
-- pizza_type
-- pizza_sliced
-- pizza_size
-- pizza_amount
-- client_payment
-- client_address
 - future_pizza_amount
 - future_pizza_type
-- anti_pizza_type
+- pizza_size
+- pizza_amount
+- pizza_type
+- pizza_crust
+- PERSON
+- time
+- premium_subscription_username
+- pizza_sliced
+- client_payment
+- client_address
+- toppings
+- future_pizza_crust
 - pizza_category
 - future_pizza_size
-- future_pizza_crust
-- toppings
+- anti_pizza_type
 - phone_number
 - order_number
 - number_people
 slots:
+  time:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: time
+  premium_subscription_boolean:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+      action: action_premium_subscription_bool_mapping
+  premium_subscription_username:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: custom
+      action: action_premium_subscription_username_mapping
   takeaway_boolean:
     type: bool
     influence_conversation: true
@@ -184,6 +207,9 @@ slots:
     - client_name
     - client_address
     - client_payment
+    - time
+    - premium_subscription_boolean
+    - premium_subscription_username
     mappings:
     - type: custom
   total_order:
@@ -195,8 +221,6 @@ slots:
     mappings:
     - type: custom
 responses:
-  utter_stop_order:
-  - text: Okay. Your order has been cancelled. Is there anything else I can do for you?
   utter_out_of_scope:
   - text: Sorry, I can't handle that request.
   utter_welcome_greet:
@@ -218,10 +242,6 @@ responses:
   - text: Hello {client_name}! Welcome to HMD pizzeria. How can I help you?
   - text: Hi {client_name}! Welcome to HMD pizzeria. How can I help you?
   - text: Hi {client_name}! It's HMD pizzeria here. How can I help you?
-  utter_init_request:
-  - text: Okay. In today's menu, we have Funghi, Hawaii, Margherita, Pepperoni, Veggie, all available in sizes Baby, Small, Medium, Large, or Extra Large. What would you like to have?
-  utter_init_pizza_question:
-  - text: For pizza without meat we have.... For pizza without cheese we have. Sizes available are Small, Medium and Large. What would you love to have?
   utter_ask_pizza_size:
   - text: What size of pizza do you want?
   utter_ask_pizza_size_ack:
@@ -251,20 +271,20 @@ responses:
   - text: Okay, what type of pizza do you want?
   - text: Alright, what type of pizza do you want?
   utter_ask_pizza_type_ack_amount:
-  - text: Alright {pizza_amount}, and what type of pizza would you like for your pizza?
-  - text: Okay, what type of pizza would you like for your {pizza_amount} pizza?
+  - text: Alright {pizza_amount}, and what type of pizza would you like?
+  - text: Okay, what type would you like for your {pizza_amount} pizza?
   utter_ask_pizza_type_ack_crust:
-  - text: '{pizza_crust} crust, excellent choice! And what type of pizza would you like for your pizza?'
-  - text: '{pizza_crust} crust, yummy! And what type of pizza would you like for your pizza?'
-  - text: '{pizza_crust} crust, nice choice! And what type of pizza would you like for your pizza?'
-  - text: '{pizza_crust} crust, great choice! And what type of pizza would you like for your pizza?'
-  - text: '{pizza_crust} crust, my favourite! And what type of pizza would you like for your pizza?'
+  - text: '{pizza_crust} crust, excellent choice! And what type of pizza would you like?'
+  - text: '{pizza_crust} crust, yummy! And what type of pizza would you like?'
+  - text: '{pizza_crust} crust, nice choice! And what type of pizza would you like?'
+  - text: '{pizza_crust} crust, great choice! And what type of pizza would you like?'
+  - text: '{pizza_crust} crust, my favourite! And what type of pizza would you like?'
   utter_ask_pizza_type_ack_size:
-  - text: '{pizza_size}, excellent choice! And what type of pizza would you like for your pizza?'
-  - text: '{pizza_size}, nice! And what type of pizza would you like for your pizza?'
-  - text: '{pizza_size}, wonderful! And what type of pizza would you like for your pizza?'
-  - text: '{pizza_size}, perfect! And what type of pizza would you like for your pizza?'
-  - text: '{pizza_size}, great! And what type of pizza would you like for your pizza?'
+  - text: '{pizza_size}, excellent choice! And what type of pizza would you like?'
+  - text: '{pizza_size}, nice! And what type of pizza would you like?'
+  - text: '{pizza_size}, wonderful! And what type of pizza would you like?'
+  - text: '{pizza_size}, perfect! And what type of pizza would you like?'
+  - text: '{pizza_size}, great! And what type of pizza would you like?'
   utter_ask_pizza_type_again:
   - text: Sorry, I didn't understand which pizza type you want, can you tell me again?
   utter_ask_pizza_amount:
@@ -335,46 +355,10 @@ responses:
   - text: My favourite! Do you want your {pizza_size} pizza to be sliced?
   utter_ask_pizza_sliced_again:
   - text: Sorry, I didn't understand if you want the pizza to be sliced. Can you tell me again?
-  utter_order_added:
-  - text: Perfect. Your order has been added.
   utter_order_confirm_negative:
   - text: No problem, what would you like to change?
-  utter_order_confirm_positive:
-  - text: Great. Anything else?
-  utter_item_change:
-  - text: Ok! So you want {pizza_amount} {pizza_type} pizza in {pizza_size}. Is that correct?
-  utter_extra_order:
-  - text: Would you like to order anything else?
-  utter_final_order:
-  - text: Your total order is {pizza_amount} {pizza_type} pizza in {pizza_size}. Do you prefer take away or home delivery?
-  utter_total_order_final:
-  - text: Do you prefer takeaway or home delivery
-  utter_name_phone:
-  - text: Here is your total order, {total_order} . what is your name and phone number?
-  utter_order_complete:
-  - text: Here is your order number {order_number}. Your order will be ready in 15 minutes. Thanks for the opportunity to serve you
-  utter_delivery_address:
-  - text: Please provide us with your home/office address
-  utter_order_add:
-  - text: which pizza would you like to add in your order?
   utter_default:
   - text: Sorry, I didn’t understand that. Can you rephrase it, please?
-  utter_item_type_start_negative:
-  - text: sadly , we don't offer {pizza_type}
-  utter_item_type_start_postive:
-  - text: yes, we do offer {pizza_type} would you like to order one?
-  utter_item_type:
-  - text: what pizza type would you like?
-  utter_item_size:
-  - text: what size do you want your {pizza_type} in
-  utter_item_amount:
-  - text: how many would you like?
-  utter_pizza_questions:
-  - text: what would you like on your pizza?
-  utter_order_processing_positive:
-  - text: Great. Your order is being processed. Please wait. We will get back to your shortly?
-  utter_order_processing_negative:
-  - text: Sorry, there is a problem with your order
   utter_explain_pizza_quantities:
   - text: In this specific question, we are asking you how many pizza you want to order.
   utter_explain_pizza_types:
@@ -385,12 +369,10 @@ responses:
   - text: In this specific question, we are asking you what size of pizza you would like to have.
   utter_explain_pizza_sliced:
   - text: In this specific question, we are asking you if you want your pizza to be sliced.
-  utter_summarize_order:
-  - text: Okay Great. Your order is {} {} pizza in {}. Can you confirm please
   utter_inform_restaurant_location:
   - text: Our restaurant is located at {restaurant_location}. We're waiting for you.
   utter_inform_pizza_types:
-  - text: The pizza that we have are Margherita, Pepperoni, Veggie, Funghi, Hawaii.
+  - text: The pizza that we have are the Margherita, Pepperoni, Veggie, Funghi, and Hawaii.
   utter_inform_pizza_types_meat:
   - text: The meat pizza that we have is the Pepperoni.
   utter_inform_pizza_types_vegetarian:
@@ -402,7 +384,7 @@ responses:
   utter_anti_pizza:
   - text: Sorry, we don't have {anti_pizza_type} in our menu.
   utter_inform_pizza_size:
-  - text: The sizes that we have are Baby, Small, Medium, Large, Extra Large.
+  - text: The sizes that we have are the Baby, Small, Medium, Large, and Extra Large.
   utter_inform_pizza_crust:
   - text: The crusts that we have are Thin, Stuffed, Cracker, and Flatbread.
   utter_ask_confirm:
@@ -420,9 +402,11 @@ responses:
   - text: Bye! Have a great day!
   - text: Thank you! Bye!
   - text: Bye! Thank you!
-  - text: Bye! Thank you for choosing us!
-  - text: Bye! Thank you for choosing HMD pizzeria!
-  - text: Bye! Thank you for choosing HMD pizzeria! Have a great day!
+  utter_final_order:
+  - text: Awesome! Your order is confirmed. Thanks for choosing HMD pizzeria.
+  - text: Great! Your order is confirmed. Thanks for choosing HMD pizzeria.
+  - text: Perfect! Your order is confirmed. Thanks for choosing HMD pizzeria.
+  - text: Wonderful! Your order is confirmed. Thanks for choosing HMD pizzeria.
   utter_iambot:
   - text: I am a bot, powered by Rasa, to help you order pizza.
   - text: I am a bot, powered by Rasa, to help you order pizza. I am still learning, so please bear with me.
@@ -430,29 +414,6 @@ responses:
   - text: What would you like to change?
   - text: No problem. What would you like to change?
   - text: Okay. What would you like to change?
-  utter_confirm_change_amount:
-  - text: Okay. I have changed the amount of pizza to {pizza_amount}.
-  - text: No problem. I have changed the amount of pizza to {pizza_amount}.
-  - text: Alright. I have changed the amount of pizza to {pizza_amount}.
-  utter_confirm_change_type:
-  - text: Okay. I have changed the type of pizza to {pizza_type}.
-  - text: No problem. I have changed the type of pizza to {pizza_type}.
-  - text: Alright. I have changed the type of pizza to {pizza_type}.
-  utter_confirm_change_size:
-  - text: Okay. I have changed the size of pizza to {pizza_size}.
-  - text: No problem. I have changed the size of pizza to {pizza_size}.
-  - text: Alright. I have changed the size of pizza to {pizza_size}.
-  utter_confirm_change_crust:
-  - text: Okay. I have changed the crust of pizza to {pizza_crust}.
-  - text: No problem. I have changed the crust of pizza to {pizza_crust}.
-  - text: Alright. I have changed the crust of pizza to {pizza_crust}.
-  utter_confirm_change_sliced:
-  - text: Okay. The pizza now will be sliced.
-  - text: No problem. The pizza now will be sliced.
-  - text: Alright. The pizza now will be sliced.
-  utter_confirm_change_not_sliced:
-  - text: Okay. The pizza now will not be sliced.
-  - text: No problem. The pizza now will not be sliced.
   utter_warning_nothing_to_change:
   - text: Sorry, there is nothing to change, as you have not ordered anything yet.
   utter_warning_nothing_to_change_delivery:
@@ -465,8 +426,6 @@ responses:
   - text: Sorry, we don't take table bookings. We only do takeaways and home deliveries.
   utter_total_order:
   - text: Your total order is {total_order}. Do you prefer take away or home delivery?
-  utter_conclude_order_takeaway:
-  - text: Okay, take away it is. When would you like to pick it up?
   utter_explain_client_name_takeaway:
   - text: We need your name to be sure that the order will be picked up by the right person.
   utter_explain_client_name_delivery:
@@ -505,9 +464,9 @@ responses:
   - text: Okay {client_name}, how would like to pay for the order?
   - text: Alright {client_name}, how would like to pay for the order?
   utter_ask_client_payment_ack_address:
-  - text: Got it, how would like to pay for the order?
-  - text: Alright, how would like to pay for the order?
-  - text: Okay, how would like to pay for the order?
+  - text: Got it, and how would like to pay for the order?
+  - text: Alright, and how would like to pay for the order?
+  - text: Okay, and how would like to pay for the order?
   utter_ask_client_name_again:
   - text: Sorry, I didn't understand your name. Can you tell me again?
   utter_ask_client_address_again:
@@ -518,45 +477,108 @@ responses:
   - text: We deliver our pizza in all Trento area and the delivery is free.
   utter_inform_delivery_payment:
   - text: We accept cash, credit card, and debit card for payment.
+  utter_confirm_takeaway_final:
+  - text: Great. Now we need to know when you will pick up your order. Do you have our premium subscription for priority preparation?
+  - text: Perfect, now we need to know when you will pick up your order. Do you have our premium subscription for priority preparation?
+  - text: Alright, now we need to know when you will pick up your order. Do you have our premium subscription for priority preparation?
+  utter_confirm_delivery_final:
+  - text: Great. Now we need to know when you want your order delivered. Do you have our premium subscription for priority delivery?
+  - text: Perfect, now we need to know when you want your order delivered. Do you have our premium subscription for priority delivery?
+  - text: Alright, now we need to know when you want your order delivered. Do you have our premium subscription for priority delivery?
+  utter_ask_premium_subscription_username:
+  - text: What is your username for the premium subscription?
+  utter_ask_premium_subscription_username_ack:
+  - text: Okay, what is your username for the premium subscription?
+  - text: Alright, what is your username for the premium subscription?
+  utter_ask_time_takeaway:
+  - text: What time would you like to pick up your order?
+  utter_ask_time_delivery:
+  - text: What time would you like your order to be delivered?
+  utter_ask_time_takeaway_ack:
+  - text: Okay, what time would you like to pick up your order?
+  - text: Alright, what time would you like to pick up your order?
+  utter_ask_time_delivery_ack:
+  - text: Okay, and what time would you like your order to be delivered?
+  - text: Alright, and what time would you like your order to be delivered?
+  utter_ask_time_takeaway_ack_username:
+  - text: Got it. And what time would you like to pick up your order?
+  - text: Verified successfully, and what time would you like to pick up your order?
+  utter_ask_time_delivery_ack_username:
+  - text: Got it. And what time would you like your order to be delivered?
+  - text: Verified successfully, and what time would you like your order to be delivered?
+  utter_ask_premium_subscription_username_boolean:
+  - text: Do you have our premium subscription for priority preparation?
+  utter_ask_premium_subscription_username_boolean_ack:
+  - text: Okay, do you have our premium subscription for priority preparation?
+  utter_explain_premium_subscription_username:
+  - text: We need your username to verify if you have the premium subscription. It's the username you used to subscribe on our website.
+  utter_explain_premium_subscription_boolean:
+  - text: We need to know if you have our premium subscription to get the priority of preparation of your order. You can subscribe on our website.
+  utter_explain_time:
+  - text: We need to know when you want your order to be delivered or picked up. This is to ensure that your order is ready when you arrive.
+  utter_inform_time:
+  - text: Our restaurant is open 24/7. You can pick up and we deliver your order at any time.
+  utter_inform_bot_skills:
+  - text: I can help you order pizza, from choosing the type, size, crust, and toppings, to delivery and payment. I can also handle explanations, modifications and cancellations of the order, provide information about the restaurant, and answer questions about the pizza we have. I can also restart the conversation by saying to me 'Restart'. I am still learning, so please bear with me.
 actions:
-- action_change_delivery
-- action_confirm_takeaway
-- action_confirm_pizzas
 - action_pizza_order_add
+- utter_ask_changes
+- utter_explain_premium_subscription_boolean
+- action_confirm_time
 - utter_anything_else
+- action_confirm_takeaway
+- utter_no_problem_lets_continue
+- utter_confirm_takeaway_final
+- utter_final_order
+- action_confirm_pizzas
+- utter_goodbye
 - action_next_order
 - action_total_order
+- action_change_time
 - action_confirm_delivery
-- utter_ask_changes
-- utter_no_problem_lets_continue
+- utter_explain_client_name_delivery
+- utter_inform_delivery_payment
+- utter_confirm_delivery_final
+- utter_inform_time
+- action_change_delivery
+- utter_inform_delivery_address
+- action_get_pizza_types
+- utter_inform_pizza_crust
+- utter_explain_pizza_crust
+- utter_welcome_greet
+- utter_inform_bot_skills
+- utter_no_table_booking
+- utter_inform_pizza_size
+- action_change_order
+- utter_out_of_scope
+- utter_iambot
+- utter_anti_pizza
+- validate_time_form
+- action_premium_subscription_bool_mapping
+- action_premium_subscription_username_mapping
+- action_time_mapping
+- action_ask_time
+- action_ask_premium_subscription
+- action_ask_premium_subscription_username
 - action_payment_mapping
 - action_client_name_mapping
 - action_address_mapping
-- utter_inform_delivery_payment
-- utter_inform_delivery_address
-- utter_explain_client_name_delivery
 - utter_explain_payment_method
 - utter_explain_client_address
 - validate_delivery_form
 - validate_takeaway_form
-- action_change_order
 - action_cancel_pending_order
 - utter_order_confirm_negative
 - action_crust_mapping
 - action_amount_mapping
 - action_size_mapping
 - action_type_mapping
-- action_get_pizza_types
-- utter_anti_pizza
 - action_restart
 - utter_ask_confirm
 - utter_explain_pizza_quantities
 - action_reset_pizza_form
 - utter_confirm_order_canceled
 - action_sliced_mapping
-- utter_welcome_greet
-- utter_inform_pizza_crust
-- utter_iambot
 - utter_explain_pizza_types
 - validate_pizza_order_form
 - action_ask_pizza_amount
@@ -569,36 +591,13 @@ actions:
 - action_ask_client_payment
 - action_get_restaurant_location
 - action_order_number
-- utter_stop_order
-- utter_order_added
-- utter_order_confirm_positive
-- utter_item_change
-- utter_extra_order
-- utter_final_order
-- utter_total_order_final
-- utter_name_phone
-- utter_order_complete
-- utter_delivery_address
-- utter_order_add
 - utter_default
-- utter_item_type_start_negative
-- utter_item_type_start_postive
-- utter_item_type
-- utter_item_size
-- utter_item_amount
-- utter_pizza_questions
-- utter_order_processing_positive
-- utter_order_processing_negative
-- utter_explain_pizza_crust
 - utter_explain_pizza_size
 - utter_explain_pizza_sliced
-- utter_summarize_order
 - utter_inform_restaurant_location
 - utter_inform_pizza_types
 - utter_inform_pizza_types_meat
 - utter_inform_pizza_types_vegetarian
-- utter_inform_pizza_size
-- utter_goodbye
 forms:
   pizza_order_form:
     required_slots:
@@ -615,3 +614,8 @@ forms:
   takeaway_form:
     required_slots:
     - client_name
+  time_form:
+    required_slots:
+    - premium_subscription_boolean
+    - premium_subscription_username
+    - time

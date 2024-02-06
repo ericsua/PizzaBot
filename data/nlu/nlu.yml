@@ -1,5 +1,246 @@
 version: "3.1"
 nlu:
+- intent: request_bot_skills
+  examples: |
+    - What can you do?
+    - What are your skills?
+    - What are you able to do?
+    - What are your abilities?
+    - What are your capabilities?
+    - What are your features?
+    - What are your functions?
+    - What are your talents?
+    - What are your powers?
+    - What are your competences?
+    - What are your capacities
+    - what can you do?
+- intent: request_time_openings
+  examples: |
+    - What time do you open?
+    - What time do you close?
+    - What time do you open for delivery?
+    - When do you open?
+    - What are your opening hours?
+    - What time do you open for takeaway?
+    - When are you open?
+    - What time do you open for pizza?
+    - What time do you open for pizza delivery?
+    - Are you open all day?
+    - Are you open all day for delivery?
+    - What are your opening hours for delivery?
+    - Do you stay open all day?
+    - Is it open all day?
+    - what are your opening hours?
+- intent: time_change_request_without_entity
+  examples: |
+    - I want to change the time
+    - I want to change the time of the delivery
+    - I want to change the time of the pickup
+    - I want to change the time of the order
+    - I want to change the time of the takeaway
+    - Actually I want to change the time
+    - Actually I want to change the time of the delivery
+    - Actually I want to change the time of the pickup
+    - Actually I want to change the time of the order
+    - Actually I want to change the time of the takeaway
+- intent: time_change
+  examples: |
+    - I want to change the delivery time to [eight am](time)
+    - I want to change the delivery time to [nine am](time)
+    - I want to change the delivery time to [ten am](time)
+    - I want to change the delivery time to [eleven am](time)
+    - I want to change the delivery time to [twelwe pm](time)
+    - I want to change the delivery time to [thirteen pm](time)
+    - I want to change the delivery time to [fourteen pm](time)
+    - I want to change the delivery time to [six am](time)
+    - I want to change the delivery time to [seven pm](time)
+    - I want to change the delivery time to [eight pm](time)
+    - I want to change the delivery time to [nine pm](time)
+    - I want to change the delivery time to [ten pm](time)
+    - I want to change the delivery time to [eleven pm](time)
+    - I want to change the delivery time to [midnight](time)
+    - I want to change the delivery time to [seven](time)
+    - I want to change the time to [six pm](time)
+    - I want to change the time to [seven pm](time)
+    - I want to change the time to [eight pm](time)
+    - I want to change the time to [nine pm](time)
+    - I want to change the time to [ten pm](time)
+    - I want to change the time to [eleven pm](time)
+    - I want to change the time to [midnight](time)
+    - I want to change the time to [seven](time)
+    - I want to change the time to [seven thirty](time)
+    - I want to change the time to [seven thirty pm](time)
+    - I want to change the time to [eight thirty pm](time)
+    - I want to change the time to [nine thirty pm](time)
+    - I want to change the time to [ten thirty pm](time)
+    - I want to change the time to [eleven thirty pm](time)
+    - I want to change the time to [six thirty pm](time)
+    - I want to change the time to [seven thirty in the evening](time)
+    - I want to change the time to [seven thirty in the night](time)
+    - I want to change the time to [seven thirty at night](time)
+    - I want to change the time to [half past six](time)
+    - I want to change the time to [half past seven](time)
+    - I want to change the time to [half past eight](time)
+    - I want to change the time to [half past nine](time)
+    - I want to change the time to [half past ten](time)
+    - I want to change the time to [half past eleven](time)
+    - I want to change the time to [six fifteen pm](time)
+    - I want to change the time to [seven fifteen pm](time)
+    - I want to change the time to [eight fifteen pm](time)
+    - I want to change the time to [nine fifteen pm](time)
+    - I want to change the time to [ten fifteen pm](time)
+    - I want to change the time to [eleven fifteen pm](time)
+    - Actually I want to change the time to [six pm](time)
+    - Actually I want to change the time to [seven pm](time)
+    - Actually I want to change the time to [eight pm](time)
+    - Actually I want to change the time to [nine pm](time)
+    - Actually I want to change the time to [ten pm](time)
+    - Actually I want to change the time to [eleven pm](time)
+    - Actually I want to change the time to [midnight](time)
+    - Actually I want to change the time to [seven](time)
+    - Actually I want to change the time to [seven thirty](time)
+    - Actually I want to change the time to [seven thirty pm](time)
+    - Actually I want to change the time to [eight thirty pm](time)
+    - Actually I want to change the time to [nine thirty pm](time)
+    - Actually I want to change the time to [ten thirty pm](time)
+    - Actually I want to change the time to [eleven thirty pm](time)
+    - Actually I want to change the time to [six thirty pm](time)
+    - Actually I want to change the time to [seven thirty in the evening](time)
+    - Actually I want to change the time to [seven thirty in the night](time)
+    - Actually I want to change the time to [seven thirty at night](time)
+    - Actually I want to change the time to [half past six](time)
+    - Actually I want to change the time to [half past seven](time)
+    - Actually I want to change the time to [half past eight](time)
+    - Actually I want to change the time to [half past nine](time)
+    - Actually I want to change the time to [half past ten](time)
+    - Actually I want to change the time to [half past eleven](time)
+    - Actually I want to change the time to [six fifteen pm](time)
+    - Actually I want to change the time to [seven fifteen pm](time)
+    - I've changed my mind, I want the delivery at [seven pm](time) instead
+    - I've changed my mind, I want the delivery at [eight pm](time) instead
+    - I've changed my mind, I want the delivery at [nine pm](time) instead
+    - I've changed my mind, I want the delivery at [ten pm](time) instead
+    - I've changed my mind, I want the delivery at [eleven pm](time) instead
+    - I've changed my mind, I want the delivery at [midnight](time) instead
+    - actually i want to change the time to [eight thirty](time)
+    - actually i want to change the time to [8 30](time)
+    - actually i want to change the time to [830]{"entity": "time", "value": "eight thirty"}
+- intent: username
+  examples: |
+    - My username is [john doe](premium_subscription_username)
+    - My username is [jane doe](premium_subscription_username)
+    - My username is [pizza eater](premium_subscription_username)
+    - My username is [pizza lover](premium_subscription_username)
+    - [pizza eater](premium_subscription_username)
+    - [pizza lover](premium_subscription_username)
+    - [john doe](premium_subscription_username)
+    - [jane doe](premium_subscription_username)
+    - It's [john doe](premium_subscription_username)
+    - It's [jane doe](premium_subscription_username)
+    - It's [pizza eater](premium_subscription_username)
+    - It's [pizza lover](premium_subscription_username)
+    - The username is [john doe](premium_subscription_username)
+    - The username is [jane doe](premium_subscription_username)
+    - The username is [pizza eater](premium_subscription_username)
+    - The username is [pizza lover](premium_subscription_username)
+    - I think it's [john doe](premium_subscription_username)
+    - I think it's [jane doe](premium_subscription_username)
+    - I think it's [pizza eater](premium_subscription_username)
+    - I think it's [pizza lover](premium_subscription_username)
+- intent: time
+  examples: |
+    - I want to pick it up at [six am](time)
+    - I want to pick it up at [seven am](time)
+    - I want to pick it up at [eight am](time)
+    - I want to pick it up at [nine am](time)
+    - I want to pick it up at [ten am](time)
+    - I want to pick it up at [eleven am](time)
+    - I want to pick it up at [six pm](time)
+    - I want to pick it up at [seven pm](time)
+    - I want to pick it up at [eight pm](time)
+    - I want to pick it up at [nine pm](time)
+    - I want to pick it up at [ten pm](time)
+    - I want to pick it up at [eleven pm](time)
+    - I want to pick it up at [midnight](time)
+    - I want to pick it up at [seven](time)
+    - I want to pick it up at [seven thirty](time)
+    - I want to pick it up at [six thirty pm](time)
+    - I want to pick it up at [eight thirty pm](time)
+    - I want to pick it up at [nine thirty pm](time)
+    - I want to pick it up at [ten thirty pm](time)
+    - I want to pick it up at [eleven thirty pm](time)
+    - I want to pick it up at [six thirty am](time)
+    - I want to pick it up at [eight thirty am](time)
+    - I want to pick it up at [nine thirty am](time)
+    - I want to pick it up at [ten thirty am](time)
+    - I want to pick it up at [eleven thirty am](time)
+    - I want to pick it up at [seven thirty in the evening](time)
+    - I want to pick it up at [seven thirty in the night](time)
+    - I want to pick it up at [seven thirty at night](time)
+    - I want to pick it up at [half past six](time)
+    - I want to pick it up at [half past seven](time)
+    - I want to pick it up at [half past eight](time)
+    - I want to pick it up at [half past nine](time)
+    - I want to pick it up at [half past ten](time)
+    - I want to pick it up at [half past eleven](time)
+    - I want to pick it up at [six fifteen pm](time)
+    - I want to pick it up at [seven fifteen pm](time)
+    - I want to pick it up at [eight fifteen pm](time)
+    - I want to pick it up at [nine fifteen pm](time)
+    - I want to pick it up at [ten fifteen pm](time)
+    - I want to pick it up at [eleven fifteen pm](time)
+    - I want to pick it up at [six forty five pm](time)
+    - I want to pick it up at [seven forty five pm](time)
+    - I want to pick it up at [eight forty five pm](time)
+    - I want to pick it up at [nine forty five pm](time)
+    - I want to pick it up at [ten forty five pm](time)
+    - I want to pick it up at [eleven forty five pm](time)
+    - I want to pick it up at [six o clock](time)
+    - I want to pick it up at [seven o clock](time)
+    - I want to pick it up at [eight o clock](time)
+    - I want to pick it up at [nine o clock](time)
+    - I want to pick it up at [ten o clock](time)
+    - I want to pick it up at [eleven o clock](time)
+    - I'll pick it up at [seven pm](time)
+    - I'll pick it up at [eight pm](time)
+    - I'll pick it up at [nine pm](time)
+    - I'll pick it up at [eleven pm](time)
+    - I'll pick it up at [seven am](time)
+    - I'll pick it up at [eight am](time)
+    - I'll pick it up at [nine am](time)
+    - I'll pick it up at [eleven am](time)
+    - I'll pick it up at [midnight](time)
+    - I'll pick it up at [seven](time)
+    - I'll pick it up at [seven thirty](time)
+    - I'll pick it up at [seven thirty pm](time)
+    - I want it to be delivered at [seven pm](time)
+    - I want it to be delivered at [seven](time)
+    - I want it to be delivered at [seven thirty](time)
+    - I want it to be delivered at [seven thirty pm](time)
+    - I want it to be delivered at [seven thirty in the evening](time)
+    - I want it to be delivered at [seven thirty in the night](time)
+    - I want it to be delivered at [seven thirty at night](time)
+    - at [seven](time)
+    - at [eight](time)
+    - at [nine](time)
+    - at [ten](time)
+    - at [eleven](time)
+    - at [seven thirty](time)
+    - at [eight thirty](time)
+    - at [nine thirty](time)
+    - at [ten thirty](time)
+    - at [eleven thirty](time)
+    - at [seven pm](time)
+    - at [eight pm](time)
+    - at [nine pm](time)
+    - at [ten pm](time)
+    - [in an hour](time)
+    - [in two hours](time)
+    - [in three hours](time)
+    - [in four hours](time)
+    - Ok, i want it to be delivered at [seven thirty](time)
+    - Ok, i want it to be delivered at [7 30](time)
+    - OK i want it to be delivered at [730]{"entity": "time", "value": "seven thirty"}
 - intent: delivery_change
   examples: |
     - Actually I want to change the name to [Eric](PERSON)
@@ -55,6 +296,8 @@ nlu:
     - i want to change the address to [roma street number six trento](client_address)
     - i want to change the name to [mahed][{"entity": "PERSON", "value": "Mahed"}, {"entity": "PERSON", "value": "Mahed"}]
     - actually i want to change the name to [eric][{"entity": "PERSON", "value": "Eric"}, {"entity": "PERSON", "value": "Eric"}]
+    - actually i'd like to change the payment method to [card](client_payment)
+    - actually i want to change the payment method to [card](client_payment)
 - intent: request_delivery_areas
   examples: |
     - where do you deliver?
@@ -90,6 +333,7 @@ nlu:
     - what are the payment methods?
     - what are the payment methods for delivery?
     - what are the payment methods for takeaway?
+    - how can I pay
 - intent: client_payment
   examples: |
     - I want to pay with [cash](client_payment)
@@ -137,6 +381,7 @@ nlu:
     - [google pay](client_payment)
     - [venmo](client_payment)
     - [card](client_payment)
+    - at [seven o clock](time)
 - intent: client_name
   examples: |
     - my name is [Raymond](PERSON)
@@ -188,6 +433,8 @@ nlu:
     - [eric]{"entity": "PERSON", "value": "Eric"}
     - [eric][{"entity": "PERSON", "value": "Eric"}, {"entity": "PERSON", "value": "Eric"}]
     - [giuliano][{"entity": "PERSON", "value": "Giuliano"}, {"entity": "PERSON", "value": "Giuliano"}]
+    - [Gigi](PERSON)
+    - [Eric][{"entity": "PERSON"}, {"entity": "PERSON"}]
 - intent: client_address
   examples: |
     - my address is [roma square number 5](client_address)
@@ -223,6 +470,9 @@ nlu:
     - at [number five roma street](client_address)
     - to [number five of roma street trento](client_address)
     - [roma street number five trento](client_address)
+    - to [roma street number five trento](client_address)
+    - to [roma street number 5 trento](client_address)
+    - to [roma street #5 trento](client_address)
 - intent: book_table
   examples: |
     - I want to book a table
@@ -231,6 +481,8 @@ nlu:
     - I would like to book a table for [two](number_people)
     - I want to make a reservation for a table for [two](number_people)
     - Can i book a table for [two](number_people)?
+    - can i book a table
+    - can I book a table?
 - intent: restart
   examples: |
     - start over
@@ -254,6 +506,7 @@ nlu:
     - don't worry about it
     - don't worry about that
     - let's forget about that
+    - nevermind forget about that
 - intent: order_anti_pizza
   examples: |
     - I want to order [americana](anti_pizza_type) pizza
@@ -371,6 +624,7 @@ nlu:
     - i want to order a pizza and a [coke](anti_pizza_type)
     - i want to order a [coke](anti_pizza_type) and a pizza
     - i want a [margherita]{"entity": "pizza_type", "value": "Margherita"} and a [beer][{"entity": "anti_pizza_type"}, {"entity": "anti_pizza_type"}]
+    - yes i want to order a [beer][{"entity": "anti_pizza_type"}, {"entity": "anti_pizza_type"}]
 - intent: stop_order
   examples: |
     - stop
@@ -415,6 +669,8 @@ nlu:
     - do you have pizzas with [vegetables](pizza_category)?
     - do you have pizzas with [no meat](pizza_category)?
     - do you have pizzas with [no cheese](pizza_category)?
+    - do you have pizzas without [gluten](pizza_category)?
+    - do you have pizzas without [lactose](pizza_category)?
     - pizzas with [no pepper](pizza_category)?
     - pizzas with [no vegetables](pizza_category)?
     - pizzas with [meat](pizza_category)?
@@ -473,6 +729,8 @@ nlu:
     - can i have the menu?
     - what are the pizzas on the menu?
     - what are the daily pizzas?
+    - do you have pizza with [meat](pizza_category)?
+    - do you also have pizza with [pepper](pizza_category)?
 - intent: request_pizza_crusts
   examples: |
     - what crusts do you have?
@@ -483,6 +741,8 @@ nlu:
     - which crusts do you have?
     - which crusts do you offer?
     - what are the crusts options?
+    - what crusts do you have
+    - do you have soft crust
 - intent: request_pizza_sizes
   examples: |
     - what sizes do you have?
@@ -494,6 +754,9 @@ nlu:
     - which sizes do you offer?
     - what are the sizes options?
     - what size you have
+    - do you have small size
+    - do you have medium size
+    - do you have the small size?
 - intent: welcome_greet
   examples: |
     - Hi, I'm [Raymond](PERSON)
@@ -548,6 +811,12 @@ nlu:
     - Pizza will do
     - pizza will do
     - Pizza
+    - yes I want to order [two](pizza_amount) more pizza
+    - I want to order a pizza [half Pepperoni and half Margherita](pizza_type)
+    - I want to order a pizza [half pepperoni and half margarita](pizza_type)
+    - I want to order a pizza [half hawaii and half funghi](pizza_type)
+    - I want to order a pizza [half margarita and half veggie](pizza_type)
+    - I want to order a pizza [half funghi and half pepperoni](pizza_type)
     - I want to order [large](pizza_size) pizza with [olives](toppings)
     - I want [large](pizza_size) [tomatoes](toppings) pizza
     - I want a [medium](pizza_size) [cheese](toppings) pizza
@@ -876,6 +1145,7 @@ nlu:
     - [tomatoes](toppings)
     - [Onions](toppings)
     - [Corn](toppings)
+    - the [pepperoni]{"entity": "pizza_type", "value": "Pepperoni"} with [onions](toppings) and [olives](toppings)
     - [mushrooms](toppings), [artichokes](toppings) and [olives](toppings)
     - [ham](toppings), [mushrooms](toppings), [bacon](toppings) and [brie](toppings)
     - [onions](toppings) and [tuna](toppings)
@@ -1045,7 +1315,20 @@ nlu:
     - [not sliced]{"entity": "pizza_sliced", "value": "false"} please
     - [not sliced]{"entity": "pizza_sliced", "value": "false"} pizza
     - I want it [sliced]{"entity": "pizza_sliced", "value": "true"}
-    - i want to order [one](pizza_amount) [large](pizza_size) [thin](pizza_crust) crust [sliced]{"entity": "pizza_sliced", "value": "true"} [margherita]{"entity": "pizza_type", "value": "Margherita"}
+    - [margherita]{"entity": "pizza_type", "value": "Margherita"} and [pepperoni]{"entity": "future_pizza_type", "value": "Pepperoni"}
+    - i want [one](pizza_amount) pizza
+    - [one](pizza_amount) [large](pizza_size) [margherita]{"entity": "pizza_type", "value": "Margherita"}
+    - i want to order [three](pizza_amount) [large](pizza_size) [margherita]{"entity": "pizza_type", "value": "Margherita"} and [two](future_pizza_amount) [hawaii]{"entity": "future_pizza_type", "value": "Hawaii"}
+    - the [stuffed](pizza_crust) crust please
+    - [small](pizza_size) [thin](pizza_crust) crust and [sliced]{"entity": "pizza_sliced", "value": "true"} please
+    - yes i want to order [two](pizza_amount) more pizza
+    - i want to order [three](pizza_amount) [large](pizza_size) [cracker](pizza_crust) crust [margherita]{"entity": "pizza_type", "value": "Margherita"} and [two](future_pizza_amount) [medium](future_pizza_size) [thin](future_pizza_crust) crust [hawaii]{"entity": "future_pizza_type", "value": "Hawaii"}
+    - i want to order [two](pizza_amount) more pizza
+    - i want to order [2]{"entity": "pizza_amount", "value": "two"} more pizza
+    - i want the [pepperoni]{"entity": "pizza_type", "value": "Pepperoni"} with [olives](toppings) and [onions](toppings)
+    - [extra large](pizza_size) [thin](pizza_crust) crust and [sliced]{"entity": "pizza_sliced", "value": "true"} please
+    - I want to order [3]{"entity": "pizza_amount", "value": "three"} [large](pizza_size) [margherita](pizza_type) and [2]{"entity": "future_pizza_amount", "value": "two"} [Hawaii](future_pizza_type) pizza
+    - I want to order [3]{"entity": "pizza_amount", "value": "three"} [large](pizza_size) [margherita]{"entity": "pizza_type", "value": "Margherita"} and [2]{"entity": "future_pizza_amount", "value": "two"} [Hawaii](future_pizza_type) pizza
 - intent: item_change
   examples: |
     - I changed my mind. Can I get a [funghi](pizza_type) instead?
@@ -1056,6 +1339,9 @@ nlu:
     - I'd like in [small](pizza_size) instead.
     - actually, i would like a [small](pizza_size) [vegetarian](pizza_type).
     - wait, can i get  it in [large](pizza_size).
+    - I would like to change the pizza to [Hawaii](pizza_type).
+    - I would like to change the pizza to [Margherita](pizza_type).
+    - I would like to change the pizza to [Pepperoni](pizza_type).
     - I want [funghi](pizza_type) instead
     - I want to change the size to [medium](pizza_size)
     - I want to change the size to [large](pizza_size)
@@ -1069,6 +1355,9 @@ nlu:
     - Sorry, I want to change the size to [baby](pizza_size).
     - Sorry, I want to change the size to [small](pizza_size).
     - Sorry, I want to order [three](pizza_amount) pizzas instead.
+    - Sorry, I want to change the pizza to [Hawaii](pizza_type).
+    - Sorry, I want to change the pizza to [Margherita](pizza_type).
+    - Sorry, I want to change the pizza to [Pepperoni](pizza_type).
     - Actually, I want to change the size to [medium](pizza_size).
     - Actually, can I order [three](pizza_amount) pizzas instead?
     - Actually, can I order [four](pizza_amount) pizzas?
@@ -1090,6 +1379,8 @@ nlu:
     - actually i want [flatbread](pizza_crust) crust instead
     - actually, i want [seven](pizza_amount) pizza instead
     - actually i want [five](pizza_amount) [funghi]{"entity": "pizza_type", "value": "Funghi"}
+    - actually I want the [cracker](pizza_crust) crust
+    - actually I want the size to be [medium](pizza_size)
 - intent: response_negative
   examples: |
     - actually no
@@ -1098,6 +1389,8 @@ nlu:
     - Nope
     - No, I want to make a change
     - Noo
+    - no that's ok
+    - no that's all
 - intent: response_positive
   examples: |
     - all good
@@ -1113,6 +1406,10 @@ nlu:
     - Yeah
     - yes please
     - es
+    - yes in [two](pizza_amount) parts
+    - yes it's okay
+    - yes everything correct
+    - yes I have it
 - intent: order_take_home
   examples: |
     - take away
@@ -1153,29 +1450,37 @@ nlu:
     - I'd like my order to be delivered
     - I'd like my order to be delivered please
     - I would like my order to be delivered
+    - home delivery
 - intent: item_change_request_without_entity
   examples: |
+    - actually i want to change the size
+    - actually I want to change the size
+    - actually, I want to change the size
     - Actually i want to modify pizza type.
     - Actually i want to modify pizza size.
     - Actually i want to modify pizza crust.
     - Actually i want to modify pizza sliced.
     - Actually i want to modify pizza amount.
-    - Actually i want to change pizza type.
-    - Actually i want to change pizza size.
-    - Actually i want to change pizza crust.
-    - Actually i want to change pizza sliced.
-    - Actually i want to change pizza amount.
     - Actually i want to change type.
     - Actually i want to change size.
     - Actually i want to change crust.
     - Actually i want to change sliced.
     - Actually i want to change amount.
+    - I would like to change the order
+    - I would like to modify the order
     - Sorry, I want to change my order.
     - Sorry, I want to modify my order.
     - Sorry, can I change my order?
     - I want to modify my order.
     - I want to change my order.
     - i want to change my order
+    - Sorry I would like to modify my order
+    - Sorry I would like to change my order
+    - Can I change my order?
+    - Can I modify my order?
+    - Can I change the order
+    - Can I modify the order
+    - actually i want to change something
 - intent: delivery_change_request_without_entity
   examples: |
     - Actually i want to modify delivery payment.
@@ -1223,6 +1528,8 @@ nlu:
     - why are you asking?
     - why do you need that?
     - why do you need that information?
+    - can you repeat
+    - what is that
 - intent: request_restaurant_location
   examples: |
     - Where is the restaurant?
@@ -1244,6 +1551,8 @@ nlu:
     - what is the weather
     - how is the weather
     - what is the weather like
+    - do you have takeaway
+    - what is 2 + 2
 - intent: goodbye
   examples: |
     - bye
@@ -1269,6 +1578,7 @@ nlu:
     - are you a robot?
     - who am I talking to?
     - who am i talking to?
+    - are you a bot
 - synonym: card
   examples: |
     - credit card
@@ -1379,6 +1689,16 @@ nlu:
     - Extra large
     - XXL
     - size XXL
+- synonym: two
+  examples: |
+    - 2
+    - two
+    - Two
+- synonym: three
+  examples: |
+    - 3
+    - three
+    - Three
 - synonym: thin
   examples: |
     - normal
@@ -1430,3 +1750,18 @@ nlu:
     - Stuff
     - stufed
     - Stufd
+- synonym: four
+  examples: |
+    - 4
+    - four
+    - Four
+- synonym: one
+  examples: |
+    - 1
+    - one
+    - One
+- synonym: seven
+  examples: |
+    - 7
+    - seven
+    - Seven

@@ -5,18 +5,11 @@ stories:
   steps:
   - intent: welcome_greet
   - action: utter_welcome_greet
-  - checkpoint: start_questions_on_pizza
 - story: greeting
   steps:
   - intent: welcome_greet
   - action: utter_welcome_greet
-  - checkpoint: start_order
-- story: questions_on_pizza
-  steps:
-  - checkpoint: start_questions_on_pizza
-  - intent: init_pizza_question
-  - action: utter_init_pizza_question
-  - checkpoint: start_order
+
 
 - story: pizza interjection
   steps:
@@ -156,8 +149,6 @@ stories:
   - intent: item_start_generic
   - action: pizza_order_form
   - active_loop: pizza_order_form
-  - intent: item_start_generic
-  - action: utter_item_change
 
 - story: interactive_story_09
   steps:
@@ -182,10 +173,6 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_size
-  - intent: item_start_generic
-  - action: utter_item_change
-  - intent: response_positive
-  - action: utter_total_order_final
 
 - story: interactive_story_10
   steps:
@@ -2751,6 +2738,7 @@ stories:
   - intent: order_delivery
   - action: delivery_form
   - active_loop: delivery_form
+  - intent: delivery_change
   - action: action_change_delivery
   - action: delivery_form
   - intent: delivery_change

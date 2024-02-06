@@ -29,6 +29,8 @@ pipeline:
 #   constrain_similarities: true
 #   intent_classification: false
 - name: EntitySynonymMapper
+- name: FallbackClassifier
+  threshold: 0.5
 
 # #- name: "SpacyNLP"
 # #  # language model to load
@@ -84,7 +86,7 @@ pipeline:
 policies:
 # - name: TEDPolicy
 #   max_history: 5
-#   epochs: 3
+#   epochs: 5
 #   constrain_similarities: True
 - name: AugmentedMemoizationPolicy
   max_history: 5

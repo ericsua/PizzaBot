@@ -56,7 +56,7 @@ class ActionConfirmPizzas(Action):
         #order_details = ", ".join(order_details)
         order_details += ", all pizza" + ( " sliced" if pizza_sliced == True else " not sliced")
         if tracker.get_slot("future_pizza_amount") is not None or tracker.get_slot("future_pizza_type") is not None or tracker.get_slot("future_pizza_size") is not None or tracker.get_slot("future_pizza_crust") is not None:
-            dispatcher.utter_message(text="So, for now, you want to order "+order_details+" Is everything correct?")
+            dispatcher.utter_message(text="So, for now, you want to order "+order_details+". Is everything correct?")
         else:
             dispatcher.utter_message(text="So, you want to order "+order_details+". Is everything correct?")
         old_order = tracker.get_slot("pending_order")
@@ -70,7 +70,7 @@ class ActionTotalOrder(Action):
     async def run(self, dispatcher, tracker, domain):
         total_order = tracker.get_slot("total_order")
         if total_order is None:
-            dispatcher.utter_message(text="Sorry, there is an error. You have no pending order")
+            dispatcher.utter_message(text="Sorry, there is an error. You have no pending order.")
             return []
         else:
             total_order = ", and ".join(total_order)
@@ -85,7 +85,7 @@ class ActionCancelPendingOrder(Action):
     async def run(self, dispatcher, tracker, domain):
         pending_order = tracker.get_slot("pending_order")
         if pending_order is None:
-            dispatcher.utter_message(text="Sorry, there is an error. You have no pending order")
+            dispatcher.utter_message(text="Sorry, there is an error. You have no pending order.")
             return []
         else:
             if len(pending_order) > 0:
@@ -145,7 +145,7 @@ class ActionNextOrder(Action):
             next_order += f"{next_pizza_size} " if next_pizza_size is not None else ""
             next_order += f"{next_pizza_crust} crust " if next_pizza_crust is not None else ""
             next_order += f"{next_pizza_type}" if next_pizza_type is not None else ""
-            dispatcher.utter_message(text=f"Alright, let's go through the next {next_order} pizza")
+            dispatcher.utter_message(text=f"Alright, let's go through the next {next_order} pizza.")
         #print("events", (events + [FollowupAction("pizza_order_form")]) if doForm else [])
         if doForm:
             events += [SlotSet("pizza_sliced", None), FollowupAction("pizza_order_form")]
@@ -165,7 +165,7 @@ class ActionPizzaOrderAdd(Action):
         # 	pizza_size = "standard"
         pending_order = tracker.get_slot("pending_order")
         if pending_order is None:
-            dispatcher.utter_message(text="Sorry, there is an error. You have no pending order")
+            dispatcher.utter_message(text="Sorry, there is an error. You have no pending order.")
             return []
         total_order = tracker.get_slot("total_order")
         if total_order is None:
@@ -257,10 +257,11 @@ class ValidatePizzaOrderForm(FormValidationAction):
             pizza_size = tracker.get_slot("pizza_size")
             pizza_amount = tracker.get_slot("pizza_amount")
             pizza_crust = tracker.get_slot("pizza_crust")
-            
+            #print("doing warn user before if")
             if future_pizza_type is not None or future_pizza_size is not None or future_pizza_amount is not None or future_pizza_crust is not None:
                 if future_pizza_type is not None and pizza_type is not None:
                     #print("future pizza type", future_pizza_type, pizza_type)
+                    #print("doing warn user inside type")
                     dispatcher.utter_message(text=f"Sure, but for now let's first only go through the {pizza_type} pizza.")
                 elif future_pizza_size is not None and pizza_size is not None:
                     dispatcher.utter_message(text=f"Sure, but let's focus only on the first {pizza_size} pizza.")
@@ -269,7 +270,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
                 elif future_pizza_crust is not None and pizza_crust is not None:
                     dispatcher.utter_message(text=f"Okay, but let's focus only on the first {pizza_crust} pizza.")
                 #dispatcher.utter_message(response="utter_ask_pizza_type_ack")
-            self.warn_user = True
+                self.warn_user = True
             return True
         else:
             return False
@@ -378,7 +379,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
                 # validation succeeded, set the value of the "cuisine" slot to value
                 return {"pizza_amount": slot_value}
             else:
-                dispatcher.utter_message(text="Please tell me a valid number")
+                dispatcher.utter_message(text="Please tell me a valid number.")
                 return {"pizza_amount": None}
         elif isinstance(slot_value, list):
             if len(slot_value) > 0:
@@ -387,7 +388,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
             else:
                 # validation failed, set this slot to None so that the
                 # user will be asked for the slot again
-                dispatcher.utter_message(text="Please tell me a valid number")
+                dispatcher.utter_message(text="Please tell me a valid number.")
                 return {"pizza_amount": None}
 
     def validate_pizza_size(
@@ -422,7 +423,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
                 self.warn_user_one_at_time(dispatcher, tracker, domain)
                 return {"pizza_size": slot_value}
             else:
-                dispatcher.utter_message(text="Please tell me a valid size")#. We have baby, small, medium, standard, large, extra large")
+                dispatcher.utter_message(text="Please tell me a valid size.")#. We have baby, small, medium, standard, large, extra large")
                 dispatcher.utter_message(response="utter_inform_pizza_size")
                 return {"pizza_size": None}
         elif isinstance(slot_value, list):
@@ -432,7 +433,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
             else:
                 # validation failed, set this slot to None so that the
                 # user will be asked for the slot again
-                dispatcher.utter_message(text="Please tell me a valid size")#. We have baby, small, medium, standard, large, extra large")
+                dispatcher.utter_message(text="Please tell me a valid size.")#. We have baby, small, medium, standard, large, extra large")
                 dispatcher.utter_message(response="utter_inform_pizza_size")
                 return {"pizza_size": None}
 
@@ -444,26 +445,27 @@ class ValidatePizzaOrderForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate cuisine value."""
-        if isinstance(slot_value, str):
-            if tracker.get_intent_of_latest_message() == "response_positive": #slot_value.lower() in ["yes", "no"]:
-                self.warn_user_one_at_time(dispatcher, tracker, domain)
-                # validation succeeded, set the value of the "cuisine" slot to value
-                return {"pizza_sliced": True}
-            elif tracker.get_intent_of_latest_message() == "response_negative":
-                self.warn_user_one_at_time(dispatcher, tracker, domain)
-                return {"pizza_sliced": False}
-            else:
-                #dispatcher.utter_message(text="Please tell me if you want the pizza sliced or not, with a yes or a no") # not correct since it can be a different intent like "stop" which do not need an answer
-                return {"pizza_sliced": None}
-        elif isinstance(slot_value, list):
-            if len(slot_value) > 0:
-                concatenated_slot = ", ".join(slot_value)
-                return {"pizza_sliced": concatenated_slot}
-            else:
-                # validation failed, set this slot to None so that the
-                # user will be asked for the slot again
-                #dispatcher.utter_message(text="Please tell me yes or no")
-                return {"pizza_sliced": None}
+        # if isinstance(slot_value, str):
+        #     if tracker.get_intent_of_latest_message() == "response_positive": #slot_value.lower() in ["yes", "no"]:
+        #         self.warn_user_one_at_time(dispatcher, tracker, domain)
+        #         # validation succeeded, set the value of the "cuisine" slot to value
+        #         return {"pizza_sliced": True}
+        #     elif tracker.get_intent_of_latest_message() == "response_negative":
+        #         self.warn_user_one_at_time(dispatcher, tracker, domain)
+        #         return {"pizza_sliced": False}
+        #     else:
+        #         #dispatcher.utter_message(text="Please tell me if you want the pizza sliced or not, with a yes or a no") # not correct since it can be a different intent like "stop" which do not need an answer
+        #         return {"pizza_sliced": None}
+        # elif isinstance(slot_value, list):
+        #     if len(slot_value) > 0:
+        #         concatenated_slot = ", ".join(slot_value)
+        #         return {"pizza_sliced": concatenated_slot}
+        #     else:
+        #         # validation failed, set this slot to None so that the
+        #         # user will be asked for the slot again
+        #         #dispatcher.utter_message(text="Please tell me yes or no")
+        #         return {"pizza_sliced": None}
+        return {}#{"pizza_sliced": slot_value}
 
     def validate_pizza_crust(
         self,
@@ -496,7 +498,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
                 self.warn_user_one_at_time(dispatcher, tracker, domain)
                 return {"pizza_crust": slot_value}
             else:
-                dispatcher.utter_message(text="Please tell me a valid crust")#. We have thin, thick, standard")
+                dispatcher.utter_message(text="Please tell me a valid crust.")#. We have thin, thick, standard")
                 dispatcher.utter_message(response="utter_inform_pizza_crust")
                 return {"pizza_crust": None}
         elif isinstance(slot_value, list):
@@ -506,7 +508,7 @@ class ValidatePizzaOrderForm(FormValidationAction):
             else:
                 # validation failed, set this slot to None so that the
                 # user will be asked for the slot again
-                dispatcher.utter_message(text="Please tell me a valid crust")#. We have thin, thick, standard")
+                dispatcher.utter_message(text="Please tell me a valid crust.")#. We have thin, thick, standard")
                 dispatcher.utter_message(response="utter_inform_pizza_crust")
                 return {"pizza_crust": None}
 
@@ -980,7 +982,7 @@ class ActionChangeOrder(Action):
             if len(changes) > 1:
                 # substitute the last comma with "and"
                 changes[-1] = "and " + changes[-1]
-            total_changes = "Alright, I changed " + ", ".join(changes)
+            total_changes = "Alright, I changed " + ", ".join(changes) + "."
             dispatcher.utter_message(text=total_changes)
         return [
             SlotSet("pizza_type", pizza_type),
@@ -1019,7 +1021,7 @@ class ValidataDeliveryForm(FormValidationAction):
                 concatenated_slot = ", ".join(slot_value)
                 return {"client_name": concatenated_slot}
             else:
-                dispatcher.utter_message(text="Please tell me your name")
+                dispatcher.utter_message(text="Please tell me your name.")
                 return {"client_name": None}
     
     async def validate_client_address(
@@ -1031,7 +1033,7 @@ class ValidataDeliveryForm(FormValidationAction):
     ) -> Dict[Text, Any]:
         
         if tracker.active_loop.get('name') != "delivery_form":
-            dispatcher.utter_message(text="We'll get to the delivery in a moment")
+            dispatcher.utter_message(text="We'll get to the delivery in a moment.")
             return {"client_address": None}
         
         if isinstance(slot_value, str):
@@ -1041,7 +1043,7 @@ class ValidataDeliveryForm(FormValidationAction):
                 concatenated_slot = ", ".join(slot_value)
                 return {"client_address": concatenated_slot}
             else:
-                dispatcher.utter_message(text="Please tell me your address")
+                dispatcher.utter_message(text="Please tell me your address.")
                 return {"client_address": None}
             
     async def validate_client_payment(
@@ -1067,7 +1069,7 @@ class ValidataDeliveryForm(FormValidationAction):
                 concatenated_slot = ", ".join(slot_value)
                 return {"client_payment": concatenated_slot}
             else:
-                dispatcher.utter_message(text="Please tell me your payment method")
+                dispatcher.utter_message(text="Please tell me your payment method.")
                 return {"client_payment": None}
             
 class ValidateTakeawayForm(FormValidationAction):
@@ -1090,7 +1092,7 @@ class ValidateTakeawayForm(FormValidationAction):
                 concatenated_slot = ", ".join(slot_value)
                 return {"client_name": concatenated_slot}
             else:
-                dispatcher.utter_message(text="Please tell me your name")
+                dispatcher.utter_message(text="Please tell me your name.")
                 return {"client_name": None}
             
 class ActionClientNameMapping(Action):
@@ -1284,10 +1286,283 @@ class ActionChangeDelivery(Action):
             if len(changes) > 1:
                 # substitute the last comma with "and"
                 changes[-1] = "and " + changes[-1]
-            total_changes = "Alright, I changed " + ", ".join(changes)
+            total_changes = "Alright, I changed " + ", ".join(changes) + "."
             dispatcher.utter_message(text=total_changes)
         return [
             SlotSet("client_name", client_name),
             SlotSet("client_address", client_address),
             SlotSet("client_payment", client_payment),
         ]
+        
+        
+
+# ---------------------------------------------------------------------------- #
+#                                   TIME FORM                                  #
+# ---------------------------------------------------------------------------- #
+
+
+class ActionValidateTimeForm(FormValidationAction):
+    
+    def name(self) -> Text:
+        return "validate_time_form"
+    
+    async def validate_time(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        
+        if isinstance(slot_value, str):
+            return {"time": slot_value}
+        elif isinstance(slot_value, list):
+            if len(slot_value) > 0:
+                concatenated_slot = ", ".join(slot_value)
+                return {"time": concatenated_slot}
+            else:
+                dispatcher.utter_message(text="Please tell me the time.")
+                return {"time": None}
+            
+    async def validate_premium_subscription_boolean(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        
+        if isinstance(slot_value, bool):
+            if slot_value in [True, False]:
+                return {"premium_subscription_boolean": slot_value}
+            else:
+                dispatcher.utter_message(text="Sorry, there was an error.")
+                return {"premium_subscription_boolean": None}
+        elif isinstance(slot_value, list):
+            if len(slot_value) > 0:
+                concatenated_slot = ", ".join(slot_value)
+                return {"premium_subscription_boolean": concatenated_slot}
+            else:
+                dispatcher.utter_message(text="Please tell me if you have a premium subscription.")
+                return {"premium_subscription_boolean": None}
+            
+    
+    async def validate_premium_subscription_username(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        
+        if slot_value not in ["john doe", "jane doe", "pizza lover", "pizza eater", "NO_USERNAME"]:
+            dispatcher.utter_message(text="Sorry, our system doesn't recognize that username as a premium subscription.")
+            return {"premium_subscription_username": None}
+        
+        if isinstance(slot_value, str):
+            return {"premium_subscription_username": slot_value}
+        elif isinstance(slot_value, list):
+            if len(slot_value) > 0:
+                concatenated_slot = ", ".join(slot_value)
+                return {"premium_subscription_username": concatenated_slot}
+            else:
+                dispatcher.utter_message(text="Please tell me your username.")
+                return {"premium_subscription_username": None}
+            
+class ActionPremiumSubscriptionBoolMapping(Action):
+    def name(self):
+        return "action_premium_subscription_bool_mapping"
+    
+    async def run(self, dispatcher, tracker, domain):
+        if tracker.active_loop.get('name') != "time_form":
+            return []
+        last_intent = tracker.get_intent_of_latest_message()
+        
+        # get last action of the bot
+        last_bot_action = tracker.get_last_event_for("action", exclude=["action_listen", "time_form"])
+        #print("last_bot_action", last_bot_action)
+        last_bot_action_name = last_bot_action.get("name")
+        if last_bot_action_name in ["utter_confirm_takeaway_final", "utter_confirm_delivery_final", "utter_ask_premium_subscription_boolean_again", "utter_explain_premium_subscription_boolean", "explain"]:
+            # check that the last intent is after the last bot action
+            last_user_message = tracker.get_last_event_for("user")
+            if last_user_message.get("timestamp") < last_bot_action.get("timestamp") or tracker.get_slot("requested_slot") != "premium_subscription_boolean":
+                return []
+            
+            premium_subscription_boolean = tracker.get_slot("premium_subscription_boolean")
+            #print("premium_subscription_boolean", premium_subscription_boolean)
+            #ent_premium_subscription_boolean = next(tracker.get_latest_entity_values("premium_subscription"), None)
+            if premium_subscription_boolean is None:
+                if last_intent == "response_positive":
+                    return [SlotSet("premium_subscription_boolean", True)]
+                elif last_intent == "response_negative":
+                    return [SlotSet("premium_subscription_boolean", False), SlotSet("premium_subscription_username", "NO_USERNAME")]
+                else:
+                    return []
+            else:
+                return [SlotSet("premium_subscription_boolean", premium_subscription_boolean)]
+        return []
+    
+class ActionPremiumSubscriptionUsernameMapping(Action):
+    def name(self):
+        return "action_premium_subscription_username_mapping"
+    
+    async def run(self, dispatcher, tracker, domain):
+        last_intent = tracker.get_intent_of_latest_message()
+        
+        if last_intent == "username":
+            premium_subscription_username = tracker.get_slot("premium_subscription_username")
+            ent_premium_subscription_username = next(tracker.get_latest_entity_values("premium_subscription_username"), None)
+            if ent_premium_subscription_username is None:
+                return []
+            else:
+                if premium_subscription_username is None:
+                    return [SlotSet("premium_subscription_username", ent_premium_subscription_username)]
+                else:
+                    return [SlotSet("premium_subscription_username", premium_subscription_username)]
+        return []
+    
+class ActionTimeMapping(Action):
+    def name(self):
+        return "action_time_mapping"
+    
+    async def run(self, dispatcher, tracker, domain):
+        last_intent = tracker.get_intent_of_latest_message()
+        
+        if last_intent == "time":
+            time = tracker.get_slot("time")
+            ent_time = next(tracker.get_latest_entity_values("time"), None)
+            if ent_time is None:
+                return []
+            else:
+                if time is None:
+                    return [SlotSet("time", ent_time)]
+                else:
+                    return [SlotSet("time", time)]
+        return []
+
+class ActionAskTime(Action):
+    def name(self):
+        return 'action_ask_time'
+    
+    async def run(self, dispatcher, tracker, domain):
+        last_intent = tracker.get_intent_of_latest_message()
+        requested_slot = tracker.get_slot("requested_slot")
+        if requested_slot == "time" and last_intent not in ["time_change", "time_change_request_without_entity", "stop_order", "explain", "response_negative", "bot_challenge", "nevermind", "book_table"]:
+            dispatcher.utter_message(response="utter_ask_time_again")
+            return []
+        
+        isTakeaway = tracker.get_slot("takeaway_boolean")
+        
+        if isTakeaway:
+            if last_intent == "username" and tracker.get_slot("premium_subscription_username") not in [None, "NO_USERNAME"]:
+                dispatcher.utter_message(response="utter_ask_time_takeaway_ack_username")
+            elif last_intent in ["response_negative", "response_positive"]:
+                dispatcher.utter_message(response="utter_ask_time_takeaway_ack")
+            else:
+                dispatcher.utter_message(response="utter_ask_time_takeaway")
+        else:
+            if last_intent == "username" and tracker.get_slot("premium_subscription_username") not in [None, "NO_USERNAME"]:
+                dispatcher.utter_message(response="utter_ask_time_delivery_ack_username")
+            elif last_intent in ["response_negative", "response_positive"]:
+                dispatcher.utter_message(response="utter_ask_time_delivery_ack")
+            else:
+                dispatcher.utter_message(response="utter_ask_time_delivery")
+        return []
+    
+class ActionAskPremiumSubscriptionBoolean(Action):
+    def name(self):
+        return 'action_ask_premium_subscription_boolean'
+    
+    async def run(self, dispatcher, tracker, domain):
+        last_intent = tracker.get_intent_of_latest_message()
+        requested_slot = tracker.get_slot("requested_slot")
+        if requested_slot == "action_ask_premium_subscription_boolean" and last_intent not in ["time_change", "time_change_request_without_entity", "stop_order", "explain", "response_negative", "bot_challenge", "nevermind", "book_table"]:
+            dispatcher.utter_message(response="utter_ask_premium_subscription_again")
+            return []
+        
+        if tracker.active_loop.get("name") == "time_form":
+            dispatcher.utter_message(response="utter_ask_premium_subscription_username_boolean_ack")
+        else:
+            dispatcher.utter_message(response="utter_ask_premium_subscription_username_boolean")
+        return []
+
+class ActionAskPremiumSubscriptionUsername(Action):
+    def name(self):
+        return 'action_ask_premium_subscription_username'
+    
+    async def run(self, dispatcher, tracker, domain):
+        last_intent = tracker.get_intent_of_latest_message()
+        requested_slot = tracker.get_slot("requested_slot")
+        if requested_slot == "premium_subscription_username" and last_intent not in ["time_change", "time_change_request_without_entity", "stop_order", "explain", "response_negative", "bot_challenge", "nevermind", "book_table"]:
+            dispatcher.utter_message(response="utter_ask_premium_subscription_username_again")
+            return []
+        
+        if tracker.active_loop.get("name") == "time_form":
+            if requested_slot == "premium_subscription_boolean" and tracker.get_slot("premium_subscription_boolean") is True:
+                dispatcher.utter_message(response="utter_ask_premium_subscription_username_ack")
+        else:
+            dispatcher.utter_message(response="utter_ask_premium_subscription_username")
+        return []
+
+class ActionChangeTime(Action):
+    def name(self):
+        return 'action_change_time'
+    
+    async def run(self, dispatcher, tracker, domain):
+        time = tracker.get_slot("time")
+        premium_subscription_boolean = tracker.get_slot("premium_subscription_boolean")
+        premium_subscription_username = tracker.get_slot("premium_subscription_username")
+        
+        timeChanged = next(tracker.get_latest_entity_values("time"), None)
+        premiumSubscriptionBoolChanged = next(tracker.get_latest_entity_values("premium_subscription_boolean"), None)
+        premiumSubscriptionUsernameChanged = next(tracker.get_latest_entity_values("premium_subscription_username"), None)
+        
+        if time is None and premium_subscription_boolean is None and premium_subscription_username is None:
+            dispatcher.utter_message(response="utter_warning_nothing_to_change_time")
+            return []
+        changes = []
+        if timeChanged:
+            time = timeChanged
+            changes.append(f"the time to {time}")
+        if premiumSubscriptionBoolChanged:
+            premium_subscription_boolean = premiumSubscriptionBoolChanged
+            changes.append(f"the premium subscription status to {premium_subscription_boolean}")
+        if premiumSubscriptionUsernameChanged:
+            premium_subscription_username = premiumSubscriptionUsernameChanged
+            changes.append(f"the premium subscription username to {premium_subscription_username}")
+        if len(changes) > 0:
+            if len(changes) > 1:
+                # substitute the last comma with "and"
+                changes[-1] = "and " + changes[-1]
+            total_changes = "Alright, I changed " + ", ".join(changes) + "."
+            dispatcher.utter_message(text=total_changes)
+        return [
+            SlotSet("time", time),
+            SlotSet("premium_subscription_boolean", premium_subscription_boolean),
+            SlotSet("premium_subscription_username", premium_subscription_username),
+        ]
+        
+class ActionConfirmTime(Action):
+    def name(self):
+        return 'action_confirm_time'
+    
+    async def run(self, dispatcher, tracker, domain):
+        time = tracker.get_slot("time")
+        premium_subscription_boolean = tracker.get_slot("premium_subscription_boolean")
+        premium_subscription_username = tracker.get_slot("premium_subscription_username")
+        isTakeaway = tracker.get_slot("takeaway_boolean")
+        
+        if premium_subscription_boolean:
+            if isTakeaway:
+                message = f"Great! Can you confirm that the order will be picked up at {time} and that your premium subscription username is {premium_subscription_username}?"
+            else:
+                message = f"Great! Can you confirm that the order will be delivered at {time} and that your premium subscription username is {premium_subscription_username}?"
+            dispatcher.utter_message(text=message)
+        else:
+            if isTakeaway:
+                message = f"Great! Can you confirm that the order will be picked up at {time}?"
+            else:
+                message = f"Great! Can you confirm that the order will be delivered at {time}?"
+            dispatcher.utter_message(text=message)
+
+        return []
