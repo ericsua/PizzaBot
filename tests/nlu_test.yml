@@ -164,7 +164,7 @@ nlu:
   examples: |
     - Is it crowded right now?
     - Are you getting a lot of orders?
-    - Are you paid well?
+    - What is the weather like?
 - intent: goodbye
   examples: |
     - Goodbye, thanks
