@@ -14,6 +14,7 @@ nlu:
     - What are your competences?
     - What are your capacities
     - what can you do?
+    - what can you do
 - intent: request_time_openings
   examples: |
     - What time do you open?
@@ -125,6 +126,7 @@ nlu:
     - actually i want to change the time to [eight thirty](time)
     - actually i want to change the time to [8 30](time)
     - actually i want to change the time to [830]{"entity": "time", "value": "eight thirty"}
+    - i changed my mind i'll pick it up at [twelve](time)
 - intent: username
   examples: |
     - My username is [john doe](premium_subscription_username)
@@ -241,6 +243,7 @@ nlu:
     - Ok, i want it to be delivered at [seven thirty](time)
     - Ok, i want it to be delivered at [7 30](time)
     - OK i want it to be delivered at [730]{"entity": "time", "value": "seven thirty"}
+    - at [half past seven](time)
 - intent: delivery_change
   examples: |
     - Actually I want to change the name to [Eric](PERSON)
@@ -382,6 +385,7 @@ nlu:
     - [venmo](client_payment)
     - [card](client_payment)
     - at [seven o clock](time)
+    - [cash](client_payment)
 - intent: client_name
   examples: |
     - my name is [Raymond](PERSON)
@@ -435,6 +439,8 @@ nlu:
     - [giuliano][{"entity": "PERSON", "value": "Giuliano"}, {"entity": "PERSON", "value": "Giuliano"}]
     - [Gigi](PERSON)
     - [Eric][{"entity": "PERSON"}, {"entity": "PERSON"}]
+    - [Luisa][{"entity": "PERSON"}, {"entity": "PERSON"}]
+    - [Giovanni][{"entity": "PERSON"}, {"entity": "PERSON"}]
 - intent: client_address
   examples: |
     - my address is [roma square number 5](client_address)
@@ -473,6 +479,7 @@ nlu:
     - to [roma street number five trento](client_address)
     - to [roma street number 5 trento](client_address)
     - to [roma street #5 trento](client_address)
+    - deliver it to [roma street number five rovereto](client_address)
 - intent: book_table
   examples: |
     - I want to book a table
@@ -625,6 +632,9 @@ nlu:
     - i want to order a [coke](anti_pizza_type) and a pizza
     - i want a [margherita]{"entity": "pizza_type", "value": "Margherita"} and a [beer][{"entity": "anti_pizza_type"}, {"entity": "anti_pizza_type"}]
     - yes i want to order a [beer][{"entity": "anti_pizza_type"}, {"entity": "anti_pizza_type"}]
+    - can i order a pizza and a [beer][{"entity": "anti_pizza_type"}, {"entity": "anti_pizza_type"}]
+    - do you have [fried chicken](anti_pizza_type)[chicken](anti_pizza_type)
+    - i'd like a pizza [half pepperoni half prosciutto](pizza_type)[prosciutto](anti_pizza_type)
 - intent: stop_order
   examples: |
     - stop
@@ -731,6 +741,7 @@ nlu:
     - what are the daily pizzas?
     - do you have pizza with [meat](pizza_category)?
     - do you also have pizza with [pepper](pizza_category)?
+    - what types you have
 - intent: request_pizza_crusts
   examples: |
     - what crusts do you have?
@@ -743,6 +754,7 @@ nlu:
     - what are the crusts options?
     - what crusts do you have
     - do you have soft crust
+    - what crusts can i choose
 - intent: request_pizza_sizes
   examples: |
     - what sizes do you have?
@@ -1329,6 +1341,18 @@ nlu:
     - [extra large](pizza_size) [thin](pizza_crust) crust and [sliced]{"entity": "pizza_sliced", "value": "true"} please
     - I want to order [3]{"entity": "pizza_amount", "value": "three"} [large](pizza_size) [margherita](pizza_type) and [2]{"entity": "future_pizza_amount", "value": "two"} [Hawaii](future_pizza_type) pizza
     - I want to order [3]{"entity": "pizza_amount", "value": "three"} [large](pizza_size) [margherita]{"entity": "pizza_type", "value": "Margherita"} and [2]{"entity": "future_pizza_amount", "value": "two"} [Hawaii](future_pizza_type) pizza
+    - i would like to order a pizza
+    - [one](pizza_amount) pizza
+    - [one](pizza_amount) [medium](pizza_size) pizza
+    - i want to order another pizza
+    - yes i want to add [one](pizza_amount) pizza
+    - [extra large](pizza_size) with [cracker](pizza_crust) crust
+    - good afternoon i want to order [five](pizza_amount) pizza
+    - all [cracker](pizza_crust) crust and [sliced]{"entity": "pizza_sliced", "value": "true"}
+    - i'd like a [large](pizza_size) pizza [half pepperoni half prosciutto](pizza_type)[prosciutto](anti_pizza_type)
+    - i want a [large](pizza_size) [pepperoni]{"entity": "pizza_type", "value": "Pepperoni"} pizza
+    - [one](pizza_amount) pizza
+    - [cracker](pizza_crust) crust
 - intent: item_change
   examples: |
     - I changed my mind. Can I get a [funghi](pizza_type) instead?
@@ -1391,6 +1415,7 @@ nlu:
     - Noo
     - no that's ok
     - no that's all
+    - no thank you
 - intent: response_positive
   examples: |
     - all good
@@ -1410,6 +1435,7 @@ nlu:
     - yes it's okay
     - yes everything correct
     - yes I have it
+    - yes in eight parts
 - intent: order_take_home
   examples: |
     - take away
@@ -1579,6 +1605,15 @@ nlu:
     - who am I talking to?
     - who am i talking to?
     - are you a bot
+- intent: nlu_fallback
+  examples: |
+    - that's correct. can i order [one](pizza_amount) more pizza
+- synonym: eight thirty
+  examples: |
+    - 830
+- synonym: seven thirty
+  examples: |
+    - 730
 - synonym: card
   examples: |
     - credit card

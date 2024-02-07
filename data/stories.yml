@@ -7863,3 +7863,647 @@ stories:
       - two
   - slot_was_set:
     - requested_slot: pizza_crust
+
+# # - story: interactive_story_1
+# #   steps:
+# #   - intent: welcome_greet
+# #   - action: utter_welcome_greet
+# #   - intent: item_start_generic
+# #   - action: pizza_order_form
+# #   - active_loop: pizza_order_form
+# #   - slot_was_set:
+# #     - requested_slot: pizza_amount
+# #   - intent: item_start_generic
+# #     entities:
+# #     - pizza_amount: one
+# #   - slot_was_set:
+# #     - pizza_amount: one
+# #   - action: pizza_order_form
+# #   - slot_was_set:
+# #     - pizza_amount: one
+# #   - slot_was_set:
+# #     - requested_slot: pizza_type
+# #   - intent: item_start_generic
+# #     entities:
+# #     - pizza_amount: one
+# #     - pizza_size: medium
+# #   - slot_was_set:
+# #     - pizza_amount: one
+# #   - slot_was_set:
+# #     - pizza_size: medium
+# #   - action: pizza_order_form
+# #   - slot_was_set:
+# #     - pizza_amount: one
+# #   - slot_was_set:
+# #     - pizza_size: medium
+# #   - slot_was_set:
+# #     - requested_slot: pizza_type
+# #   - intent: request_pizza_types
+# #   - action: action_get_pizza_types
+# #   - slot_was_set:
+# #     - pizza_category: null
+# #   - action: pizza_order_form
+# #   - slot_was_set:
+# #     - requested_slot: pizza_type
+# #   - intent: item_start_generic
+# #     entities:
+# #     - pizza_type: Veggie
+# #   - slot_was_set:
+# #     - pizza_type: Veggie
+# #   - action: pizza_order_form
+# #   - slot_was_set:
+# #     - pizza_type: Veggie
+# #   - slot_was_set:
+# #     - requested_slot: pizza_crust
+# #   - intent: request_pizza_crusts
+# #   - action: utter_inform_pizza_crust
+# #   - action: pizza_order_form
+# #   - slot_was_set:
+# #     - requested_slot: pizza_crust
+# #   - intent: nlu_fallback
+# #     entities:
+# #     - pizza_crust: thin
+# #   - slot_was_set:
+# #     - pizza_crust: thin
+# #   - intent: item_start_generic
+# #     entities:
+# #     - pizza_crust: thin
+# #   - slot_was_set:
+# #     - pizza_crust: thin
+# #   - action: pizza_order_form
+# #   - slot_was_set:
+# #     - pizza_crust: thin
+# #   - slot_was_set:
+# #     - requested_slot: pizza_sliced
+# #   - intent: response_positive
+# #   - slot_was_set:
+# #     - pizza_sliced: true
+# #   - action: pizza_order_form
+# #   - slot_was_set:
+# #     - pizza_sliced: true
+# #   - slot_was_set:
+# #     - requested_slot: null
+# #   - active_loop: null
+# #   - action: action_confirm_pizzas
+# #   - slot_was_set:
+# #     - pending_order:
+# #       - one medium thin crust Veggie, all pizza sliced
+# #   - intent: response_positive
+# #   - intent: nlu_fallback
+# #     entities:
+# #     - pizza_amount: one
+# #   - action: utter_default
+# #   - intent: item_start_generic
+# #   - action: pizza_order_form
+# #   - active_loop: pizza_order_form
+# #   - slot_was_set:
+# #     - pizza_amount: one
+# #   - slot_was_set:
+# #     - pizza_type: Veggie
+# #   - slot_was_set:
+# #     - pizza_size: medium
+# #   - slot_was_set:
+# #     - pizza_crust: thin
+# #   - slot_was_set:
+# #     - pizza_sliced: true
+# #   - slot_was_set:
+# #     - requested_slot: null
+# #   - active_loop: null
+# #   - action: action_confirm_pizzas
+# #   - slot_was_set:
+# #     - pending_order:
+# #       - one medium thin crust Veggie, all pizza sliced
+# #       - one medium thin crust Veggie, all pizza sliced
+# #   - intent: response_positive
+# #   - action: action_pizza_order_add
+# #   - slot_was_set:
+# #     - total_order:
+# #       - one medium thin crust Veggie, all pizza sliced
+# #       - one medium thin crust Veggie, all pizza sliced
+# #   - slot_was_set:
+# #     - pizza_type: null
+# #   - slot_was_set:
+# #     - pizza_size: null
+# #   - slot_was_set:
+# #     - pizza_amount: null
+# #   - slot_was_set:
+# #     - pizza_sliced: null
+# #   - slot_was_set:
+# #     - pizza_crust: null
+# #   - slot_was_set:
+# #     - pizza_toppings: null
+# #   - slot_was_set:
+# #     - pending_order: null
+# #   - action: action_next_order
+# #   - action: utter_anything_else
+# #   - intent: item_start_generic
+# #     entities:
+# #     - pizza_amount: one
+# #   - slot_was_set:
+# #     - pizza_amount: one
+# #   - action: pizza_order_form
+# #   - active_loop: pizza_order_form
+# #   - slot_was_set:
+# #     - pizza_amount: one
+# #   - slot_was_set:
+# #     - requested_slot: pizza_type
+# #   - intent: item_start_generic
+# #     entities:
+# #     - pizza_type: Margherita
+# #   - slot_was_set:
+# #     - pizza_type: Margherita
+# #   - action: pizza_order_form
+# #   - slot_was_set:
+# #     - pizza_type: Margherita
+# #   - slot_was_set:
+# #     - requested_slot: pizza_size
+# #   - intent: item_start_generic
+# #     entities:
+# #     - pizza_size: extra large
+# #     - pizza_crust: cracker
+# #   - slot_was_set:
+# #     - pizza_crust: cracker
+# #   - slot_was_set:
+# #     - pizza_size: extra large
+# #   - action: pizza_order_form
+# #   - slot_was_set:
+# #     - pizza_crust: cracker
+# #   - slot_was_set:
+# #     - pizza_size: extra large
+# #   - slot_was_set:
+# #     - requested_slot: pizza_sliced
+# #   - intent: response_positive
+# #   - slot_was_set:
+# #     - pizza_sliced: true
+# #   - action: pizza_order_form
+# #   - slot_was_set:
+# #     - pizza_sliced: true
+# #   - slot_was_set:
+# #     - requested_slot: null
+# #   - active_loop: null
+# #   - action: action_confirm_pizzas
+# #   - slot_was_set:
+# #     - pending_order:
+# #       - one extra large cracker crust Margherita, all pizza sliced
+# #   - intent: response_positive
+# #   - action: action_pizza_order_add
+# #   - slot_was_set:
+# #     - total_order:
+# #       - one medium thin crust Veggie, all pizza sliced
+# #       - one medium thin crust Veggie, all pizza sliced
+# #       - one extra large cracker crust Margherita, all pizza sliced
+# #   - slot_was_set:
+# #     - pizza_type: null
+# #   - slot_was_set:
+# #     - pizza_size: null
+# #   - slot_was_set:
+# #     - pizza_amount: null
+# #   - slot_was_set:
+# #     - pizza_sliced: null
+# #   - slot_was_set:
+# #     - pizza_crust: null
+# #   - slot_was_set:
+# #     - pizza_toppings: null
+# #   - slot_was_set:
+# #     - pending_order: null
+# #   - action: action_next_order
+# #   - action: utter_anything_else
+# #   - intent: response_negative
+# #   - action: action_total_order
+# #   - slot_was_set:
+# #     - total_order: one medium thin crust Veggie, all pizza sliced, and one medium thin crust Veggie, all pizza sliced, and one extra large cracker crust Margherita, all pizza sliced
+# #   - intent: order_take_home
+# #   - slot_was_set:
+# #     - takeaway_boolean: true
+# #   - action: takeaway_form
+# #   - active_loop: takeaway_form
+# #   - slot_was_set:
+# #     - takeaway_boolean: true
+# #   - slot_was_set:
+# #     - requested_slot: client_name
+# #   - intent: client_name
+# #     entities:
+# #     - PERSON: Luisa
+# #     - PERSON: Luisa
+# #   - slot_was_set:
+# #     - client_name: Luisa
+# #   - action: takeaway_form
+# #   - slot_was_set:
+# #     - client_name: Luisa
+# #   - slot_was_set:
+# #     - requested_slot: null
+# #   - active_loop: null
+# #   - action: action_confirm_takeaway
+# #   - intent: response_positive
+# #   - action: utter_confirm_takeaway_final
+# #   - action: time_form
+# #   - active_loop: time_form
+# #   - slot_was_set:
+# #     - requested_slot: premium_subscription_boolean
+# #   - intent: response_negative
+# #   - slot_was_set:
+# #     - premium_subscription_boolean: false
+# #   - slot_was_set:
+# #     - premium_subscription_username: NO_USERNAME
+# #   - action: time_form
+# #   - slot_was_set:
+# #     - premium_subscription_boolean: false
+# #   - slot_was_set:
+# #     - premium_subscription_username: NO_USERNAME
+# #   - slot_was_set:
+# #     - requested_slot: time
+# #   - intent: nlu_fallback
+# #   - intent: time
+# #     entities:
+# #     - time: eleven
+# #   - slot_was_set:
+# #     - time: eleven
+# #   - action: time_form
+# #   - slot_was_set:
+# #     - time: eleven
+# #   - slot_was_set:
+# #     - requested_slot: null
+# #   - active_loop: null
+# #   - action: action_confirm_time
+# #   - intent: time
+# #   - intent: time_change
+# #     entities:
+# #     - time: twelve
+# #   - action: action_change_time
+# #   - slot_was_set:
+# #     - time: twelve
+# #   - slot_was_set:
+# #     - premium_subscription_boolean: false
+# #   - slot_was_set:
+# #     - premium_subscription_username: NO_USERNAME
+# #   - action: time_form
+# #   - active_loop: time_form
+# #   - slot_was_set:
+# #     - premium_subscription_boolean: false
+# #   - slot_was_set:
+# #     - premium_subscription_username: NO_USERNAME
+# #   - slot_was_set:
+# #     - time: twelve
+# #   - slot_was_set:
+# #     - requested_slot: null
+# #   - active_loop: null
+# #   - action: action_confirm_time
+# #   - intent: response_positive
+# #   - action: utter_final_order
+# #   - action: utter_goodbye
+
+# - story: interactive_story_1
+#   steps:
+#   - intent: welcome_greet
+#   - action: utter_welcome_greet
+#   - intent: item_start_generic
+#     entities:
+#     - pizza_amount: five
+#   - slot_was_set:
+#     - pizza_amount: five
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - slot_was_set:
+#     - pizza_amount: five
+#   - slot_was_set:
+#     - requested_slot: pizza_type
+#   - intent: item_start_generic
+#     entities:
+#     - pizza_type: Pepperoni
+#   - slot_was_set:
+#     - pizza_type: Pepperoni
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_type: Pepperoni
+#   - slot_was_set:
+#     - requested_slot: pizza_size
+#   - intent: item_start_generic
+#     entities:
+#     - pizza_size: medium
+#   - slot_was_set:
+#     - pizza_size: medium
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_size: medium
+#   - slot_was_set:
+#     - requested_slot: pizza_crust
+#   - intent: item_start_generic
+#     entities:
+#     - pizza_crust: cracker
+#     - pizza_sliced: 'true'
+#   - slot_was_set:
+#     - pizza_sliced: true
+#   - slot_was_set:
+#     - pizza_crust: cracker
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_sliced: true
+#   - slot_was_set:
+#     - pizza_crust: cracker
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - slot_was_set:
+#     - pending_order:
+#       - five medium cracker crust Pepperoni, all pizza sliced
+#   - intent: response_positive
+#   - action: action_pizza_order_add
+#   - slot_was_set:
+#     - total_order:
+#       - five medium cracker crust Pepperoni, all pizza sliced
+#   - slot_was_set:
+#     - pizza_type: null
+#   - slot_was_set:
+#     - pizza_size: null
+#   - slot_was_set:
+#     - pizza_amount: null
+#   - slot_was_set:
+#     - pizza_sliced: null
+#   - slot_was_set:
+#     - pizza_crust: null
+#   - slot_was_set:
+#     - pizza_toppings: null
+#   - slot_was_set:
+#     - pending_order: null
+#   - action: action_next_order
+#   - action: utter_anything_else
+#   - intent: response_negative
+#   - action: action_total_order
+#   - slot_was_set:
+#     - total_order: five medium cracker crust Pepperoni, all pizza sliced
+#   - intent: order_take_home
+#   - slot_was_set:
+#     - takeaway_boolean: true
+#   - action: takeaway_form
+#   - active_loop: takeaway_form
+#   - slot_was_set:
+#     - takeaway_boolean: true
+#   - slot_was_set:
+#     - requested_slot: client_name
+#   - intent: client_name
+#     entities:
+#     - PERSON: Luisa
+#     - PERSON: Luisa
+#   - slot_was_set:
+#     - client_name: Luisa
+#   - action: takeaway_form
+#   - slot_was_set:
+#     - client_name: Luisa
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_confirm_takeaway
+#   - intent: response_positive
+#   - action: utter_confirm_takeaway_final
+#   - action: time_form
+#   - active_loop: time_form
+#   - slot_was_set:
+#     - requested_slot: premium_subscription_boolean
+#   - intent: response_negative
+#   - slot_was_set:
+#     - premium_subscription_boolean: false
+#   - slot_was_set:
+#     - premium_subscription_username: NO_USERNAME
+#   - action: time_form
+#   - slot_was_set:
+#     - premium_subscription_boolean: false
+#   - slot_was_set:
+#     - premium_subscription_username: NO_USERNAME
+#   - slot_was_set:
+#     - requested_slot: time
+#   - intent: time
+#     entities:
+#     - time: eight thirty
+#   - slot_was_set:
+#     - time: eight thirty
+#   - action: time_form
+#   - slot_was_set:
+#     - time: eight thirty
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_confirm_time
+#   - intent: response_positive
+#   - action: utter_final_order
+#   - action: utter_goodbye
+
+# - story: interactive_story_1
+#   steps:
+#   - intent: welcome_greet
+#   - action: utter_welcome_greet
+#   - intent: request_bot_skills
+#   - action: utter_inform_bot_skills
+#   - intent: book_table
+#   - action: utter_no_table_booking
+#   - intent: order_anti_pizza
+#     entities:
+#     - anti_pizza_type: beer
+#     - anti_pizza_type: beer
+#   - slot_was_set:
+#     - anti_pizza_type: beer
+#   - action: utter_anti_pizza
+#   - action: action_get_pizza_types
+#   - slot_was_set:
+#     - pizza_category: null
+#   - intent: order_anti_pizza
+#     entities:
+#     - anti_pizza_type: fried chicken
+#     - anti_pizza_type: chicken
+#   - slot_was_set:
+#     - anti_pizza_type: chicken
+#   - action: utter_anti_pizza
+#   - action: action_get_pizza_types
+#   - slot_was_set:
+#     - pizza_category: null
+#   - intent: item_change
+#     entities:
+#     - pizza_size: large
+#     - pizza_type: half pepperoni half prosciutto
+#     - anti_pizza_type: prosciutto
+#   - slot_was_set:
+#     - modify_order: true
+#   - slot_was_set:
+#     - anti_pizza_type: prosciutto
+#   - intent: item_start_generic
+#     entities:
+#     - pizza_size: large
+#     - pizza_type: half pepperoni half prosciutto
+#     - anti_pizza_type: prosciutto
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - slot_was_set:
+#     - anti_pizza_type: prosciutto
+#   - slot_was_set:
+#     - requested_slot: pizza_amount
+#   - intent: item_change
+#     entities:
+#     - pizza_type: half pepperoni half prosciutto
+#     - anti_pizza_type: prosciutto
+#   - slot_was_set:
+#     - modify_order: true
+#   - slot_was_set:
+#     - anti_pizza_type: prosciutto
+#   - intent: order_anti_pizza
+#     entities:
+#     - pizza_type: half pepperoni half prosciutto
+#     - anti_pizza_type: prosciutto
+#   - action: utter_anti_pizza
+#   - action: action_get_pizza_types
+#   - slot_was_set:
+#     - pizza_category: null
+#   - intent: item_start_generic
+#     entities:
+#     - pizza_size: large
+#     - pizza_type: Pepperoni
+#   - slot_was_set:
+#     - pizza_size: large
+#   - slot_was_set:
+#     - pizza_type: Pepperoni
+#   - action: pizza_order_form
+#   - active_loop: pizza_order_form
+#   - slot_was_set:
+#     - pizza_type: Pepperoni
+#   - slot_was_set:
+#     - pizza_size: large
+#   - slot_was_set:
+#     - requested_slot: pizza_amount
+#   - intent: item_start_generic
+#     entities:
+#     - pizza_amount: one
+#   - slot_was_set:
+#     - pizza_amount: one
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_amount: one
+#   - slot_was_set:
+#     - requested_slot: pizza_crust
+#   - intent: request_pizza_crusts
+#   - action: utter_inform_pizza_crust
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - requested_slot: pizza_crust
+#   - intent: item_start_generic
+#     entities:
+#     - pizza_crust: cracker
+#   - slot_was_set:
+#     - pizza_crust: cracker
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_crust: cracker
+#   - slot_was_set:
+#     - requested_slot: pizza_sliced
+#   - intent: response_positive
+#   - slot_was_set:
+#     - pizza_sliced: true
+#   - action: pizza_order_form
+#   - slot_was_set:
+#     - pizza_sliced: true
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_confirm_pizzas
+#   - slot_was_set:
+#     - pending_order:
+#       - one large cracker crust Pepperoni, all pizza sliced
+#   - intent: response_positive
+#   - action: action_pizza_order_add
+#   - slot_was_set:
+#     - total_order:
+#       - one large cracker crust Pepperoni, all pizza sliced
+#   - slot_was_set:
+#     - pizza_type: null
+#   - slot_was_set:
+#     - pizza_size: null
+#   - slot_was_set:
+#     - pizza_amount: null
+#   - slot_was_set:
+#     - pizza_sliced: null
+#   - slot_was_set:
+#     - pizza_crust: null
+#   - slot_was_set:
+#     - pizza_toppings: null
+#   - slot_was_set:
+#     - pending_order: null
+#   - action: action_next_order
+#   - action: utter_anything_else
+#   - intent: response_negative
+#   - action: action_total_order
+#   - slot_was_set:
+#     - total_order: one large cracker crust Pepperoni, all pizza sliced
+#   - intent: order_delivery
+#   - action: delivery_form
+#   - active_loop: delivery_form
+#   - slot_was_set:
+#     - requested_slot: client_name
+#   - intent: client_name
+#     entities:
+#     - PERSON: Giovanni
+#     - PERSON: Giovanni
+#   - slot_was_set:
+#     - client_name: Giovanni
+#   - action: delivery_form
+#   - slot_was_set:
+#     - client_name: Giovanni
+#   - slot_was_set:
+#     - requested_slot: client_address
+#   - intent: client_address
+#     entities:
+#     - client_address: roma street number five rovereto
+#   - slot_was_set:
+#     - client_address: roma street number five rovereto
+#   - action: delivery_form
+#   - slot_was_set:
+#     - client_address: roma street number five rovereto
+#   - slot_was_set:
+#     - requested_slot: client_payment
+#   - intent: client_payment
+#     entities:
+#     - client_payment: cash
+#   - slot_was_set:
+#     - client_payment: cash
+#   - action: delivery_form
+#   - slot_was_set:
+#     - client_payment: cash
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_confirm_delivery
+#   - intent: response_positive
+#   - action: utter_confirm_delivery_final
+#   - action: time_form
+#   - active_loop: time_form
+#   - slot_was_set:
+#     - requested_slot: premium_subscription_boolean
+#   - intent: explain
+#   - action: utter_explain_premium_subscription_boolean
+#   - action: time_form
+#   - slot_was_set:
+#     - requested_slot: premium_subscription_boolean
+#   - intent: response_negative
+#   - slot_was_set:
+#     - premium_subscription_boolean: false
+#   - slot_was_set:
+#     - premium_subscription_username: NO_USERNAME
+#   - action: time_form
+#   - slot_was_set:
+#     - premium_subscription_boolean: false
+#   - slot_was_set:
+#     - premium_subscription_username: NO_USERNAME
+#   - slot_was_set:
+#     - requested_slot: time
+#   - intent: time
+#     entities:
+#     - time: half past seven
+#   - slot_was_set:
+#     - time: half past seven
+#   - action: time_form
+#   - slot_was_set:
+#     - time: half past seven
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_confirm_time
+#   - intent: response_positive
+#   - action: utter_final_order
+#   - action: utter_goodbye

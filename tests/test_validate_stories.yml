@@ -2515,3 +2515,599 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: action_confirm_takeaway
+
+- story: total
+  steps:
+  - user: |
+      Hi
+    intent: welcome_greet
+  - action: utter_welcome_greet
+  - user: |
+      Are you a bot?
+    intent: bot_challenge
+  - action: utter_iambot
+  - action: utter_anything_else
+  - user: |
+      what are your skills?
+    intent: request_bot_skills
+  - action: utter_inform_bot_skills
+  - user: |
+      can I book a table?
+    intent: book_table
+  - action: utter_no_table_booking
+  - user: |
+      what is 2 + 2?
+    intent: out_of_scope
+  - action: utter_out_of_scope
+  - user: |
+      i want to order [three](pizza_amount) [large](pizza_size) [margherita]{ "entity": "pizza_type", "value": "Margherita" } and [two](future_pizza_amount) [hawaii]{ "entity": "future_pizza_type", "value": "Hawaii" } pizza
+    intent: item_start_generic
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - future_pizza_type:
+      - Hawaii
+  - slot_was_set:
+    - future_pizza_amount:
+      - two
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - future_pizza_type:
+      - Hawaii
+  - slot_was_set:
+    - future_pizza_amount:
+      - two
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      what?
+    intent: explain
+  - action: utter_explain_pizza_crust
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      what crusts do you have?
+    intent: request_pizza_crusts
+  - action: utter_inform_pizza_crust
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - user: |
+      [stuffed](pizza_crust) crust
+    intent: item_start_generic
+  # - intent: item_start_generic
+  #   entities:
+  #   - pizza_crust: stuffed
+  - slot_was_set:
+    - pizza_crust: stuffed
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_crust: stuffed
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - user: |
+      actually I want the [cracker](pizza_crust) crust
+    intent: item_change
+  - slot_was_set:
+    - modify_order: true
+  - action: action_change_order
+  - slot_was_set:
+    - pizza_type: Margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_amount: three
+  - slot_was_set:
+    - pizza_crust: cracker
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - modify_order: null
+  - slot_was_set:
+    - pending_order: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - user: |
+      yes please
+    intent: response_positive
+  # - intent: response_positive
+  - slot_was_set:
+    - pizza_sliced: true
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - three large cracker crust Margherita, all pizza sliced
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_pizza_order_add
+  - slot_was_set:
+    - total_order:
+      - three large cracker crust Margherita, all pizza sliced
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_toppings: null
+  - slot_was_set:
+    - pending_order: null
+  - action: action_next_order
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - future_pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: two
+  - slot_was_set:
+    - future_pizza_amount: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: two
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      do you have the small size?
+    intent: request_pizza_sizes
+  - action: utter_inform_pizza_size
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      [small](pizza_size) [thin](pizza_crust) crust and [sliced]{"entity": "pizza_sliced", "value": "true"} please
+    intent: item_start_generic
+  # - intent: item_start_generic
+  #   entities:
+  #   - pizza_size: small
+  #   - pizza_crust: thin
+  #   - pizza_sliced: 'true'
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_size: small
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_size: small
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - two small thin crust Hawaii, all pizza sliced
+  - user: |
+      actually I want to change something
+    intent: item_change_request_without_entity
+  - slot_was_set:
+    - modify_order: true
+  - action: utter_ask_changes
+  - user: |
+      I want to change the size to [medium](pizza_size)
+    intent: item_change
+  - slot_was_set:
+    - modify_order: true
+  - action: action_change_order
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_size: medium
+  - slot_was_set:
+    - pizza_amount: two
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - modify_order: null
+  - slot_was_set:
+    - pending_order: null
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: two
+  - slot_was_set:
+    - pizza_type: Hawaii
+  - slot_was_set:
+    - pizza_size: medium
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - modify_order: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - two medium thin crust Hawaii, all pizza sliced
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_pizza_order_add
+  - slot_was_set:
+    - total_order:
+      - three large cracker crust Margherita, all pizza sliced
+      - two medium thin crust Hawaii, all pizza sliced
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_toppings: null
+  - slot_was_set:
+    - pending_order: null
+  - action: action_next_order
+  - action: utter_anything_else
+  - user: |
+      yes I want to order [two](pizza_amount) more pizza
+    intent: item_start_generic
+  - slot_was_set:
+    - pizza_amount: two
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - pizza_amount: two
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      Do you have pizza with [meat](pizza_category)?
+    intent: request_pizza_types
+  - slot_was_set:
+    - pizza_category: meat
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      And do you have pizza with [pepper](pizza_category)?
+    intent: request_pizza_types
+  - slot_was_set:
+    - pizza_category: pepper
+  - action: action_get_pizza_types
+  - slot_was_set:
+    - pizza_category: null
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - user: |
+      I want to order [pepperoni](pizza_type) with [olives](toppings) and [onions](toppings)
+    intent: item_start_generic
+  # - intent: item_start_generic
+  #   entities:
+  #   - pizza_type: Pepperoni
+  #   - toppings: olives
+  #   - toppings: onions
+  - slot_was_set:
+    - pizza_toppings:
+      - olives
+      - onions
+  - slot_was_set:
+    - pizza_type: Pepperoni
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_type: Pepperoni
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - user: |
+      [extra large](pizza_size) [thin](pizza_crust) crust and [sliced]{"entity": "pizza_sliced", "value": "true"}
+    intent: item_start_generic
+  # - intent: item_start_generic
+  #   entities:
+  #   - pizza_size: extra large
+  #   - pizza_crust: thin
+  #   - pizza_sliced: 'true'
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_size: extra large
+  - action: pizza_order_form
+  - slot_was_set:
+    - pizza_sliced: true
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - pizza_size: extra large
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - two extra large thin crust Pepperoni with olives and onions, all pizza sliced
+  # - intent: response_positive ### nevermind
+  - user: |
+      Actually I want to change the size
+    intent: item_change_request_without_entity
+  - slot_was_set:
+    - modify_order: true
+  - action: utter_ask_changes
+  - user: |
+      nevermind forget about that
+    intent: nevermind
+  - action: action_cancel_pending_order
+  - slot_was_set:
+    - pending_order: null
+  - action: utter_no_problem_lets_continue
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - two extra large thin crust Pepperoni with olives and onions, all pizza sliced
+  - user: |
+      yes
+    intent: response_positive
+  - action: action_pizza_order_add
+  - slot_was_set:
+    - total_order:
+      - three large cracker crust Margherita, all pizza sliced
+      - two medium thin crust Hawaii, all pizza sliced
+      - two extra large thin crust Pepperoni with olives and onions, all pizza sliced
+  - slot_was_set:
+    - pizza_type: null
+  - slot_was_set:
+    - pizza_size: null
+  - slot_was_set:
+    - pizza_amount: null
+  - slot_was_set:
+    - pizza_sliced: null
+  - slot_was_set:
+    - pizza_crust: null
+  - slot_was_set:
+    - pizza_toppings: null
+  - slot_was_set:
+    - pending_order: null
+  - action: action_next_order
+  - action: utter_anything_else
+  - user: |
+      no that's all
+    intent: response_negative
+  - action: action_total_order
+  - slot_was_set:
+    - total_order: three large cracker crust Margherita, all pizza sliced, and two medium thin crust Hawaii, all pizza sliced, and two extra large thin crust Pepperoni with olives and onions, all pizza sliced
+  - user: |
+      home delivery
+    intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  - user: |
+      why do you need that?
+    intent: explain
+  - action: utter_explain_client_name_delivery
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  - user: |
+      [Eric](PERSON)
+    intent: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  #   - PERSON: Eric
+  - slot_was_set:
+    - client_name: Eric
+  - action: delivery_form
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  - user: |
+      where do you deliver?
+    intent: request_delivery_areas
+  - action: utter_inform_delivery_address
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_address
+  - user: |
+      to [roma street #5 trento](client_address)
+    intent: client_address
+  # - intent: client_address
+  #   entities:
+  #   - client_address: roma street number five trento
+  - slot_was_set:
+    - client_address: 'roma street #5 trento'
+  - action: delivery_form
+  - slot_was_set:
+    - client_address: 'roma street #5 trento'
+  - slot_was_set:
+    - requested_slot: client_payment
+  - user: |
+      how can I pay?
+    intent: request_payment_methods
+  - action: utter_inform_delivery_payment
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_payment
+  - user: |
+      I'll pay with [cash](client_payment)
+    intent: client_payment
+  # - intent: client_payment
+  #   entities:
+  #   - client_payment: cash
+  - slot_was_set:
+    - client_payment: cash
+  - action: delivery_form
+  - slot_was_set:
+    - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+  - user: |
+      Actually I want to change the payment to [card](client_payment)
+    intent: delivery_change
+  - action: action_change_delivery
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - client_address: 'roma street #5 trento'
+  - slot_was_set:
+    - client_payment: card
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - client_name: Eric
+  - slot_was_set:
+    - client_address: 'roma street #5 trento'
+  - slot_was_set:
+    - client_payment: card
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+  - user: |
+      yes
+    intent: response_positive
+  - action: utter_confirm_delivery_final
+  - action: time_form
+  - active_loop: time_form
+  - slot_was_set:
+    - requested_slot: premium_subscription_boolean
+  - user: |
+      what is that?
+    intent: explain
+  - action: utter_explain_premium_subscription_boolean
+  - action: time_form
+  - slot_was_set:
+    - requested_slot: premium_subscription_boolean
+  - user: |
+      yes
+    intent: response_positive
+  - slot_was_set:
+    - premium_subscription_boolean: true
+  - action: time_form
+  - slot_was_set:
+    - premium_subscription_boolean: true
+  - slot_was_set:
+    - requested_slot: premium_subscription_username
+  - user: |
+      It's [pizza lover](premium_subscription_username)
+    intent: username
+  # - intent: username
+  #   entities:
+  #   - premium_subscription_username: pizza lover
+  # - slot_was_set:
+  #   - premium_subscription_boolean: true # shouldn't be set
+  - slot_was_set:
+    - premium_subscription_username: pizza lover
+  - action: time_form
+  - slot_was_set:
+    - premium_subscription_username: pizza lover
+  - slot_was_set:
+    - requested_slot: time
+  - user: |
+      what are your opening hours?
+    intent: request_time_openings
+  # - slot_was_set:
+  #   - premium_subscription_boolean: true
+  #- action: time_form
+  # - slot_was_set:
+  #   - requested_slot: time
+  # - slot_was_set:
+  #   - premium_subscription_boolean: true
+  - action: utter_inform_time
+  - action: time_form
+  - slot_was_set:
+    - requested_slot: time
+  - user: |
+      Ok I want it to be delivered at [seven thirty](time)
+    intent: time
+  # - intent: time
+  #   entities:
+  #   - time: seven thirty
+  - slot_was_set:
+    - time: seven thirty
+  - action: time_form
+  - slot_was_set:
+    - time: seven thirty
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_time
+  - user: |
+      Actually I want to change the time to [eight thirty](time)
+    intent: time_change
+  - slot_was_set:
+    - time: eight thirty
+  - action: action_change_time
+  - slot_was_set:
+    - time: eight thirty
+  - slot_was_set:
+    - premium_subscription_boolean: true
+  - slot_was_set:
+    - premium_subscription_username: pizza lover
+  - action: time_form
+  - active_loop: time_form
+  - slot_was_set:
+    - premium_subscription_boolean: true
+  - slot_was_set:
+    - premium_subscription_username: pizza lover
+  - slot_was_set:
+    - time: eight thirty
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_time
+  - user: |
+      yes
+    intent: response_positive
+  - action: utter_final_order
+  - action: utter_goodbye
+  - user: |
+      goodbye
+    intent: goodbye
+  - action: utter_goodbye

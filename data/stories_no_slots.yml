@@ -2826,3 +2826,275 @@ stories:
   - active_loop: takeaway_form
   - active_loop: null
   - action: action_confirm_takeaway
+
+- story: total
+  steps:
+  - intent: welcome_greet
+  - action: utter_welcome_greet
+  - intent: bot_challenge
+  - action: utter_iambot
+  - action: utter_anything_else
+  - intent: request_bot_skills
+  - action: utter_inform_bot_skills
+  - intent: book_table
+  - action: utter_no_table_booking
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - intent: explain
+  - action: utter_explain_pizza_crust
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - intent: request_pizza_crusts
+  - action: utter_inform_pizza_crust
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  # - intent: item_start_generic
+  #   entities:
+  #   - pizza_crust: stuffed
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_crust: stuffed
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - intent: item_change
+  - action: action_change_order
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - requested_slot: pizza_sliced
+  # - intent: response_positive
+  # - slot_was_set:
+  #   - pizza_sliced: true
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_sliced
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_pizza_order_add
+  - action: action_next_order
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - intent: request_pizza_sizes
+  - action: utter_inform_pizza_size
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_size
+  # - intent: item_start_generic
+  #   entities:
+  #   - pizza_size: small
+  #   - pizza_crust: thin
+  #   - pizza_sliced: 'true'
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_sliced: true
+  # - slot_was_set:
+  #   - pizza_crust: thin
+  # - slot_was_set:
+  #   - pizza_size: small
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - slot_was_set:
+    - pending_order:
+      - two small thin crust Hawaii, all pizza sliced
+  - intent: item_change_request_without_entity
+  - action: utter_ask_changes
+  - intent: item_change
+  - action: action_change_order
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_pizza_order_add
+  - action: action_next_order
+  - action: utter_anything_else
+  - intent: item_start_generic
+  - action: pizza_order_form
+  - active_loop: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - intent: request_pizza_types
+  - action: action_get_pizza_types
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  - intent: request_pizza_types
+  - action: action_get_pizza_types
+  - action: pizza_order_form
+  - slot_was_set:
+    - requested_slot: pizza_type
+  # - intent: item_start_generic
+  #   entities:
+  #   - pizza_type: Pepperoni
+  #   - toppings: olives
+  #   - toppings: onions
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_type: Pepperoni
+  - slot_was_set:
+    - requested_slot: pizza_size
+  # - intent: item_start_generic
+  #   entities:
+  #   - pizza_size: extra large
+  #   - pizza_crust: thin
+  #   - pizza_sliced: 'true'
+  # - action: pizza_order_form
+  # - slot_was_set:
+  #   - pizza_sliced: true
+  # - slot_was_set:
+  #   - pizza_crust: thin
+  # - slot_was_set:
+  #   - pizza_size: extra large
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_pizzas
+  # - intent: response_positive ### nevermind
+  - intent: item_change_request_without_entity
+  - action: utter_ask_changes
+  - intent: nevermind
+  - action: action_cancel_pending_order
+  - action: utter_no_problem_lets_continue
+  - action: action_confirm_pizzas
+  - intent: response_positive
+  - action: action_pizza_order_add
+  - action: action_next_order
+  - action: utter_anything_else
+  - intent: response_negative
+  - action: action_total_order
+  - intent: order_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  - intent: explain
+  - action: utter_explain_client_name_delivery
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_name
+  # - intent: client_name
+  #   entities:
+  #   - PERSON: Eric
+  #   - PERSON: Eric
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_name: Eric
+  - slot_was_set:
+    - requested_slot: client_address
+  - intent: request_delivery_areas
+  - action: utter_inform_delivery_address
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_address
+  # - intent: client_address
+  #   entities:
+  #   - client_address: roma street number five trento
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_address: 'roma street #5 trento'
+  - slot_was_set:
+    - requested_slot: client_payment
+  - intent: request_payment_methods
+  - action: utter_inform_delivery_payment
+  - action: delivery_form
+  - slot_was_set:
+    - requested_slot: client_payment
+  # - intent: client_payment
+  #   entities:
+  #   - client_payment: cash
+  # - action: delivery_form
+  # - slot_was_set:
+  #   - client_payment: cash
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+  - intent: delivery_change
+  - action: action_change_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_delivery
+  - intent: response_positive
+  - action: utter_confirm_delivery_final
+  - action: time_form
+  - active_loop: time_form
+  - slot_was_set:
+    - requested_slot: premium_subscription_boolean
+  - intent: explain
+  - action: utter_explain_premium_subscription_boolean
+  - action: time_form
+  - slot_was_set:
+    - requested_slot: premium_subscription_boolean
+  # - intent: response_positive
+  - slot_was_set:
+    - premium_subscription_boolean: true
+  # - action: time_form
+  # - slot_was_set:
+  #   - premium_subscription_boolean: true
+  - slot_was_set:
+    - requested_slot: premium_subscription_username
+  # - intent: username
+  #   entities:
+  #   - premium_subscription_username: pizza lover
+  # - slot_was_set:
+  #   - premium_subscription_boolean: true # shouldn't be set
+  # - action: time_form
+  # - slot_was_set:
+  #   - premium_subscription_boolean: true
+  # - slot_was_set:
+  #   - premium_subscription_username: pizza lover
+  - slot_was_set:
+    - requested_slot: time
+  - intent: request_time_openings
+  # - slot_was_set:
+  #   - premium_subscription_boolean: true
+  - action: time_form
+  # - slot_was_set:
+  #   - premium_subscription_boolean: true
+  - slot_was_set:
+    - requested_slot: time
+  - action: utter_inform_time
+  - action: time_form
+  - slot_was_set:
+    - requested_slot: time
+  # - intent: time
+  #   entities:
+  #   - time: seven thirty
+  # - action: time_form
+  # - slot_was_set:
+  #   - time: seven thirty
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_time
+  - intent: time_change
+  - action: action_change_time
+  - action: time_form
+  - active_loop: time_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_confirm_time
+  - intent: response_positive
+  - action: utter_final_order
+  - action: utter_goodbye
+  - intent: goodbye
+  - action: utter_goodbye
