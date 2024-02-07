@@ -1,14 +1,11 @@
 version: "3.1"
 stories:
-
 - story: greeting
   steps:
   - user: |
       hi
     intent: welcome_greet
   - action: utter_welcome_greet
-  #- checkpoint: start_questions_on_pizza
-
 - story: greeting
   steps:
   - user: |
@@ -16,14 +13,6 @@ stories:
     intent: welcome_greet
   - action: utter_welcome_greet
   - checkpoint: start_order
-
-# - story: questions_on_pizza
-#   steps:
-#   - checkpoint: start_questions_on_pizza
-#   - intent: init_pizza_question
-#   - action: utter_init_pizza_question
-#   - checkpoint: start_order
-
 - story: pizza interjection
   steps:
   - user: |
@@ -32,13 +21,12 @@ stories:
   - action: pizza_order_form
   - active_loop: pizza_order_form
   - slot_was_set:
-    - requested_slot: pizza_amount # what I already asked you
+    - requested_slot: pizza_amount 
   - user: |
       what
     intent: explain
   - action: utter_explain_pizza_quantities
   - action: pizza_order_form
-
 - story: pizza interjection 2
   steps:
   - user: |
@@ -47,13 +35,12 @@ stories:
   - action: pizza_order_form
   - active_loop: pizza_order_form
   - slot_was_set:
-    - requested_slot: pizza_type # what I already asked you
+    - requested_slot: pizza_type 
   - user: |
       can you explain
     intent: explain
   - action: utter_explain_pizza_types
   - action: pizza_order_form
-
 - story: interactive_story_13
   steps:
   - user: |
@@ -70,7 +57,6 @@ stories:
     - pizza_amount: '10'
   - slot_was_set:
     - requested_slot: pizza_type
-
 - story: extra large
   steps:
   - user: |
@@ -103,7 +89,6 @@ stories:
     intent: item_start_generic
   - slot_was_set:
     - pizza_size: extra large
-
 - story: name greet
   steps:
   - user: |
@@ -129,7 +114,6 @@ stories:
     - pizza_amount: '10'
   - slot_was_set:
     - requested_slot: pizza_type
-
 - story: chicken wings anti pizza
   steps:
   - user: |
@@ -143,7 +127,6 @@ stories:
   - action: action_get_pizza_types
   - slot_was_set:
     - pizza_category: null
-
 - story: multiple anti pizza
   steps:
   - user: |
@@ -171,7 +154,6 @@ stories:
   - action: action_get_pizza_types
   - slot_was_set:
     - pizza_category: null
-
 - story: name greet anti pizza full order
   steps:
   - user: |
@@ -253,7 +235,6 @@ stories:
   - active_loop: null
   - action: action_confirm_pizzas
   - intent: response_positive
-
 - story: explain 2 steps
   steps:
   - user: |
@@ -297,8 +278,6 @@ stories:
     - pizza_type: Margherita
   - slot_was_set:
     - requested_slot: pizza_size
-
-
 - story: stop order second step
   steps:
   - user: |
@@ -344,7 +323,6 @@ stories:
     - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
-
 - story: stop order first step
   steps:
   - user: |
@@ -380,7 +358,6 @@ stories:
     - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
-
 - story: stop order at crust plus starting again
   steps:
   - user: |
@@ -474,7 +451,6 @@ stories:
     - pizza_amount: nine
   - slot_was_set:
     - requested_slot: pizza_type
-
 - story: stop order at size
   steps:
   - user: |
@@ -530,8 +506,6 @@ stories:
     - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
-
-
 - story: stop order at crust
   steps:
   - user: |
@@ -597,7 +571,6 @@ stories:
     - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
-
 - story: stop order at sliced
   steps:
   - user: |
@@ -672,7 +645,6 @@ stories:
     - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
-
 - story: stop order at sliced 2
   steps:
   - user: |
@@ -748,8 +720,6 @@ stories:
     - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
-
-
 - story: happy form
   steps:
   - user: |
@@ -813,7 +783,6 @@ stories:
   - action: action_confirm_pizzas
   - slot_was_set:
     - pending_order: 1 medium Margherita. All pizzas sliced
-
 - story: stop at amount
   steps:
   - user: |
@@ -849,8 +818,6 @@ stories:
     - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
-
-
 - story: three ask + stop at size
   steps:
   - user: |
@@ -872,7 +839,7 @@ stories:
     intent: item_start_generic
   - slot_was_set:
     - pizza_amount: one
-  - action: pizza_order_form # no
+  - action: pizza_order_form 
   - slot_was_set:
     - pizza_amount: one
   - slot_was_set:
@@ -883,7 +850,7 @@ stories:
   - action: action_get_pizza_types
   - slot_was_set:
     - pizza_category: null
-  - action: pizza_order_form # yes
+  - action: pizza_order_form 
   - slot_was_set:
     - requested_slot: pizza_type
   - user: |
@@ -894,7 +861,7 @@ stories:
   - action: action_get_pizza_types
   - slot_was_set:
     - pizza_category: null
-  - action: pizza_order_form # yes
+  - action: pizza_order_form 
   - slot_was_set:
     - requested_slot: pizza_type
   - user: |
@@ -933,7 +900,6 @@ stories:
     - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
-
 - story: bot challenge, what types and crusts, vegetables, stop at sliced
   steps:
   - user: |
@@ -959,9 +925,6 @@ stories:
     intent: item_start_generic
   - slot_was_set:
     - pizza_amount: nine
-  # - action: pizza_order_form
-  # - slot_was_set:
-  #   - pizza_amount: nine
   - slot_was_set:
     - requested_slot: pizza_type
   - user: |
@@ -1038,7 +1001,6 @@ stories:
     - pending_order: null
   - action: utter_confirm_order_canceled
   - action: utter_anything_else
-
 - story: over informative in amount
   steps:
   - user: |
@@ -1072,7 +1034,6 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: action_confirm_pizzas
-
 - story: change every step + double confirm
   steps:
   - user: |
@@ -1258,7 +1219,6 @@ stories:
   - action: action_confirm_pizzas
   - slot_was_set:
     - pending_order: three large thin crust Hawaii. All pizzas not sliced.
-
 - story: change amount specific
   steps:
   - user: |
@@ -1281,16 +1241,10 @@ stories:
   - user: |
       Actually I want [three](pizza_amount) pizzas instead
     intent: item_change
-  # - intent: item_change
-  #   entities:
-  #   - pizza_amount: three
   - slot_was_set:
     - modify_order: true
   - slot_was_set:
     - pizza_amount: three
-  # - action: pizza_order_form
-  # - slot_was_set:
-  #   - pizza_amount: three
   - slot_was_set:
     - requested_slot: pizza_type
   - action: action_change_order
@@ -1319,7 +1273,6 @@ stories:
     - pizza_type: Margherita
   - slot_was_set:
     - requested_slot: pizza_size
-
 - story: vague change
   steps:
   - user: |
@@ -1346,7 +1299,6 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_amount
-
 - story: vague change + nevermind
   steps:
   - user: |
@@ -1379,7 +1331,6 @@ stories:
     - pizza_amount: one
   - slot_was_set:
     - requested_slot: pizza_type
-
 - story: vague change at type
   steps:
   - user: |
@@ -1392,9 +1343,6 @@ stories:
   - user: |
       [one](pizza_amount) pizza
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_amount: one
   - slot_was_set:
     - pizza_amount: one
   - action: pizza_order_form
@@ -1429,7 +1377,6 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_type
-
 - story: vague change at size
   steps:
   - user: |
@@ -1442,9 +1389,6 @@ stories:
   - user: |
       [five](pizza_amount) pizza
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_amount: five
   - slot_was_set:
     - pizza_amount: five
   - action: pizza_order_form
@@ -1455,9 +1399,6 @@ stories:
   - user: |
       [Hawaii](pizza_type)
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_type: Hawaii
   - slot_was_set:
     - pizza_type: Hawaii
   - action: pizza_order_form
@@ -1502,7 +1443,6 @@ stories:
     - pizza_size: large
   - slot_was_set:
     - requested_slot: pizza_crust
-
 - story: vague change at crust
   steps:
   - user: |
@@ -1515,9 +1455,6 @@ stories:
   - user: |
       [ten](pizza_amount) pizza
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_amount: ten
   - slot_was_set:
     - pizza_amount: ten
   - action: pizza_order_form
@@ -1528,9 +1465,6 @@ stories:
   - user: |
       [Veggie](pizza_type)
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #  - pizza_type: Veggie
   - slot_was_set:
     - pizza_type: Veggie
   - action: pizza_order_form
@@ -1541,9 +1475,6 @@ stories:
   - user: |
       [medium](pizza_size)
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_size: medium
   - slot_was_set:
     - pizza_size: medium
   - action: pizza_order_form
@@ -1578,7 +1509,6 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_crust
-
 - story: vague change at sliced
   steps:
   - user: |
@@ -1591,9 +1521,6 @@ stories:
   - user: |
       [three](pizza_amount) pizza
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_amount: three
   - slot_was_set:
     - pizza_amount: three
   - action: pizza_order_form
@@ -1604,9 +1531,6 @@ stories:
   - user: |
       [Hawaii](pizza_type)
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_type: Hawaii
   - slot_was_set:
     - pizza_type: Hawaii
   - action: pizza_order_form
@@ -1617,9 +1541,6 @@ stories:
   - user: |
       [large](pizza_size)
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_size: large
   - slot_was_set:
     - pizza_size: large
   - action: pizza_order_form
@@ -1630,9 +1551,6 @@ stories:
   - user: |
       [thin](pizza_crust)
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_crust: thin
   - slot_was_set:
     - pizza_crust: thin
   - action: pizza_order_form
@@ -1667,8 +1585,6 @@ stories:
   - action: pizza_order_form
   - slot_was_set:
     - requested_slot: pizza_sliced
-
-
 - story: multi order
   steps:
   - user: |
@@ -1705,9 +1621,6 @@ stories:
   - user: |
       [thin](pizza_crust)
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_crust: thin
   - slot_was_set:
     - pizza_crust: thin
   - action: pizza_order_form
@@ -1767,9 +1680,6 @@ stories:
   - user: |
       [baby](pizza_size)
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_size: baby
   - slot_was_set:
     - pizza_size: baby
   - action: pizza_order_form
@@ -1780,9 +1690,6 @@ stories:
   - user: |
       [stuffed](pizza_crust)
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_crust: stuffed
   - slot_was_set:
     - pizza_crust: stuffed
   - action: pizza_order_form
@@ -1828,9 +1735,6 @@ stories:
     - pizza_amount: null
   - slot_was_set:
     - pizza_crust: null
-
-
-
 - story: happy path delivery
   steps:
   - user: |
@@ -1902,9 +1806,6 @@ stories:
   - user: |
       [Eric](PERSON)
     intent: client_name
-  # - intent: client_name
-  #   entities:
-  #   - PERSON: Eric
   - slot_was_set:
     - client_name: Eric
   - action: delivery_form
@@ -1915,9 +1816,6 @@ stories:
   - user: |
       [number five roma street trento](client_address)
     intent: client_address
-  # - intent: client_address
-  #   entities:
-  #   - client_address: number five roma street trento
   - slot_was_set:
     - client_address: number five roma street trento
   - action: delivery_form
@@ -1928,9 +1826,6 @@ stories:
   - user: |
       [cash](client_payment)
     intent: client_payment
-  # - intent: client_payment
-  #   entities:
-  #   - client_payment: cash
   - slot_was_set:
     - client_payment: cash
   - action: delivery_form
@@ -1940,9 +1835,6 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: action_confirm_delivery
-
-
-
 - story: vague change name
   steps:
   - user: |
@@ -2014,10 +1906,6 @@ stories:
   - user: |
       [Eric](PERSON)
     intent: client_name
-  # - intent: client_name
-  #   entities:
-  #   - PERSON: Eric
-  #   - PERSON: Eric
   - slot_was_set:
     - client_name: Eric
   - action: delivery_form
@@ -2042,7 +1930,6 @@ stories:
   - action: delivery_form
   - slot_was_set:
     - requested_slot: client_address
-
 - story: vague change name + nevermind
   steps:
   - user: |
@@ -2154,7 +2041,6 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: action_confirm_delivery
-
 - story: vague change address
   steps:
   - user: |
@@ -2272,7 +2158,6 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: action_confirm_delivery
-
 - story: vague change payment
   steps:
   - user: |
@@ -2405,8 +2290,6 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: action_confirm_delivery
-
-
 - story: takeaway change name
   steps:
   - user: |
@@ -2515,7 +2398,6 @@ stories:
     - requested_slot: null
   - active_loop: null
   - action: action_confirm_takeaway
-
 - story: total
   steps:
   - user: |
@@ -2587,9 +2469,6 @@ stories:
   - user: |
       [stuffed](pizza_crust) crust
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_crust: stuffed
   - slot_was_set:
     - pizza_crust: stuffed
   - action: pizza_order_form
@@ -2623,7 +2502,6 @@ stories:
   - user: |
       yes please
     intent: response_positive
-  # - intent: response_positive
   - slot_was_set:
     - pizza_sliced: true
   - action: pizza_order_form
@@ -2692,11 +2570,6 @@ stories:
   - user: |
       [small](pizza_size) [thin](pizza_crust) crust and [sliced]{"entity": "pizza_sliced", "value": "true"} please
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_size: small
-  #   - pizza_crust: thin
-  #   - pizza_sliced: 'true'
   - slot_was_set:
     - pizza_sliced: true
   - slot_was_set:
@@ -2824,11 +2697,6 @@ stories:
   - user: |
       I want to order [pepperoni](pizza_type) with [olives](toppings) and [onions](toppings)
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_type: Pepperoni
-  #   - toppings: olives
-  #   - toppings: onions
   - slot_was_set:
     - pizza_toppings:
       - olives
@@ -2843,11 +2711,6 @@ stories:
   - user: |
       [extra large](pizza_size) [thin](pizza_crust) crust and [sliced]{"entity": "pizza_sliced", "value": "true"}
     intent: item_start_generic
-  # - intent: item_start_generic
-  #   entities:
-  #   - pizza_size: extra large
-  #   - pizza_crust: thin
-  #   - pizza_sliced: 'true'
   - slot_was_set:
     - pizza_sliced: true
   - slot_was_set:
@@ -2868,7 +2731,6 @@ stories:
   - slot_was_set:
     - pending_order:
       - two extra large thin crust Pepperoni with olives and onions, all pizza sliced
-  # - intent: response_positive ### nevermind
   - user: |
       Actually I want to change the size
     intent: item_change_request_without_entity
@@ -2934,10 +2796,6 @@ stories:
   - user: |
       [Eric](PERSON)
     intent: client_name
-  # - intent: client_name
-  #   entities:
-  #   - PERSON: Eric
-  #   - PERSON: Eric
   - slot_was_set:
     - client_name: Eric
   - action: delivery_form
@@ -2955,9 +2813,6 @@ stories:
   - user: |
       to [roma street #5 trento](client_address)
     intent: client_address
-  # - intent: client_address
-  #   entities:
-  #   - client_address: roma street number five trento
   - slot_was_set:
     - client_address: 'roma street #5 trento'
   - action: delivery_form
@@ -2975,9 +2830,6 @@ stories:
   - user: |
       I'll pay with [cash](client_payment)
     intent: client_payment
-  # - intent: client_payment
-  #   entities:
-  #   - client_payment: cash
   - slot_was_set:
     - client_payment: cash
   - action: delivery_form
@@ -3037,11 +2889,6 @@ stories:
   - user: |
       It's [pizza lover](premium_subscription_username)
     intent: username
-  # - intent: username
-  #   entities:
-  #   - premium_subscription_username: pizza lover
-  # - slot_was_set:
-  #   - premium_subscription_boolean: true # shouldn't be set
   - slot_was_set:
     - premium_subscription_username: pizza lover
   - action: time_form
@@ -3052,13 +2899,6 @@ stories:
   - user: |
       what are your opening hours?
     intent: request_time_openings
-  # - slot_was_set:
-  #   - premium_subscription_boolean: true
-  #- action: time_form
-  # - slot_was_set:
-  #   - requested_slot: time
-  # - slot_was_set:
-  #   - premium_subscription_boolean: true
   - action: utter_inform_time
   - action: time_form
   - slot_was_set:
@@ -3066,9 +2906,6 @@ stories:
   - user: |
       Ok I want it to be delivered at [seven thirty](time)
     intent: time
-  # - intent: time
-  #   entities:
-  #   - time: seven thirty
   - slot_was_set:
     - time: seven thirty
   - action: time_form
